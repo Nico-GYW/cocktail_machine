@@ -1,0 +1,68 @@
+WindowManager:
+    MainWindow:
+    SettingsWindow:
+
+
+<MainWindowRight>
+    size_hint: 0.35, None
+    BoxLayout
+        size_hint: 0.35, None
+        Button
+            text: "Droite"
+
+<MainWindowLeft>
+    orientation: "vertical"
+    # Top padding
+    BoxLayout
+        size_hint: None, 0.5
+
+    BoxLayout
+        orientation: "vertical"
+        BoxLayout
+            BoxLayout
+                BoxLayout
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    size_hint: 0.5, None
+                    Label
+                        text: "B_G"
+                            
+                GridLayout
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    cols: 3
+                    rows: 2
+                    Label
+                        text: "Cocktail 1"
+                    Label
+                        text: "Cocktail 2"
+                    Label
+                        text: "Cocktail 3"
+                    Label
+                        text: "Cocktail 4"
+                    Label
+                        text: "Cocktail 5"
+                    Label
+                        text: "Cocktail 6"
+                BoxLayout
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    size_hint: 0.5, None
+                    Label
+                        text: "B_D"
+        BoxLayout
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            size_hint: 0.5, None
+            Label
+                text: "Page 1/2"
+
+    # Bottom Padding
+    BoxLayout
+        size_hint: None, 0.5
+
+<MainWindow>:
+    name: "main_windows"
+    # Fenêtre principale
+    BoxLayout
+        MainWindowLeft
+        MainWindowRight
+
+<SettingsWindow>:
+    name: "settings_windows"
