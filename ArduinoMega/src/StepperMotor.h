@@ -20,6 +20,8 @@ class StepperMotor {
     void stop();
     long getPosition();
     int getCurrentState();
+    void setSpeed(int speed);
+    void runUntilEndStop();
 
   private:
     void handleIdleState();

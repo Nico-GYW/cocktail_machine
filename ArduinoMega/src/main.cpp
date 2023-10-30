@@ -7,9 +7,11 @@ CmdMessenger cmdMessenger = CmdMessenger(Serial, ',', ';', '/');
 
 void setup() {
   Serial.begin(115200);
-  beginStepper();
+  
   attachStepperMotorXCommands();
   attachStepperMotorYCommands();
+
+  beginStepper();
 }
 
 void loop() {

@@ -23,6 +23,7 @@ StepperMotor StepperMotorY(StepPinY, DirPinY, EndAxisY, EnablePinY);  // stepPin
 void beginStepper(){
   StepperMotorX.begin();
   StepperMotorY.begin();
+  StepperMotorX.runUntilEndStop();
   onHomeY();
   onHomeX();
 }
@@ -31,7 +32,6 @@ void updateStepperMotor(){
   StepperMotorX.loop();
   StepperMotorY.loop();
 }
-
 
 // Moves StepperMotorX to a specific position
 void onMoveToX() {
@@ -46,7 +46,6 @@ void onHomeX() {
   int currentState = StepperMotorX.getCurrentState();
   cmdMessenger.sendCmd(cmd_ack, "X Homing initiated, State : " + String(currentState));
 }
-
 
 // Stops StepperMotorX immediately
 void onStopX() {
