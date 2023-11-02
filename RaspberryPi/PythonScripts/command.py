@@ -2,8 +2,8 @@ import PyCmdMessenger
 import time
 
 # Initialize an ArduinoBoard instance.  
-arduino_uno = PyCmdMessenger.ArduinoBoard("/dev/ttyACM0", baud_rate=9600)
-arduino_mega = PyCmdMessenger.ArduinoBoard("/dev/ttyACM1", baud_rate=9600)
+arduino_uno = PyCmdMessenger.ArduinoBoard("/dev/ttyACM0", baud_rate=115200)
+arduino_mega = PyCmdMessenger.ArduinoBoard("/dev/ttyACM1", baud_rate=115200)
 
 # List of command names (and formats for their associated arguments). These must
 # be in the same order as in the sketch.

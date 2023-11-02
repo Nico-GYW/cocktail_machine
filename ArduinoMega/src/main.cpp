@@ -3,6 +3,8 @@
 #include "StepperMotor.h"
 #include "StepperMotorCommands.h"
 
+// PORT ttyACM1 (Arduino Mega)
+
 CmdMessenger cmdMessenger = CmdMessenger(Serial, ',', ';', '/');
 
 void setup() {

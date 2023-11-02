@@ -12,8 +12,8 @@ void StepperMotor::begin() {
     stepper.setEnablePin(enablePin);
     stepper.setPinsInverted(false, false, true);
     stepper.setCurrentPosition(0);
-    stepper.setSpeed(500);
-    stepper.setAcceleration(100);
+    stepper.setMaxSpeed(1000);
+    stepper.setAcceleration(500);
 }
 
 // The main loop function to be called in the main loop
@@ -56,7 +56,7 @@ void StepperMotor::handleHomingReverseState(bool isEndStopReached) {
     if (isEndStopReached) {
         currentState = REACHED_HOME_STATE;
         stepper.stop();
-        stepper.move(-100);
+        stepper.move(-5000);
     } else {
         stepper.run();
     }
@@ -73,11 +73,12 @@ void StepperMotor::handleHomingForwardState(bool isEndStopReached) {
 
 void StepperMotor::moveTo(int position) {
     stepper.moveTo(position);
+    currentState = MOVING_STATE;
 }
 
 void StepperMotor::home() {
     currentState = MOVING_TO_HOME_STATE;
-    stepper.move(1000);
+    stepper.move(20000);
 }
 
 void StepperMotor::stop() {
@@ -95,15 +96,5 @@ int StepperMotor::getCurrentState() {
 }
 
 void StepperMotor::setSpeed(int speed) {
-    stepper.setSpeed(speed);
-}
-
-void StepperMotor::runUntilEndStop(){
-    stepper.move(-1000);
-    stepper.setSpeed(300);
-    stepper.setAcceleration(100);
-    while (digitalRead(endStop) == HIGH) {
-        stepper.run();
-    }
-    stepper.stop();
+    stepper.setMaxSpeed(speed);
 }

@@ -23,9 +23,8 @@ StepperMotor StepperMotorY(StepPinY, DirPinY, EndAxisY, EnablePinY);  // stepPin
 void beginStepper(){
   StepperMotorX.begin();
   StepperMotorY.begin();
-  StepperMotorX.runUntilEndStop();
-  onHomeY();
-  onHomeX();
+  StepperMotorX.home();
+  StepperMotorY.home();
 }
 
 void updateStepperMotor(){
@@ -75,7 +74,8 @@ void onMoveToY() {
 // Initiates homing sequence for StepperMotorY
 void onHomeY() {
   StepperMotorY.home();
-  cmdMessenger.sendCmd(cmd_ack, "Y Homing initiated");
+  int currentState = StepperMotorX.getCurrentState();
+  cmdMessenger.sendCmd(cmd_ack, "Y Coucou Homing initiated, State : " + String(currentState));
 }
 
 // Stops StepperMotorY immediately
@@ -103,7 +103,6 @@ void attachStepperMotorXCommands() {
   cmdMessenger.attach(cmd_stopX, onStopX);
   cmdMessenger.attach(cmd_getPositionX, onGetPositionX);
   cmdMessenger.attach(cmd_getStateX, onGetStateX);
-  StepperMotorX.begin();
 }
 
 // Attaches command handlers for StepperMotorY
@@ -113,5 +112,4 @@ void attachStepperMotorYCommands() {
   cmdMessenger.attach(cmd_stopY, onStopY);
   cmdMessenger.attach(cmd_getPositionY, onGetPositionY);
   cmdMessenger.attach(cmd_getStateY, onGetStateY);
-  StepperMotorY.begin();
 }

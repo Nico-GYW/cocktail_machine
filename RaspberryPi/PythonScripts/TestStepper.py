@@ -57,5 +57,3 @@ print(f"The current position of StepperMotorY is {position}") # Print the positi
 # Test the getStateY command
 state = stepper_motor.getStateY() # Get the current state
 print(f"The current state of StepperMotorY is {state}") # Print the state
-
-J'espère que ce script de test vous convient. Si vous avez besoin d'aide pour l'améliorer ou l'optimiser, n'hésitez pas à me le demander. Je suis là pour vous aider. 😊
