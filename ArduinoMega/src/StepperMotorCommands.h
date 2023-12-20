@@ -4,21 +4,6 @@
 #include "StepperMotor.h"
 #include "CmdMessenger.h"
 
-// Enum for Stepper Motor Command
-enum StepperMotorCommands {
-  cmd_moveToX,
-  cmd_homeX,
-  cmd_stopX,
-  cmd_getPositionX,
-  cmd_getStateX,
-  cmd_moveToY,
-  cmd_homeY,
-  cmd_stopY,
-  cmd_getPositionY,
-  cmd_getStateY,
-  cmd_ack // acknowledge command
-};
-
 void beginStepper();
 void updateStepperMotor();
 
@@ -33,8 +18,7 @@ void onHomeY();
 void onStopY();
 void onGetPositionY();
 void onGetStateY();
-void attachStepperMotorXCommands();
-void attachStepperMotorYCommands();
+void attachStepperMotorCommands();
 
 
 #endif // STEPPER_MOTOR_COMMANDS_H

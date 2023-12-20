@@ -1,6 +1,7 @@
 #include "StepperMotor.h"
 #include "StepperMotorCommands.h"
 #include "CmdMessenger.h"
+#include "CommandsEnum.h"
 
 // X motor
 #define StepPinX A0
@@ -36,14 +37,13 @@ void updateStepperMotor(){
 void onMoveToX() {
   int position = cmdMessenger.readBinArg<int>();
   StepperMotorX.moveTo(position);
-  cmdMessenger.sendCmd(cmd_ack, "X Moved to position, State : ");
+  cmdMessenger.sendCmd(cmd_ack, "X Moved");
 }
 
 // Initiates homing sequence for StepperMotorX
 void onHomeX() {
   StepperMotorX.home();
-  int currentState = StepperMotorX.getCurrentState();
-  cmdMessenger.sendCmd(cmd_ack, "X Homing initiated, State : " + String(currentState));
+  cmdMessenger.sendCmd(cmd_ack, "X Homing initiated State");
 }
 
 // Stops StepperMotorX immediately
@@ -55,13 +55,13 @@ void onStopX() {
 // Gets the current position of StepperMotorX
 void onGetPositionX() {
   long position = StepperMotorX.getPosition();
-  cmdMessenger.sendCmd(cmd_ack, position);
+  cmdMessenger.sendCmd(cmd_ack, String(position));
 }
 
 // Gets the current state of StepperMotorX
 void onGetStateX() {
   int state = StepperMotorX.getCurrentState();
-  cmdMessenger.sendCmd(cmd_ack, state);
+  cmdMessenger.sendCmd(cmd_ack, String(state));
 }
 
 // Moves StepperMotorY to a specific position
@@ -74,8 +74,7 @@ void onMoveToY() {
 // Initiates homing sequence for StepperMotorY
 void onHomeY() {
   StepperMotorY.home();
-  int currentState = StepperMotorX.getCurrentState();
-  cmdMessenger.sendCmd(cmd_ack, "Y Coucou Homing initiated, State : " + String(currentState));
+  cmdMessenger.sendCmd(cmd_ack, "Y Coucou Homing initiated");
 }
 
 // Stops StepperMotorY immediately
@@ -87,26 +86,23 @@ void onStopY() {
 // Gets the current position of StepperMotorY
 void onGetPositionY() {
   long position = StepperMotorY.getPosition();
-  cmdMessenger.sendCmd(cmd_ack, position);
+  cmdMessenger.sendCmd(cmd_ack, String(position));
 }
 
 // Gets the current state of StepperMotorY
 void onGetStateY() {
   int state = StepperMotorY.getCurrentState();
-  cmdMessenger.sendCmd(cmd_ack, state);
+  cmdMessenger.sendCmd(cmd_ack, String(state));
 }
 
+
 // Attaches command handlers for StepperMotorX
-void attachStepperMotorXCommands() {
+void attachStepperMotorCommands() {
   cmdMessenger.attach(cmd_moveToX, onMoveToX);
   cmdMessenger.attach(cmd_homeX, onHomeX);
   cmdMessenger.attach(cmd_stopX, onStopX);
   cmdMessenger.attach(cmd_getPositionX, onGetPositionX);
   cmdMessenger.attach(cmd_getStateX, onGetStateX);
-}
-
-// Attaches command handlers for StepperMotorY
-void attachStepperMotorYCommands() {
   cmdMessenger.attach(cmd_moveToY, onMoveToY);
   cmdMessenger.attach(cmd_homeY, onHomeY);
   cmdMessenger.attach(cmd_stopY, onStopY);

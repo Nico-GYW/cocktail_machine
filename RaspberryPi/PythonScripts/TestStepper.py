@@ -3,6 +3,7 @@ import command
 import time
 # Create an instance of the StepperMotorController class
 stepper_motor = command.StepperMotorController()
+led_strip = command.LedStripController()
 
 # screen /dev/ttyACM0 9600
  

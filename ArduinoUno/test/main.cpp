@@ -1,21 +1,21 @@
 #include <Arduino.h>
 #include <CmdMessenger.h>
-
+#include "StepperMotor.h"
 #include "StepperMotorCommands.h"
-#include "LedStripCommands.h"
+#include "LedStrip.h"
 
 
 // PORT ttyACM1 (Arduino Mega)
+
 CmdMessenger cmdMessenger = CmdMessenger(Serial, ',', ';', '/');
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   
-  attachStepperMotorCommands();
-  attachLedStripCommands();
+  attachStepperMotorXCommands();
+  attachStepperMotorYCommands();
 
   beginStepper();
-  beginLedStrip();
 }
 
 void loop() {

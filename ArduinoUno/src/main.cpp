@@ -1,26 +1,33 @@
 #include <Arduino.h>
 #include <CmdMessenger.h>
-
+#include "StepperMotor.h"
 #include "StepperMotorCommands.h"
-#include "LedStripCommands.h"
+#include <Adafruit_NeoPixel.h>
+#include "LedStrip.h"
 
 
 // PORT ttyACM1 (Arduino Mega)
+
 CmdMessenger cmdMessenger = CmdMessenger(Serial, ',', ';', '/');
 
-void setup() {
-  Serial.begin(9600);
-  
-  attachStepperMotorCommands();
-  attachLedStripCommands();
 
-  beginStepper();
-  beginLedStrip();
+// LedStrip
+#define LedPin A3
+
+LedStrip leds(24, LedPin);
+uint32_t white = leds.Color(255, 255, 255);
+
+
+void setup() {
+  Serial.begin(115200);
+  leds.begin();
+  
 }
 
 void loop() {
   updateStepperMotor();
-  cmdMessenger.feedinSerialData();
+  // cmdMessenger.feedinSerialData();
+  // leds.pulse(white,2,10); 
 }
 
 // -----------------------------------------------------------------------------------------------------------

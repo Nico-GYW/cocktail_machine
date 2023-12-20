@@ -12,7 +12,7 @@ void StepperMotor::begin() {
     stepper.setEnablePin(enablePin);
     stepper.setPinsInverted(false, false, true);
     stepper.setCurrentPosition(0);
-    stepper.setMaxSpeed(1000);
+    stepper.setMaxSpeed(500);
     stepper.setAcceleration(500);
 }
 
@@ -72,13 +72,15 @@ void StepperMotor::handleHomingForwardState(bool isEndStopReached) {
 }
 
 void StepperMotor::moveTo(int position) {
-    stepper.moveTo(position);
     currentState = MOVING_STATE;
+    stepper.enableOutputs();
+    stepper.moveTo(position);
 }
 
 void StepperMotor::home() {
     currentState = MOVING_TO_HOME_STATE;
-    stepper.move(20000);
+    stepper.enableOutputs();
+    stepper.move(10000);
 }
 
 void StepperMotor::stop() {
