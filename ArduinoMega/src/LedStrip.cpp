@@ -1,67 +1,29 @@
 #include <Arduino.h>
-
 #include "LedStrip.h"
 #include <Adafruit_NeoPixel.h>
 
-
-LedStrip::LedStrip(uint16_t num_leds, uint8_t led_pin) {
-  strip = Adafruit_NeoPixel(num_leds, led_pin, NEO_GRB + NEO_KHZ800);
-  strip.begin();
+// Constructeur pour initialiser le bandeau de LED et définir les états par défaut.
+// @param num_leds Le nombre total de LEDs dans le bandeau.
+// @param led_pin Le numéro de pin sur lequel le bandeau de LED est connecté.
+LedStrip::LedStrip(uint16_t num_leds, int16_t led_pin) 
+    : strip(num_leds, led_pin, NEO_GRB + NEO_KHZ800),
+      onState({whiteColor, 255}), 
+      offState({whiteColor, 0}), 
+      pulseState({whiteColor, 255, 10}), 
+      rollState({whiteColor, 255, 10}),
+      currentState(STATE_IDLE) {
 }
 
-void LedStrip::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
-    strip.setPixelColor(n, r, g, b);
-}
-
-void LedStrip::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
-    strip.setPixelColor(n, r, g, b, w);
-}
-
-void LedStrip::setPixelColor(uint16_t n, uint32_t c) {
-    strip.setPixelColor(n, c);
-}
-
-void LedStrip::setBrightness(uint8_t b) {
-    strip.setBrightness(b);
-}
-
-void LedStrip::fill(uint32_t c) {
-    strip.fill(c);
-    strip.show();
-}
-
+// Initialise le bandeau de LED et allume toutes les LEDs.
 void LedStrip::begin() {
     strip.begin();
 }
 
-void LedStrip::fill(uint32_t c, uint16_t first, uint16_t count) {
-    strip.fill(c, first, count);
-    strip.show();
-}
-
-void LedStrip::show() {
-    strip.show();
-}
-
-uint32_t LedStrip::Color(uint8_t r, uint8_t g, uint8_t b) {
-    return Adafruit_NeoPixel::Color(r, g, b);
-}
-
-uint32_t LedStrip::Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
-    return Adafruit_NeoPixel::Color(r, g, b, w);
-}
-
-uint16_t LedStrip::numPixels() const {
-    return strip.numPixels();
-}
-
+// Boucle principale pour gérer l'état actuel du bandeau de LED.
 void LedStrip::loop() {
     switch (currentState) {
-        case STATE_ON:
-            handleOnState();
-            break;
-        case STATE_OFF:
-            handleOffState();
+        case STATE_IDLE:
+            // Ne fait rien en état de repos.
             break;
         case STATE_PULSE:
             handlePulseState();
@@ -72,55 +34,77 @@ void LedStrip::loop() {
     }
 }
 
-
-void LedStrip::handleOnState() {
-    fill(onState.color); // Remplir avec la couleur définie
-    setBrightness(onState.brightness); // Régler la luminosité
-    show(); // Mettre à jour le bandeau LED
-    currentState = STATE_IDLE; // Passer à l'état de repos
-}
-
-void LedStrip::handleOffState() {
-    fill(0); // Éteindre toutes les LEDs
-    show();
-    currentState = STATE_IDLE; // Passer à l'état de repos
-}
-
+// Gère l'état de défilement en rotation des LEDs.
 void LedStrip::handleRollState() {
     static uint16_t currentLed = 0; // LED actuelle
 
-    setPixelColor(currentLed, rollState.color); // Allumer la LED actuelle
-    show();
+    strip.setPixelColor(currentLed, rollState.color); // Allumer la LED actuelle
+    strip.show();
 
-    currentLed = (currentLed + 1) % numPixels(); // Passer à la LED suivante
+    currentLed = (currentLed + 1) % strip.numPixels(); // Passer à la LED suivante
     if (currentLed == 0) {
         currentState = STATE_IDLE; // Revenir à l'état de repos à la fin du cycle
     }
 }
 
+// Gère l'état de pulsation des LEDs.
 void LedStrip::handlePulseState() {
-    static int brightness = 0; // Luminosité actuelle
-    static int step = pulseState.pulseSpeed; // Pas d'augmentation/de diminution
-
-    brightness += step;
-    if (brightness >= 255 || brightness <= 10) {
-        step = -step; // Inverser la direction de la luminosité
+    // Mettre à jour la luminosité
+    if (pulseState.brightness + pulseState.speed > 255 || 
+        pulseState.brightness + pulseState.speed < 0) {
+        pulseState.speed = -pulseState.speed; // Inverser la direction
     }
+    pulseState.brightness += pulseState.speed;
 
-    setBrightness(brightness);
-    fill(pulseState.color); // Appliquer la couleur
-    show();
-
-    if (brightness == 10) {
-        currentState = STATE_IDLE; // Revenir à l'état de repos
-    }
+    // Appliquer la luminosité et la couleur
+    strip.setBrightness(pulseState.brightness);
+    strip.fill(pulseState.color); 
+    strip.show();
 }
 
-void LedStrip::handleIdleState() {
-    // Ne fait rien
+// Met à jour les paramètres d'état des LEDs (couleur, luminosité, vitesse).
+// @param state Référence à la structure StateSettings à mettre à jour.
+// @param color La nouvelle couleur (RGB combinée en uint32_t) pour les LEDs.
+// @param brightness La nouvelle luminosité pour les LEDs (0-255).
+// @param speed La nouvelle vitesse pour les animations des LEDs.
+void LedStrip::updateStateSettings(StateSettings& state, uint32_t color = state.color, uint8_t brightness = state.brightness, uint8_t speed = state.speed){
+    state.color = color;
+    state.brightness = brightness;
+    state.speed = speed;
 }
 
+// Active le bandeau de LED avec les paramètres de l'état "on".
+void LedStrip::on(){
+    strip.fill(onState.color);
+    strip.setBrightness(onState.brightness); 
+    strip.show();
+    currentState = STATE_IDLE; 
+}
 
+// Éteint le bandeau de LED en appliquant les paramètres de l'état "off".
+void LedStrip::off(){
+    strip.fill(offState.color); 
+    strip.setBrightness(offState.brightness); 
+    strip.show();
+    currentState = STATE_IDLE;
+}
+
+// Définit le bandeau de LED en mode pulsation.
+void LedStrip::pulse(){
+    strip.fill(pulseState.color);
+    currentState = STATE_PULSE; 
+}
+
+// Définit le bandeau de LED en mode défilement.
+void LedStrip::roll(){
+    strip.fill(rollState.color); 
+    currentState = STATE_ROLL; 
+}
+
+// Exécute un effet de pulsation bloquant avec une couleur, un nombre de pulsations et une vitesse spécifiés.
+// @param color La couleur (RGB combinée en uint32_t) pour l'effet de pulsation.
+// @param num_pulses Le nombre de pulsations à effectuer.
+// @param speedOfPulse La vitesse de la pulsation (plus le nombre est élevé, plus la pulsation est rapide).
 void LedStrip::pulse(uint32_t color, uint8_t num_pulses, uint8_t speedOfPulse){
     strip.fill(color);
 

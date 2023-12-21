@@ -16,7 +16,9 @@ enum GlobalCommands {
     cmd_getStateY,
 
     //LedStrip
-    cmd_pulse,
+    cmd_LED_mode,
+    cmd_LED_pulseBlock,
+    cmd_LED_settings,
 
     //Shared Command
     cmd_ack,

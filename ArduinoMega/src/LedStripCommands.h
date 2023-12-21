@@ -4,9 +4,10 @@
 #include "CmdMessenger.h"
 
 void beginLedStrip();
-void testLed();
 
-void onPulse();
+void onLedMode();
+void onPulseBlock():
+void onLedSettings();
 void attachLedStripCommands();
 
 #endif

@@ -95,8 +95,7 @@ void onGetStateY() {
   cmdMessenger.sendCmd(cmd_ack, String(state));
 }
 
-
-// Attaches command handlers for StepperMotorX
+// Attaches command handlers for StepperMotor
 void attachStepperMotorCommands() {
   cmdMessenger.attach(cmd_moveToX, onMoveToX);
   cmdMessenger.attach(cmd_homeX, onHomeX);
