@@ -1,9 +1,5 @@
 #include <Arduino.h>
 #include <CmdMessenger.h>
-#include "StepperMotor.h"
-#include "StepperMotorCommands.h"
-#include <Adafruit_NeoPixel.h>
-#include "LedStrip.h"
 
 
 // PORT ttyACM1 (Arduino Mega)
