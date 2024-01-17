@@ -1,5 +1,5 @@
 #include "Servo.h"  // Assurez-vous d'inclure ou de déclarer les types nécessaires
-#define NUMBER_OF_DISPENSER 8
+#define NUMBER_OF_DISPENSER 9
 
 // Prototype de la fonction pour créer la liste d'actions
 

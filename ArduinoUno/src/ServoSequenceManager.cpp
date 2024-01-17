@@ -3,7 +3,7 @@
 DispenserSequenceManager::DispenserSequenceManager(ServoHandler& handler, uint8_t order[NUMBER_OF_DISPENSER])
     : servoHandler(handler) {
 
-    dispenserParams = {180, 100, 150}; // positionMax, tMax ,positionRelease
+    dispenserParams = {160, 1000, 130}; // positionMax, tMax ,positionRelease
 
     moveUp = ServoAction(WAIT, dispenserParams.positionMax, 0, dispenserParams.tMax);
     release = ServoAction(WAIT, dispenserParams.positionRelease, 0, 0);

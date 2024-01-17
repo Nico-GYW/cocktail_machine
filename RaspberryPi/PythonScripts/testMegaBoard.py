@@ -1,5 +1,5 @@
 # Import the file that contains the StepperMotorController class
-import command
+import commandMega as command
 import time
 # Create an instance of the StepperMotorController class
 stepper_motor = command.StepperMotorController()

@@ -1,7 +1,7 @@
 #include "Servo.h"
 
-#define USMIN  600 // This is the rounded 'minimum' microsecond length 0° (-90°)
-#define USMAX  2400 // This is the rounded 'maximum' microsecond length 180° (+90°)
+#define USMIN  450 // This is the rounded 'minimum' microsecond length 0° (-90°)
+#define USMAX  1800 // This is the rounded 'maximum' microsecond length 180° (+90°)
 
 // Constructeur: initialise chaque servo avec des valeurs par défaut.
 ServoHandler::ServoHandler(Adafruit_PWMServoDriver& pwmDriver) : pwmDriver(pwmDriver) {
@@ -119,5 +119,18 @@ void ServoHandler::stop() {
         if (servos[i] != nullptr) { // Vérifie si le pointeur n'est pas nul
             stop(*servos[i]); // Déréférence le pointeur et appelle la fonction stop pour chaque servo
         }
+    }
+}
+
+// Arrête tous les servos en les plaçant dans leur état de repos.
+void ServoHandler::move(uint8_t position, uint8_t id) {
+    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        pwmDriver.writeMicroseconds(id, map(position, 0, 180, USMIN, USMAX));
+    }
+}
+
+void ServoHandler::moveAll(uint8_t position) {
+    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        pwmDriver.writeMicroseconds(i, map(position, 0, 180, USMIN, USMAX));
     }
 }

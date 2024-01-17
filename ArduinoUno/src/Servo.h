@@ -53,4 +53,7 @@ public:
     void initializeAction(Servo &servo, bool resetActionIndex);
     void stop(Servo &servo);
     void stop();
+    void move(uint8_t position, uint8_t id);
+    void moveAll(uint8_t position);
+
 };
