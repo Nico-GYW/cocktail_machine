@@ -10,32 +10,47 @@ enum ServoState {
     WAIT
 };
 
-struct ServoStateParams {
+struct ServoAction {
     ServoState stateType;
-    int targetPosition;
-    int speed;
-    unsigned long timer;
+    uint8_t targetPosition;  // in degrees
+    uint8_t speed; // taux d'incrémentation en degré
+    uint16_t delay; // Durée maximale de 20000 ms
+
+    // Constructeur qui initialise direction à true et timer à 0 par défaut.
+    ServoAction(ServoState state = IDLE, uint8_t pos = 0, uint8_t spd = 0, uint16_t del = 0)
+        : stateType(state), targetPosition(pos), speed(spd), delay(del) {}
 };
 
 struct Servo {
-    int restPosition;
-    int currentPosition;
-    int numberID;
-    ServoStateParams actionList[MAX_ACTIONS];
-    int currentActionIndex;
+    uint8_t ServoID;
+    uint8_t currentActionIndex;
+    ServoAction* actionList[MAX_ACTIONS];
+    ServoAction persoAction;
+    uint8_t currentPosition;
+    bool direction;
+    unsigned long timer; // Pour enregistrer le temps actuel avec millis()
+
+    // Constructeur avec argument pour ServoID
+    Servo() : ServoID(0), currentActionIndex(0), persoAction(ServoAction()), currentPosition(0), direction(true), timer(0) {
+        for (int i = 0; i < MAX_ACTIONS; ++i) {
+            actionList[i] = nullptr;  // Initialiser tous les pointeurs à nullptr
+        }
+    }
 };
 
 class ServoHandler {
 private:
     Adafruit_PWMServoDriver& pwmDriver;
-    Servo servos[NUMBER_OF_SERVO];
-    void ServoHandler::handleMoveState(Servo &servo, ServoStateParams &action);
-    void ServoHandler::handleWaitState(Servo &servo, ServoStateParams &action);
+    Servo* servos[NUMBER_OF_SERVO];
+    void handleMoveState(Servo &servo, ServoAction &action);
+    void handleWaitState(Servo &servo, ServoAction &action);
 
 public:
     ServoHandler(Adafruit_PWMServoDriver& pwmDriver);
+    bool addServo(Servo* newServo);
+    void begin();
     void loop();
-    void ServoHandler::assignActions(int servoIndex, ServoStateParams newActions[], int sizeOfNewActions);
-    void ServoHandler::stop(int servoIndex);
-
-}
+    void initializeAction(Servo &servo, bool resetActionIndex);
+    void stop(Servo &servo);
+    void stop();
+};

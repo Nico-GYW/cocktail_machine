@@ -1,17 +1,24 @@
 #include <Arduino.h>
 #include <CmdMessenger.h>
 
-// PORT ttyACM1 (Arduino Mega)
+#include "ServoCommand.h"
+#include "DCValveCommand.h"
 
 CmdMessenger cmdMessenger = CmdMessenger(Serial, ',', ';', '/');
 
 void setup() {
   Serial.begin(115200);
-  
+  beginServo();
+  beginValve();
+
+  attachServoCommands();
+  attachValveCommands();
 }
 
 void loop() {
-  // cmdMessenger.feedinSerialData();
+  updateServo();
+  updateValve();
+  cmdMessenger.feedinSerialData();
 }
 
 // -----------------------------------------------------------------------------------------------------------

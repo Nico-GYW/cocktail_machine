@@ -1,96 +1,123 @@
 #include "Servo.h"
 
+#define USMIN  600 // This is the rounded 'minimum' microsecond length 0° (-90°)
+#define USMAX  2400 // This is the rounded 'maximum' microsecond length 180° (+90°)
 
-ServoHandler::ServoHandler(Adafruit_PWMServoDriver& pwmDriver) 
-  : pwmDriver(pwmDriver) {
+// Constructeur: initialise chaque servo avec des valeurs par défaut.
+ServoHandler::ServoHandler(Adafruit_PWMServoDriver& pwmDriver) : pwmDriver(pwmDriver) {
+    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        servos[i] = nullptr;  // Initialiser tous les pointeurs à nullptr
+    }
 }
 
+void ServoHandler::begin(){
+    pwmDriver.begin(); 
+    pwmDriver.setOscillatorFrequency(27000000);
+    pwmDriver.setPWMFreq(50);
+}
+
+bool ServoHandler::addServo(Servo* newServo){
+    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        if (servos[i] == nullptr) {
+            servos[i] = newServo;
+            return true;
+        }
+    }
+    return false; // Liste pleine
+}
+
+// Gère l'état de mouvement d'un servo.
+void ServoHandler::handleMoveState(Servo &servo, ServoAction &action) {
+    // Calcule et applique le pas de mouvement.
+    int moveStep = servo.direction ? action.speed : -action.speed;
+    servo.currentPosition += moveStep;
+    pwmDriver.writeMicroseconds(servo.ServoID, map(servo.currentPosition, 0, 180, USMIN, USMAX));
+
+    // Vérifie si la position cible est atteinte.
+    if ((servo.direction && servo.currentPosition >= action.targetPosition) ||
+        (!servo.direction && servo.currentPosition <= action.targetPosition)) {
+        servo.currentActionIndex++;
+        initializeAction(servo, false);
+    }
+}
+
+// Gère l'état d'attente d'un servo.
+void ServoHandler::handleWaitState(Servo &servo, ServoAction &action) {
+    // Calcule le temps écoulé depuis le début de l'attente.
+    unsigned long elapsed = millis() - servo.timer;
+    if (elapsed >= action.delay) {
+        servo.timer = 0;  // Réinitialise le timer.
+        servo.currentActionIndex++;
+        initializeAction(servo, false);
+    }
+}
+
+// Initialise la prochaine action d'un servo.
+void ServoHandler::initializeAction(Servo &servo, bool resetActionIndex = false) {
+    
+    if(resetActionIndex){
+        servo.currentActionIndex = 0;
+    }
+    
+    ServoAction &action = *(servo.actionList[servo.currentActionIndex]);
+
+    switch (action.stateType) {
+        case MOVE:
+            // Détermine la direction du mouvement en fonction de la position actuelle et de la position cible.
+            servo.direction = servo.currentPosition < action.targetPosition;
+            break;
+        case WAIT:
+            // Initialise le timer pour l'attente.
+            servo.timer = millis();
+            pwmDriver.writeMicroseconds(servo.ServoID, map(action.targetPosition, 0, 180, USMIN, USMAX));
+            break;
+        case IDLE:
+            // Place le servo dans une position de repos.
+            pwmDriver.writeMicroseconds(servo.ServoID, map(action.targetPosition, 0, 180, USMIN, USMAX));
+            break;
+        default:
+            // Gestion des cas inattendus.
+            break;
+    }
+}
+
+// Méthode principale pour traiter les actions de chaque servo dans une boucle.
 void ServoHandler::loop() {
     for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        if (servos[i] != nullptr) { // Vérifie si le pointeur n'est pas nul
+            // Récupère l'action courante du servo.
+            ServoAction &action = *(servos[i]->actionList[servos[i]->currentActionIndex]);
 
-        ServoStateParams &action = servos[i].actionList[servos[i].currentActionIndex];
-
-        switch (action.stateType){
-            case MOVE:
-                handleMoveState(servos[i], action);
-                break;
-            case WAIT:
-                handleWaitState(servos[i], action);
-                break;
-            case IDLE:
-            default:
-                // Logique pour IDLE, par exemple retourner à la position de repos
-                break;
+            // Traite l'action en fonction de son type.
+            switch (action.stateType){
+                case MOVE:
+                    handleMoveState(*servos[i], action);
+                    break;
+                case WAIT:
+                    handleWaitState(*servos[i], action);
+                    break;
+                case IDLE:
+                    // Aucune action particulière pour l'état IDLE.
+                    break;
+                default:
+                    // Gestion des états non reconnus.
+                    break;
+            }
         }
     }
 }
 
-void ServoHandler::handleMoveState(Servo &servo, ServoStateParams &action) {
-
-    int positionDifference = action.targetPosition - servo.currentPosition;
-
-    int moveStep = (positionDifference > 0) ? action.speed : -action.speed;
-
-    // Limiter le déplacement pour ne pas dépasser la position cible
-    if ((moveStep > 0 && servo.currentPosition + moveStep > action.targetPosition) ||
-        (moveStep < 0 && servo.currentPosition + moveStep < action.targetPosition)) {
-        moveStep = positionDifference;
-    }
-
-    servo.currentPosition += moveStep;
-
-    pwmDriver.writeMicroseconds(servo.numberID, servo.currentPosition);
-
-    // Vérifier si la position cible est atteinte
-    if (servo.currentPosition == action.targetPosition) {
-        servo.currentActionIndex++; // Passer à l'action suivante
-    }
+// Arrête un servo en le plaçant dans son état de repos.
+void ServoHandler::stop(Servo &servo) {
+    servo.currentActionIndex = MAX_ACTIONS - 1;  // Place l'index sur l'action de repos.
+    initializeAction(servo, false);
 }
 
-void ServoHandler::handleWaitState(Servo &servo, ServoStateParams &action) {
-    // Vérifier si le timer a déjà été initialisé
-    if (action.timer == 0) {
-        // Initialiser le timer avec le temps actuel
-        pwmDriver.writeMicroseconds(servo.numberID, action.targetPosition);
-        action.timer = millis();
-    } else {
-        // Calculer le temps écoulé
-        unsigned long elapsed = millis() - action.timer;
-
-        // Vérifier si le temps d'attente est écoulé
-        if (elapsed >= action.timer) {
-            // Réinitialiser le timer pour la prochaine fois
-            action.timer = 0;
-
-            // Passer à l'action suivante
-            servo.currentActionIndex++;
-
-            // Remettre le servo à la position de repos si nécessaire
-            // Exemple : pwmDriver.writeMicroseconds(servo.restPosition, convertPositionToMicroseconds(servo.restPosition));
+// Arrête tous les servos en les plaçant dans leur état de repos.
+void ServoHandler::stop() {
+    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        if (servos[i] != nullptr) { // Vérifie si le pointeur n'est pas nul
+            stop(*servos[i]); // Déréférence le pointeur et appelle la fonction stop pour chaque servo
         }
-    }
-}
-
-void ServoHandler::assignActions(int servoIndex, ServoStateParams newActions[], int sizeOfNewActions) {
-    if (servoIndex >= 0 && servoIndex < NUMBER_OF_SERVO) {
-        for (int i = 0; i < sizeOfNewActions; ++i) {
-            servos[servoIndex].actionList[i] = newActions[i];
-        }
-        servos[servoIndex].currentActionIndex = 0;
-        // Assurez-vous que la dernière action est IDLE ou ajustez selon les besoins
-    }
-}
-
-void ServoHandler::stop(int servoIndex) {
-    if (servoIndex >= 0 && servoIndex < NUMBER_OF_SERVO) {
-        // Réinitialiser la séquence d'actions du servo
-        for (int i = 0; i < MAX_ACTIONS; ++i) {
-            servos[servoIndex].actionList[i] = {IDLE, 0, 0, 0};
-        }
-
-        pwmDriver.writeMicroseconds(servoIndex, servos[servoIndex].restPosition);
-
-        // Réinitialiser l'index de l'action courante
-        servos[servoIndex].currentActionIndex = 0;
     }
 }

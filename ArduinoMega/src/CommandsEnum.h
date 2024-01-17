@@ -1,7 +1,3 @@
-// commands_enum.h
-#ifndef COMMANDS_ENUM_H
-#define COMMANDS_ENUM_H
-
 enum GlobalCommands {
     // StepperMotor
     cmd_moveToX,
@@ -23,5 +19,3 @@ enum GlobalCommands {
     //Shared Command
     cmd_ack,
 };
-
-#endif // COMMANDS_ENUM_H
