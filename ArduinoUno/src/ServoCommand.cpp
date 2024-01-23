@@ -9,7 +9,7 @@ extern CmdMessenger cmdMessenger;
 Adafruit_PWMServoDriver pwmDriver;
 ServoHandler servoHandler(pwmDriver);
 
-uint8_t servoOrder[NUMBER_OF_DISPENSER] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+uint8_t servoOrder[NUMBER_OF_DISPENSER] = {0, 1, 14, 3, 11, 12, 4, 2, 15};
 // {0, 1, 2, 3, 4, 5, 6, 7, 8};
 DispenserSequenceManager dispenserManager(servoHandler, servoOrder);
 
@@ -46,14 +46,23 @@ void onDispenserStop(){
     cmdMessenger.sendCmd(cmd_ack, "Dispenser " + String(dispenserIndex) + " stopped");
 }
 
-void onDispenserAnimation(){
+void onDispenserAnimation() {
     uint8_t speed = cmdMessenger.readBinArg<int>();
     uint8_t positionMax = cmdMessenger.readBinArg<int>();
     uint16_t delayFactor = cmdMessenger.readBinArg<int>();
+    uint8_t dispenserIndex = cmdMessenger.readBinArg<int>();
 
-    dispenserManager.dispenserAnimation(speed, positionMax, delayFactor);
-    cmdMessenger.sendCmd(cmd_ack, "Dispensers animated");
+    if (dispenserIndex < NUMBER_OF_DISPENSER) {
+        dispenserManager.dispenserAnimation(dispenserIndex, speed, positionMax, delayFactor);
+    } else {
+        for (uint8_t i = 0; i < NUMBER_OF_DISPENSER; ++i) {
+            dispenserManager.dispenserAnimation(i, speed, positionMax, delayFactor);
+        }
+    }
+
+    cmdMessenger.sendCmd(cmd_ack, "Dispenser(s) animated");
 }
+
 
 // ------------- Lemon bucket command ------------------ //
 
@@ -69,7 +78,7 @@ void onServoHandlerMove() {
         servoHandler.move(position, id);
         cmdMessenger.sendCmd(cmd_ack, "Servo " + String(id) + " stopped at position " + String(position));
     } else {
-        servoHandler.moveAll(position);
+        // servoHandler.moveAll(position);
         cmdMessenger.sendCmd(cmd_ack, "All servos stopped at position " + String(position));
     }
 }

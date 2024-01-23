@@ -23,17 +23,17 @@ commands_uno = [
     ["cmd_SERVO_dispenser", "ii"], # Move StepperMotorX to a specific positiimon
     ["cmd_SERVO_dispenser_setting", "iii"], # Initiate homing sequence for StepperMotorX
     ["cmd_SERVO_dispenser_stop", "i"], # Stop StepperMotorX immediately
-    ["cmd_SERVO_dispenser_animation", "iii"], 
+    ["cmd_SERVO_dispenser_animation", "iiii"], 
     ["cmd_SERVO_handler_move", "ii"], 
     ["cmd_SERVO_handler_stop", ""],
-    ["cmd_VALVE_open", "l"], # Get the current position of StepperMotorX
+    ["cmd_VALVE_open", "ii"], # 
     ["cmd_VALVE_close", "i"], # Get the current state of StepperMotorX
     ["cmd_VALVE_stop", "i"], # Move StepperMotorY to a specific position
     ["cmd_ack","s"] # Acknowledge a command,
 ]
 
 # Initialize the messenger
-cmd_arduino_mega = PyCmdMessenger.CmdMessenger(arduino_uno, commands_uno)
+cmd_arduino_uno = PyCmdMessenger.CmdMessenger(arduino_uno, commands_uno)
 
 class Controller:
     def __init__(self, cmd_arduino):
@@ -42,7 +42,7 @@ class Controller:
 class DispenserController(Controller):
 
     def __init__(self):
-        super().__init__(cmd_arduino_mega)
+        super().__init__(cmd_arduino_uno)
 
     def activate_dispenser(self, dispenser_index: int, release_time: int):
         """
@@ -64,21 +64,31 @@ class DispenserController(Controller):
         msg = self.cmd.receive()
         print(msg)
 
-    def stop(self, stop_position: int):
-        self.cmd.send("cmd_SERVO_handler_stop", stop_position)
+    def animate_dispensers(self, speed: int, position_max: int, delay_factor: int, dispenser_index: int):
+        self.cmd.send("cmd_SERVO_dispenser_animation", speed, position_max, delay_factor, dispenser_index)
         msg = self.cmd.receive()
         print(msg)
 
-    def animate_dispensers(self, speed: int, position_max: int, delay_factor: int):
-        self.cmd.send("cmd_SERVO_dispenser_animation", speed, position_max, delay_factor)
+class ServoHandler(Controller):
+
+    def __init__(self):
+        super().__init__(cmd_arduino_uno)
+
+    def move(self, position, id):
+        self.cmd.send("cmd_SERVO_handler_move", position, id)
         msg = self.cmd.receive()
-        print(msg)
+        print(f"Servo {id if id <= 15 else 'All'} stopped at position {position}: {msg}")
+
+    def stop(self):
+        self.cmd.send("cmd_SERVO_handler_stop")
+        msg = self.cmd.receive()
+        print("Servos stopped: " + msg)
 
 
 class DCValveController(Controller):
 
     def __init__(self):
-        super().__init__(cmd_arduino_mega)
+        super().__init__(cmd_arduino_uno)
 
     def open_valve(self, valve_index: int, release_time: int):
         """

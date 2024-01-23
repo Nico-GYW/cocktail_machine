@@ -3,7 +3,9 @@ import time
 
 # Créez des instances des contrôleurs
 dispenser_controller = command.DispenserController()
+servo_handler = command.ServoHandler()
 valve_controller = command.DCValveController()
+
 
 # Test du DispenserController
 print("Test du DispenserController")
@@ -13,6 +15,14 @@ release_time = 2000  # Durée de l'action en millisecondes (2000 ms = 2 secondes
 # Activez le distributeur avec un temps de libération spécifique
 print("Activation du distributeur")
 dispenser_controller.activate_dispenser(dispenser_index, release_time)
+dispenser_controller.set_dispenser_settings(160, 1000, 120)
+
+dispenser_controller.animate_dispensers(100, 150, 0, 0)
+dispenser_controller.animate_dispensers(100, 150, 500, 1)
+dispenser_controller.animate_dispensers(100, 150, 1500, 2)
+dispenser_controller.animate_dispensers(100, 150, 2000, 3)
+
+
 time.sleep(5)  # Attendez pour observer l'action
 
 # Réinitialisation du distributeur

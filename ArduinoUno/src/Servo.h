@@ -28,10 +28,11 @@ struct Servo {
     ServoAction persoAction;
     uint8_t currentPosition;
     bool direction;
-    unsigned long timer; // Pour enregistrer le temps actuel avec millis()
+    unsigned long timer;
+    uint8_t moveCounter;
 
     // Constructeur avec argument pour ServoID
-    Servo() : ServoID(0), currentActionIndex(0), persoAction(ServoAction()), currentPosition(0), direction(true), timer(0) {
+    Servo() : ServoID(0), currentActionIndex(0), persoAction(ServoAction()), currentPosition(0), direction(true), timer(0), moveCounter() {
         for (int i = 0; i < MAX_ACTIONS; ++i) {
             actionList[i] = nullptr;  // Initialiser tous les pointeurs à nullptr
         }

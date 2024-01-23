@@ -3,7 +3,7 @@
 DispenserSequenceManager::DispenserSequenceManager(ServoHandler& handler, uint8_t order[NUMBER_OF_DISPENSER])
     : servoHandler(handler) {
 
-    dispenserParams = {160, 1000, 130}; // positionMax, tMax ,positionRelease
+    dispenserParams = {160, 1000, 120}; // positionMax, tMax ,positionRelease
 
     moveUp = ServoAction(WAIT, dispenserParams.positionMax, 0, dispenserParams.tMax);
     release = ServoAction(WAIT, dispenserParams.positionRelease, 0, 0);
@@ -72,3 +72,22 @@ void DispenserSequenceManager::dispenserAnimation(uint8_t speed, uint8_t positio
         servoHandler.initializeAction(servos[i], true);
     }
 }
+
+void DispenserSequenceManager::dispenserAnimation(uint8_t dispenserIndex, uint8_t speed, uint8_t positionMax, uint16_t delayFactor) {
+    if (dispenserIndex >= NUMBER_OF_DISPENSER) {
+        return;
+    }
+
+    animation_1.targetPosition = positionMax;
+    animation_1.speed = speed;
+    animation_2.speed = speed;
+
+    servos[dispenserIndex].persoAction = ServoAction(WAIT, 0, 0, delayFactor);  // Attendre avec le délai calculé
+
+    servos[dispenserIndex].actionList[0] = &(servos[dispenserIndex].persoAction);
+    servos[dispenserIndex].actionList[1] = &animation_1;
+    servos[dispenserIndex].actionList[2] = &animation_2;
+
+    servoHandler.initializeAction(servos[dispenserIndex], true);
+}
+

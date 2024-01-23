@@ -3,6 +3,8 @@
 #define USMIN  450 // This is the rounded 'minimum' microsecond length 0° (-90°)
 #define USMAX  1800 // This is the rounded 'maximum' microsecond length 180° (+90°)
 
+#define SLOWDOWNFACTOR 10
+
 // Constructeur: initialise chaque servo avec des valeurs par défaut.
 ServoHandler::ServoHandler(Adafruit_PWMServoDriver& pwmDriver) : pwmDriver(pwmDriver) {
     for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
@@ -28,10 +30,14 @@ bool ServoHandler::addServo(Servo* newServo){
 
 // Gère l'état de mouvement d'un servo.
 void ServoHandler::handleMoveState(Servo &servo, ServoAction &action) {
-    // Calcule et applique le pas de mouvement.
-    int moveStep = servo.direction ? action.speed : -action.speed;
-    servo.currentPosition += moveStep;
-    pwmDriver.writeMicroseconds(servo.ServoID, map(servo.currentPosition, 0, 180, USMIN, USMAX));
+    // Incrémente le compteur et vérifie s'il est temps d'appliquer le pas de mouvement
+    if (++servo.moveCounter >= action.speed) {
+        int moveStep = servo.direction ? 1 : -1;
+        servo.currentPosition += moveStep;
+        pwmDriver.writeMicroseconds(servo.ServoID, map(servo.currentPosition, 0, 180, USMIN, USMAX));
+
+        servo.moveCounter = 0; // Réinitialiser le compteur
+    }
 
     // Vérifie si la position cible est atteinte.
     if ((servo.direction && servo.currentPosition >= action.targetPosition) ||

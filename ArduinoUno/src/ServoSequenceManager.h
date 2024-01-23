@@ -37,4 +37,5 @@ class DispenserSequenceManager {
 
         // Déclenche une animation ou une séquence prédéfinie sur les distributeurs.
         void dispenserAnimation(uint8_t speed, uint8_t positionMax, uint16_t delayFactor);
+        void dispenserAnimation(uint8_t dispenserIndex, uint8_t speed, uint8_t positionMax, uint16_t delayFactor);
 };
