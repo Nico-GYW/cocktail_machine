@@ -6,8 +6,9 @@
 
 CmdMessenger cmdMessenger = CmdMessenger(Serial, ',', ';', '/');
 
+
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   beginServo();
   beginValve();
 
@@ -20,5 +21,6 @@ void loop() {
   updateValve();
   cmdMessenger.feedinSerialData();
 }
+
 
 // -----------------------------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@
 extern CmdMessenger cmdMessenger;
 
 // Déclaration des variable internes 
-int valvepins[NUMBER_OF_VALVES] = {3, 5, 2, 1};
+int valvepins[NUMBER_OF_VALVES] = {2, 3, 4, 5};
 DCValveHandler valveManager(valvepins);
 
 
@@ -18,12 +18,18 @@ void updateValve(){
     valveManager.loop();
 }
 
-void onValveOpen(){
+void onValveOpen() {
     uint8_t valveIndex = cmdMessenger.readBinArg<int>();
     int releaseTime = cmdMessenger.readBinArg<int>();
-    valveManager.open(valveIndex, static_cast<unsigned long>(releaseTime));
-    cmdMessenger.sendCmd(cmd_ack, "Valve " + String(valveIndex) + " open for " + String(releaseTime) + " ms");
+
+    if (valveIndex < 0 || valveIndex > 3) {
+        cmdMessenger.sendCmd(cmd_ack, "Error: valve index must be between 0 and 3");
+    } else {
+        valveManager.open(valveIndex, static_cast<unsigned long>(releaseTime));
+        cmdMessenger.sendCmd(cmd_ack, "Valve " + String(valveIndex) + " open for " + String(releaseTime) + " ms");
+    }
 }
+
 
 void onValveClose(){
     uint8_t valveIndex = cmdMessenger.readBinArg<int>();

@@ -10,6 +10,8 @@ DCValveHandler::DCValveHandler(int pins[NUMBER_OF_VALVES]) {
 void DCValveHandler::begin(){
     for (int i = 0; i < NUMBER_OF_VALVES; i++) {
         pinMode(valves[i].pin, OUTPUT);
+        digitalWrite(valves[i].pin, HIGH);
+
     }
 }
 
@@ -45,7 +47,7 @@ void DCValveHandler::loop() {
 }
 
 void DCValveHandler::open(int valveIndex, unsigned long delay = 0){
-    digitalWrite(valves[valveIndex].pin, HIGH);
+    digitalWrite(valves[valveIndex].pin, LOW);
 
     if (delay == 0) {
         // Comportement de la fonction 'open'
@@ -59,12 +61,12 @@ void DCValveHandler::open(int valveIndex, unsigned long delay = 0){
 }
 
 void DCValveHandler::close(int valveIndex){
-    digitalWrite(valves[valveIndex].pin, LOW);
+    digitalWrite(valves[valveIndex].pin, HIGH);
     valves[valveIndex].state = IDLE;
 }
 
 void DCValveHandler::close(DCValve &valve){
-    digitalWrite(valve.pin, LOW);
+    digitalWrite(valve.pin, HIGH);
     valve.state = IDLE;
 }
 

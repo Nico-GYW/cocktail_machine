@@ -1,5 +1,5 @@
 #include "Servo.h"  // Assurez-vous d'inclure ou de déclarer les types nécessaires
-#define NUMBER_OF_DISPENSER 8
+#define NUMBER_OF_DISPENSER 9
 
 // Prototype de la fonction pour créer la liste d'actions
 
@@ -37,4 +37,5 @@ class DispenserSequenceManager {
 
         // Déclenche une animation ou une séquence prédéfinie sur les distributeurs.
         void dispenserAnimation(uint8_t speed, uint8_t positionMax, uint16_t delayFactor);
+        void dispenserAnimation(uint8_t dispenserIndex, uint8_t speed, uint8_t positionMax, uint16_t delayFactor);
 };

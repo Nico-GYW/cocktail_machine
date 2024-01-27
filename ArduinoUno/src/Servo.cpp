@@ -1,7 +1,9 @@
 #include "Servo.h"
 
-#define USMIN  600 // This is the rounded 'minimum' microsecond length 0° (-90°)
-#define USMAX  2400 // This is the rounded 'maximum' microsecond length 180° (+90°)
+#define USMIN  450 // This is the rounded 'minimum' microsecond length 0° (-90°)
+#define USMAX  1800 // This is the rounded 'maximum' microsecond length 180° (+90°)
+
+#define SLOWDOWNFACTOR 10
 
 // Constructeur: initialise chaque servo avec des valeurs par défaut.
 ServoHandler::ServoHandler(Adafruit_PWMServoDriver& pwmDriver) : pwmDriver(pwmDriver) {
@@ -28,10 +30,14 @@ bool ServoHandler::addServo(Servo* newServo){
 
 // Gère l'état de mouvement d'un servo.
 void ServoHandler::handleMoveState(Servo &servo, ServoAction &action) {
-    // Calcule et applique le pas de mouvement.
-    int moveStep = servo.direction ? action.speed : -action.speed;
-    servo.currentPosition += moveStep;
-    pwmDriver.writeMicroseconds(servo.ServoID, map(servo.currentPosition, 0, 180, USMIN, USMAX));
+    // Incrémente le compteur et vérifie s'il est temps d'appliquer le pas de mouvement
+    if (++servo.moveCounter >= action.speed) {
+        int moveStep = servo.direction ? 1 : -1;
+        servo.currentPosition += moveStep;
+        pwmDriver.writeMicroseconds(servo.ServoID, map(servo.currentPosition, 0, 180, USMIN, USMAX));
+
+        servo.moveCounter = 0; // Réinitialiser le compteur
+    }
 
     // Vérifie si la position cible est atteinte.
     if ((servo.direction && servo.currentPosition >= action.targetPosition) ||
@@ -119,5 +125,18 @@ void ServoHandler::stop() {
         if (servos[i] != nullptr) { // Vérifie si le pointeur n'est pas nul
             stop(*servos[i]); // Déréférence le pointeur et appelle la fonction stop pour chaque servo
         }
+    }
+}
+
+// Arrête tous les servos en les plaçant dans leur état de repos.
+void ServoHandler::move(uint8_t position, uint8_t id) {
+    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        pwmDriver.writeMicroseconds(id, map(position, 0, 180, USMIN, USMAX));
+    }
+}
+
+void ServoHandler::moveAll(uint8_t position) {
+    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+        pwmDriver.writeMicroseconds(i, map(position, 0, 180, USMIN, USMAX));
     }
 }
