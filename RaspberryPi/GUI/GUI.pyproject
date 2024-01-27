@@ -1,0 +1,7 @@
+{
+    "files": [
+        "mainwindow.py",
+        "pompetteWidgets.py",
+        "form.ui"
+    ]
+}
