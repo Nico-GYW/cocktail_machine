@@ -54,25 +54,6 @@ void DispenserSequenceManager::stopDispenser(uint8_t dispenserIndex){
     servoHandler.stop(servos[dispenserIndex]);
 }
 
-void DispenserSequenceManager::dispenserAnimation(uint8_t speed, uint8_t positionMax, uint16_t delayFactor) {
-
-    animation_1.targetPosition = positionMax;
-    animation_1.speed = speed;
-    animation_2.speed = speed;
-
-    for (uint8_t i = 0; i < NUMBER_OF_DISPENSER; ++i) {
-        uint16_t delay = i * delayFactor; // Calcule le délai en fonction de la position du servo
-
-        servos[i].persoAction = ServoAction(WAIT, 0, 0, delay);  // Attendre avec le délai calculé
-
-        servos[i].actionList[0] = &(servos[i].persoAction);
-        servos[i].actionList[1] = &animation_1;
-        servos[i].actionList[2] = &animation_2;
-
-        servoHandler.initializeAction(servos[i], true);
-    }
-}
-
 void DispenserSequenceManager::dispenserAnimation(uint8_t dispenserIndex, uint8_t speed, uint8_t positionMax, uint16_t delayFactor) {
     if (dispenserIndex >= NUMBER_OF_DISPENSER) {
         return;
@@ -91,3 +72,22 @@ void DispenserSequenceManager::dispenserAnimation(uint8_t dispenserIndex, uint8_
     servoHandler.initializeAction(servos[dispenserIndex], true);
 }
 
+LemonBowlSequenceManager::LemonBowlSequenceManager(ServoHandler& handler, uint8_t servoID)
+    : servoHandler(handler) {
+
+    lemonBowlParams = {0, 180, 10}; // positionOpen, positionMax ,speed
+
+    openMove = ServoAction(MOVE, lemonBowlParams.positionOpen, lemonBowlParams.speed, 0);
+    openIdle = ServoAction(IDLE, lemonBowlParams.positionOpen, 0, 0);
+    closeMove = ServoAction(MOVE, lemonBowlParams.positionClosed, lemonBowlParams.speed, 0);
+    closeIdle = ServoAction(IDLE, lemonBowlParams.positionClosed, 0, 0);
+    idle = ServoAction();
+
+    servo.ServoID = servoID;
+
+    for (int j = 0; j < MAX_ACTIONS - 1; ++j) {
+        servo.actionList[j] = &idle;
+    }
+    servoHandler.addServo(&servo)
+
+}

@@ -36,6 +36,30 @@ class DispenserSequenceManager {
         void stopDispenser(uint8_t dispenserIndex);
 
         // Déclenche une animation ou une séquence prédéfinie sur les distributeurs.
-        void dispenserAnimation(uint8_t speed, uint8_t positionMax, uint16_t delayFactor);
         void dispenserAnimation(uint8_t dispenserIndex, uint8_t speed, uint8_t positionMax, uint16_t delayFactor);
+};
+
+class LemonBowlSequenceManager{
+    private:
+
+        struct LemonBowlParams {
+            uint8_t* positionOpen;
+            uint8_t* positionClosed;
+            uint8_t* speed;
+        };
+
+        Servo servo;
+        ServoAction openMove;
+        ServoAction openIdle;
+        ServoAction closedMove;
+        ServoAction closedIdle;
+        LemonBowlParams lemonBowlParams;
+
+    public:
+        LemonBowManager(ServoHandler& handler, uint8_t servoID);
+
+        void setLemonBowlParams(uint8_t positionOpen, uint16_t positionClosed, uint8_t speed);
+
+        void closeBowl();
+        void openBowl();
 };
