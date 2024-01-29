@@ -16,10 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
-    QMainWindow, QPushButton, QRadioButton, QScrollArea,
-    QSizePolicy, QStackedWidget, QToolButton, QWidget)
+    QMainWindow, QPushButton, QScrollArea, QSizePolicy,
+    QStackedWidget, QToolButton, QVBoxLayout, QWidget)
 
-from pompetteWidgets import LandingPage
+from pompetteWidgets import (CocktailCard, LandingPage, MainPage, ParameterPage)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -34,7 +34,13 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         MainWindow.setStyleSheet(u"color: white;\n"
 "font-size: 24px;\n"
-"")
+"QPushButton {\n"
+"        border-radius: 10px;\n"
+"        background-color: #FFF;\n"
+"        color: black;\n"
+"        font-size: 16px;\n"
+"        border: none;\n"
+"}")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setEnabled(True)
@@ -43,7 +49,15 @@ class Ui_MainWindow(object):
         self.centralwidget.setFont(font1)
         self.centralwidget.setLayoutDirection(Qt.RightToLeft)
         self.centralwidget.setStyleSheet(u"background-color: #F79643;\n"
-"font-family: \"CoconPro\";")
+"font-family: \"CoconPro\";\n"
+"\n"
+"QPushButton {\n"
+"	border-radius: 10px;\n"
+"	background-color : #FFF;\n"
+"	color: black;\n"
+"	font-size: 16px;\n"
+"     border: none;\n"
+"}")
         self.stackedWidget = QStackedWidget(self.centralwidget)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setGeometry(QRect(0, 0, 800, 480))
@@ -82,7 +96,7 @@ class Ui_MainWindow(object):
         self.logo.setScaledContents(True)
         self.logo.setWordWrap(False)
         self.stackedWidget.addWidget(self.landingPage)
-        self.mainPage = QWidget()
+        self.mainPage = MainPage()
         self.mainPage.setObjectName(u"mainPage")
         self.mainPage.setMinimumSize(QSize(800, 0))
         self.cocktailView = QFrame(self.mainPage)
@@ -99,15 +113,15 @@ class Ui_MainWindow(object):
         self.cocktailCarousel = QStackedWidget(self.cocktailView)
         self.cocktailCarousel.setObjectName(u"cocktailCarousel")
         self.cocktailCarousel.setGeometry(QRect(60, 70, 471, 351))
-        self.cocktailCarousel.setFrameShape(QFrame.StyledPanel)
+        self.cocktailCarousel.setFrameShape(QFrame.NoFrame)
         self.cocktailPage1 = QWidget()
         self.cocktailPage1.setObjectName(u"cocktailPage1")
         self.layoutWidget = QWidget(self.cocktailPage1)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(10, 10, 441, 321))
-        self.gridLayout = QGridLayout(self.layoutWidget)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridCocktailLayout = QGridLayout(self.layoutWidget)
+        self.gridCocktailLayout.setObjectName(u"gridCocktailLayout")
+        self.gridCocktailLayout.setContentsMargins(0, 0, 0, 0)
         self.frame_3 = QFrame(self.layoutWidget)
         self.frame_3.setObjectName(u"frame_3")
         sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
@@ -117,7 +131,7 @@ class Ui_MainWindow(object):
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
 
-        self.gridLayout.addWidget(self.frame_3, 0, 0, 1, 1)
+        self.gridCocktailLayout.addWidget(self.frame_3, 0, 0, 1, 1)
 
         self.frame_5 = QFrame(self.layoutWidget)
         self.frame_5.setObjectName(u"frame_5")
@@ -128,7 +142,7 @@ class Ui_MainWindow(object):
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
 
-        self.gridLayout.addWidget(self.frame_5, 1, 0, 1, 1)
+        self.gridCocktailLayout.addWidget(self.frame_5, 1, 0, 1, 1)
 
         self.frame_7 = QFrame(self.layoutWidget)
         self.frame_7.setObjectName(u"frame_7")
@@ -139,7 +153,7 @@ class Ui_MainWindow(object):
         self.frame_7.setFrameShape(QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QFrame.Raised)
 
-        self.gridLayout.addWidget(self.frame_7, 1, 2, 1, 1)
+        self.gridCocktailLayout.addWidget(self.frame_7, 1, 2, 1, 1)
 
         self.frame_6 = QFrame(self.layoutWidget)
         self.frame_6.setObjectName(u"frame_6")
@@ -150,7 +164,7 @@ class Ui_MainWindow(object):
         self.frame_6.setFrameShape(QFrame.StyledPanel)
         self.frame_6.setFrameShadow(QFrame.Raised)
 
-        self.gridLayout.addWidget(self.frame_6, 1, 1, 1, 1)
+        self.gridCocktailLayout.addWidget(self.frame_6, 1, 1, 1, 1)
 
         self.frame_4 = QFrame(self.layoutWidget)
         self.frame_4.setObjectName(u"frame_4")
@@ -161,70 +175,66 @@ class Ui_MainWindow(object):
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
 
-        self.gridLayout.addWidget(self.frame_4, 0, 1, 1, 1)
+        self.gridCocktailLayout.addWidget(self.frame_4, 0, 1, 1, 1)
 
-        self.frame_8 = QFrame(self.layoutWidget)
-        self.frame_8.setObjectName(u"frame_8")
-        sizePolicy.setHeightForWidth(self.frame_8.sizePolicy().hasHeightForWidth())
-        self.frame_8.setSizePolicy(sizePolicy)
-        self.frame_8.setMinimumSize(QSize(130, 130))
-        self.frame_8.setMaximumSize(QSize(130, 130))
-        self.frame_8.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
+        self.cocktailCard = CocktailCard(self.layoutWidget)
+        self.cocktailCard.setObjectName(u"cocktailCard")
+        sizePolicy.setHeightForWidth(self.cocktailCard.sizePolicy().hasHeightForWidth())
+        self.cocktailCard.setSizePolicy(sizePolicy)
+        self.cocktailCard.setMinimumSize(QSize(130, 130))
+        self.cocktailCard.setMaximumSize(QSize(130, 130))
+        self.cocktailCard.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
-        self.frame_8.setFrameShape(QFrame.StyledPanel)
-        self.frame_8.setFrameShadow(QFrame.Raised)
-        self.label_7 = QLabel(self.frame_8)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setEnabled(True)
-        self.label_7.setGeometry(QRect(20, 100, 91, 21))
-        self.label_7.setFont(font1)
-        self.label_7.setStyleSheet(u"color: black;\n"
+        self.cocktailCard.setFrameShape(QFrame.StyledPanel)
+        self.cocktailCard.setFrameShadow(QFrame.Raised)
+        self.cocktailCardName = QLabel(self.cocktailCard)
+        self.cocktailCardName.setObjectName(u"cocktailCardName")
+        self.cocktailCardName.setEnabled(True)
+        self.cocktailCardName.setGeometry(QRect(20, 100, 91, 21))
+        self.cocktailCardName.setFont(font1)
+        self.cocktailCardName.setStyleSheet(u"color: black;\n"
 "font-size: 16px;")
-        self.label_7.setAlignment(Qt.AlignCenter)
-        self.label_8 = QLabel(self.frame_8)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setGeometry(QRect(30, 40, 61, 51))
-        self.label_9 = QLabel(self.frame_8)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setEnabled(True)
-        self.label_9.setGeometry(QRect(40, 20, 51, 71))
-        self.label_9.setFont(font1)
-        self.label_9.setStyleSheet(u"color: black;\n"
+        self.cocktailCardName.setAlignment(Qt.AlignCenter)
+        self.cocktailCardImage = QLabel(self.cocktailCard)
+        self.cocktailCardImage.setObjectName(u"cocktailCardImage")
+        self.cocktailCardImage.setEnabled(True)
+        self.cocktailCardImage.setGeometry(QRect(40, 20, 51, 71))
+        self.cocktailCardImage.setFont(font1)
+        self.cocktailCardImage.setStyleSheet(u"color: black;\n"
 "font-size: 16px;")
-        self.label_9.setPixmap(QPixmap(u"ressources/cocktail/spritz.png"))
-        self.label_9.setScaledContents(True)
-        self.label_9.setAlignment(Qt.AlignCenter)
+        self.cocktailCardImage.setPixmap(QPixmap(u"ressources/cocktail/spritz.png"))
+        self.cocktailCardImage.setScaledContents(True)
+        self.cocktailCardImage.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.frame_8, 0, 2, 1, 1)
+        self.gridCocktailLayout.addWidget(self.cocktailCard, 0, 2, 1, 1)
 
         self.cocktailCarousel.addWidget(self.cocktailPage1)
         self.cocktailPage2 = QWidget()
         self.cocktailPage2.setObjectName(u"cocktailPage2")
         self.cocktailCarousel.addWidget(self.cocktailPage2)
-        self.leftButton = QPushButton(self.cocktailView)
-        self.leftButton.setObjectName(u"leftButton")
-        self.leftButton.setGeometry(QRect(20, 220, 31, 51))
+        self.leftButtonMainPage = QPushButton(self.cocktailView)
+        self.leftButtonMainPage.setObjectName(u"leftButtonMainPage")
+        self.leftButtonMainPage.setGeometry(QRect(20, 220, 31, 51))
         font2 = QFont()
         font2.setFamilies([u"CoconPro"])
         font2.setKerning(True)
-        self.leftButton.setFont(font2)
-        self.leftButton.setStyleSheet(u"border: none; /* Supprime la bordure */")
+        self.leftButtonMainPage.setFont(font2)
+        self.leftButtonMainPage.setStyleSheet(u"border: none; /* Supprime la bordure */")
         icon = QIcon()
         icon.addFile(u"ressources/generic/arrow_left.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.leftButton.setIcon(icon)
-        self.leftButton.setIconSize(QSize(25, 25))
-        self.rightButton = QPushButton(self.cocktailView)
-        self.rightButton.setObjectName(u"rightButton")
-        self.rightButton.setGeometry(QRect(540, 220, 31, 51))
-        self.rightButton.setFont(font2)
-        self.rightButton.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
+        self.leftButtonMainPage.setIcon(icon)
+        self.leftButtonMainPage.setIconSize(QSize(25, 25))
+        self.rightButtonMainPage = QPushButton(self.cocktailView)
+        self.rightButtonMainPage.setObjectName(u"rightButtonMainPage")
+        self.rightButtonMainPage.setGeometry(QRect(540, 220, 31, 51))
+        self.rightButtonMainPage.setFont(font2)
+        self.rightButtonMainPage.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
 "")
         icon1 = QIcon()
         icon1.addFile(u"ressources/generic/arrow_right.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.rightButton.setIcon(icon1)
-        self.rightButton.setIconSize(QSize(25, 25))
+        self.rightButtonMainPage.setIcon(icon1)
+        self.rightButtonMainPage.setIconSize(QSize(25, 25))
         self.pageCount = QLabel(self.cocktailView)
         self.pageCount.setObjectName(u"pageCount")
         self.pageCount.setEnabled(True)
@@ -274,15 +284,15 @@ class Ui_MainWindow(object):
         self.cocktailName.setGeometry(QRect(670, 90, 91, 21))
         self.cocktailName.setFont(font1)
         self.cocktailName.setStyleSheet(u"")
-        self.toolButton = QToolButton(self.mainPage)
-        self.toolButton.setObjectName(u"toolButton")
-        self.toolButton.setGeometry(QRect(770, 450, 31, 31))
-        self.toolButton.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
+        self.toolButtonMainPage = QToolButton(self.mainPage)
+        self.toolButtonMainPage.setObjectName(u"toolButtonMainPage")
+        self.toolButtonMainPage.setGeometry(QRect(770, 450, 31, 31))
+        self.toolButtonMainPage.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
 "")
         icon2 = QIcon()
         icon2.addFile(u"ressources/generic/engrenage.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.toolButton.setIcon(icon2)
-        self.toolButton.setIconSize(QSize(25, 25))
+        self.toolButtonMainPage.setIcon(icon2)
+        self.toolButtonMainPage.setIconSize(QSize(25, 25))
         self.modifyButton = QPushButton(self.mainPage)
         self.modifyButton.setObjectName(u"modifyButton")
         self.modifyButton.setGeometry(QRect(600, 380, 71, 32))
@@ -299,7 +309,7 @@ class Ui_MainWindow(object):
         self.makeButton.setStyleSheet(u"color: black;\n"
 "font-size: 12px;")
         self.stackedWidget.addWidget(self.mainPage)
-        self.parameterPage = QWidget()
+        self.parameterPage = ParameterPage()
         self.parameterPage.setObjectName(u"parameterPage")
         self.parameterPage.setMinimumSize(QSize(800, 0))
         self.parameterPage.setStyleSheet(u"")
@@ -337,7 +347,6 @@ class Ui_MainWindow(object):
         self.frame_14.setMaximumSize(QSize(100, 100))
         self.frame_14.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_14.setFrameShape(QFrame.StyledPanel)
         self.frame_14.setFrameShadow(QFrame.Raised)
@@ -352,7 +361,6 @@ class Ui_MainWindow(object):
         self.frame_11.setMaximumSize(QSize(100, 100))
         self.frame_11.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_11.setFrameShape(QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QFrame.Raised)
@@ -367,7 +375,6 @@ class Ui_MainWindow(object):
         self.frame_12.setMaximumSize(QSize(100, 100))
         self.frame_12.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_12.setFrameShape(QFrame.StyledPanel)
         self.frame_12.setFrameShadow(QFrame.Raised)
@@ -382,7 +389,6 @@ class Ui_MainWindow(object):
         self.frame_10.setMaximumSize(QSize(100, 100))
         self.frame_10.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_10.setFrameShape(QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QFrame.Raised)
@@ -418,7 +424,6 @@ class Ui_MainWindow(object):
         self.frame_13.setMaximumSize(QSize(100, 100))
         self.frame_13.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_13.setFrameShape(QFrame.StyledPanel)
         self.frame_13.setFrameShadow(QFrame.Raised)
@@ -433,7 +438,6 @@ class Ui_MainWindow(object):
         self.frame_9.setMaximumSize(QSize(100, 100))
         self.frame_9.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_9.setFrameShape(QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QFrame.Raised)
@@ -448,7 +452,6 @@ class Ui_MainWindow(object):
         self.frame_15.setMaximumSize(QSize(100, 100))
         self.frame_15.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_15.setFrameShape(QFrame.StyledPanel)
         self.frame_15.setFrameShadow(QFrame.Raised)
@@ -463,7 +466,6 @@ class Ui_MainWindow(object):
         self.frame_16.setMaximumSize(QSize(100, 100))
         self.frame_16.setStyleSheet(u"background-color: #FFFFFF; /* Couleur de fond blanc */\n"
 "border-radius: 15px; /* Bords arrondis de 5px */\n"
-"box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Ombre port\u00e9e */\n"
 "")
         self.frame_16.setFrameShape(QFrame.StyledPanel)
         self.frame_16.setFrameShadow(QFrame.Raised)
@@ -475,82 +477,116 @@ class Ui_MainWindow(object):
         self.plasticBottles.setObjectName(u"plasticBottles")
         self.plasticBottles.setStyleSheet(u"background-color : #F9F8F8;")
         self.parameterStack.addWidget(self.plasticBottles)
-        self.frame = QFrame(self.parameterPage)
-        self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(570, 0, 231, 481))
-        self.frame.setStyleSheet(u"background-color : #F9F8F8;\n"
-"\n"
+        self.parameterRightPannel = QFrame(self.parameterPage)
+        self.parameterRightPannel.setObjectName(u"parameterRightPannel")
+        self.parameterRightPannel.setGeometry(QRect(570, 0, 231, 481))
+        self.parameterRightPannel.setStyleSheet(u"background-color : #F9F8F8;\n"
 "")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.titleParameter = QLabel(self.frame)
+        self.parameterRightPannel.setFrameShape(QFrame.StyledPanel)
+        self.parameterRightPannel.setFrameShadow(QFrame.Raised)
+        self.titleParameter = QLabel(self.parameterRightPannel)
         self.titleParameter.setObjectName(u"titleParameter")
         self.titleParameter.setGeometry(QRect(30, 20, 171, 31))
         self.titleParameter.setFont(font1)
         self.titleParameter.setStyleSheet(u"font-size: 32px;\n"
 "color: black;")
-        self.toolButtonParameter = QToolButton(self.frame)
-        self.toolButtonParameter.setObjectName(u"toolButtonParameter")
-        self.toolButtonParameter.setGeometry(QRect(200, 450, 31, 31))
-        self.toolButtonParameter.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
+        self.toolButtonParameterPage = QToolButton(self.parameterRightPannel)
+        self.toolButtonParameterPage.setObjectName(u"toolButtonParameterPage")
+        self.toolButtonParameterPage.setGeometry(QRect(200, 450, 31, 31))
+        self.toolButtonParameterPage.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
 "")
         icon3 = QIcon()
         icon3.addFile(u"ressources/generic/engrenage_orange.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.toolButtonParameter.setIcon(icon3)
-        self.toolButtonParameter.setIconSize(QSize(25, 25))
-        self.radioButton = QRadioButton(self.frame)
-        self.radioButton.setObjectName(u"radioButton")
-        self.radioButton.setGeometry(QRect(40, 120, 151, 61))
+        self.toolButtonParameterPage.setIcon(icon3)
+        self.toolButtonParameterPage.setIconSize(QSize(25, 25))
+        self.verticalLayoutWidget = QWidget(self.parameterRightPannel)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(30, 110, 184, 251))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.pushButtonBottleParameter = QPushButton(self.verticalLayoutWidget)
+        self.pushButtonBottleParameter.setObjectName(u"pushButtonBottleParameter")
         font3 = QFont()
         font3.setFamilies([u"CoconPro"])
         font3.setStrikeOut(False)
-        self.radioButton.setFont(font3)
-        self.radioButton.setLayoutDirection(Qt.LeftToRight)
-        self.radioButton.setStyleSheet(u"QRadioButton {\n"
-"	border-radius: 10px;\n"
-"	background-color : #FFF;\n"
-"	color: black;\n"
-"	font-size: 16px;\n"
+        self.pushButtonBottleParameter.setFont(font3)
+        self.pushButtonBottleParameter.setLayoutDirection(Qt.LeftToRight)
+        self.pushButtonBottleParameter.setAutoFillBackground(False)
+        self.pushButtonBottleParameter.setStyleSheet(u"QPushButton {\n"
+"        border-radius: 10px;\n"
+"        background-color: #FFF;\n"
+"        color: black;\n"
+"        font-size: 16px;\n"
+"        border: none;\n"
+"	   text-align: left;\n"
+"	   padding-left: 15px;\n"
 "}\n"
-"")
+"\n"
+"QPushButton:pressed {\n"
+"        background-color: #333; \n"
+"}")
         icon4 = QIcon()
         icon4.addFile(u"ressources/generic/bouteille.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.radioButton.setIcon(icon4)
-        self.radioButton.setIconSize(QSize(16, 40))
-        self.radioButton.setCheckable(False)
-        self.radioButton_2 = QRadioButton(self.frame)
-        self.radioButton_2.setObjectName(u"radioButton_2")
-        self.radioButton_2.setGeometry(QRect(40, 200, 151, 61))
-        self.radioButton_2.setLayoutDirection(Qt.LeftToRight)
-        self.radioButton_2.setStyleSheet(u"QRadioButton {\n"
-"	border-radius: 10px;\n"
-"	background-color : #FFF;\n"
-"	color: black;\n"
-"	font-size: 16px;\n"
+        self.pushButtonBottleParameter.setIcon(icon4)
+        self.pushButtonBottleParameter.setIconSize(QSize(16, 40))
+        self.pushButtonBottleParameter.setCheckable(True)
+        self.pushButtonBottleParameter.setAutoExclusive(True)
+        self.pushButtonBottleParameter.setFlat(False)
+
+        self.verticalLayout.addWidget(self.pushButtonBottleParameter)
+
+        self.pushButtonSoftParameter = QPushButton(self.verticalLayoutWidget)
+        self.pushButtonSoftParameter.setObjectName(u"pushButtonSoftParameter")
+        self.pushButtonSoftParameter.setLayoutDirection(Qt.LeftToRight)
+        self.pushButtonSoftParameter.setStyleSheet(u"QPushButton {\n"
+"        border-radius: 10px;\n"
+"        background-color: #FFF;\n"
+"        color: black;\n"
+"        font-size: 16px;\n"
+"        border: none;\n"
+"	   text-align: left;\n"
+"	   padding-left: 10px;\n"
 "}\n"
-"")
+"\n"
+"QPushButton:pressed {\n"
+"        background-color: #333; \n"
+"}")
         icon5 = QIcon()
         icon5.addFile(u"ressources/generic/soft.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.radioButton_2.setIcon(icon5)
-        self.radioButton_2.setIconSize(QSize(40, 40))
-        self.radioButton_2.setCheckable(False)
-        self.radioButton_3 = QRadioButton(self.frame)
-        self.radioButton_3.setObjectName(u"radioButton_3")
-        self.radioButton_3.setGeometry(QRect(40, 280, 151, 61))
-        self.radioButton_3.setLayoutDirection(Qt.LeftToRight)
-        self.radioButton_3.setAutoFillBackground(False)
-        self.radioButton_3.setStyleSheet(u"QRadioButton {\n"
-"	border-radius: 10px;\n"
-"	background-color : #FFF;\n"
-"	color: black;\n"
-"	font-size: 16px;\n"
+        self.pushButtonSoftParameter.setIcon(icon5)
+        self.pushButtonSoftParameter.setIconSize(QSize(40, 40))
+        self.pushButtonSoftParameter.setCheckable(True)
+        self.pushButtonSoftParameter.setAutoExclusive(True)
+
+        self.verticalLayout.addWidget(self.pushButtonSoftParameter)
+
+        self.pushButtonMachineParameter = QPushButton(self.verticalLayoutWidget)
+        self.pushButtonMachineParameter.setObjectName(u"pushButtonMachineParameter")
+        self.pushButtonMachineParameter.setLayoutDirection(Qt.LeftToRight)
+        self.pushButtonMachineParameter.setAutoFillBackground(False)
+        self.pushButtonMachineParameter.setStyleSheet(u"QPushButton {\n"
+"        border-radius: 10px;\n"
+"        background-color: #FFF;\n"
+"        color: black;\n"
+"        font-size: 16px;\n"
+"        border: none;\n"
+"	   text-align: left;\n"
+"	   padding-left: 0px;\n"
 "}\n"
-"")
+"\n"
+"QPushButton:pressed {\n"
+"        background-color: #333; \n"
+"}")
         icon6 = QIcon()
         icon6.addFile(u"ressources/generic/outil.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.radioButton_3.setIcon(icon6)
-        self.radioButton_3.setIconSize(QSize(50, 50))
-        self.radioButton_3.setCheckable(False)
+        self.pushButtonMachineParameter.setIcon(icon6)
+        self.pushButtonMachineParameter.setIconSize(QSize(40, 50))
+        self.pushButtonMachineParameter.setCheckable(True)
+        self.pushButtonMachineParameter.setAutoExclusive(True)
+
+        self.verticalLayout.addWidget(self.pushButtonMachineParameter)
+
         self.stackedWidget.addWidget(self.parameterPage)
         self.barManPage = QWidget()
         self.barManPage.setObjectName(u"barManPage")
@@ -564,8 +600,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.parameterStack.setCurrentIndex(0)
+        self.pushButtonBottleParameter.setDefault(True)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -578,11 +615,10 @@ class Ui_MainWindow(object):
         self.geerings.setText("")
         self.logo.setText("")
         self.logo_2.setText("")
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Mojito", None))
-        self.label_8.setText("")
-        self.label_9.setText("")
-        self.leftButton.setText("")
-        self.rightButton.setText("")
+        self.cocktailCardName.setText(QCoreApplication.translate("MainWindow", u"Mojito", None))
+        self.cocktailCardImage.setText("")
+        self.leftButtonMainPage.setText("")
+        self.rightButtonMainPage.setText("")
         self.pageCount.setText(QCoreApplication.translate("MainWindow", u"Page 1/3", None))
         self.title.setText(QCoreApplication.translate("MainWindow", u"Cocktail", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"2 cl de rhum blanc\n"
@@ -593,7 +629,7 @@ class Ui_MainWindow(object):
 "gla\u00e7on", None))
         self.cocktailImage.setText("")
         self.cocktailName.setText(QCoreApplication.translate("MainWindow", u"Mojito", None))
-        self.toolButton.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.toolButtonMainPage.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self.modifyButton.setText(QCoreApplication.translate("MainWindow", u"Modifier", None))
         self.addButton.setText(QCoreApplication.translate("MainWindow", u"Suppl\u00e9ment", None))
         self.makeButton.setText(QCoreApplication.translate("MainWindow", u"Make !", None))
@@ -602,9 +638,9 @@ class Ui_MainWindow(object):
         self.title_3.setText(QCoreApplication.translate("MainWindow", u"Rhum Blanc", None))
         self.title_4.setText(QCoreApplication.translate("MainWindow", u"100 ml", None))
         self.titleParameter.setText(QCoreApplication.translate("MainWindow", u"Param\u00e8tres", None))
-        self.toolButtonParameter.setText(QCoreApplication.translate("MainWindow", u"...", None))
-        self.radioButton.setText(QCoreApplication.translate("MainWindow", u"Bouteilles", None))
-        self.radioButton_2.setText(QCoreApplication.translate("MainWindow", u"Soft", None))
-        self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"Machine", None))
+        self.toolButtonParameterPage.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.pushButtonBottleParameter.setText(QCoreApplication.translate("MainWindow", u"     Bouteilles", None))
+        self.pushButtonSoftParameter.setText(QCoreApplication.translate("MainWindow", u"   Soft", None))
+        self.pushButtonMachineParameter.setText(QCoreApplication.translate("MainWindow", u"  Machine", None))
     # retranslateUi
 

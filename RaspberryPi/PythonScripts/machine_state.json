@@ -1,0 +1,169 @@
+{
+    "glass_bottles": {
+        "bottles": [
+            {
+                "name": "Rhum Black",
+                "quantity": 1000,
+                "position": 1
+            },
+            {
+                "name": "Lime Juice",
+                "quantity": 997,
+                "position": 2
+            },
+            {
+                "name": "Sugar Syrup",
+                "quantity": 1000,
+                "position": 3
+            },
+            {
+                "name": "Grenadine Syrup",
+                "quantity": 1000,
+                "position": 4
+            },
+            {
+                "name": "Tequila",
+                "quantity": 750,
+                "position": 5
+            },
+            {
+                "name": "Rhum Black",
+                "quantity": 770,
+                "position": 6
+            },
+            {
+                "name": "Rhum Black",
+                "quantity": 1000,
+                "position": 7
+            },
+            {
+                "name": "Sugar Syrup",
+                "quantity": 1000,
+                "position": 8
+            }
+        ]
+    },
+    "soft_drink_bottles": {
+        "bottles": [
+            {
+                "name": "Fanta",
+                "quantity": 760,
+                "position": 1
+            },
+            {
+                "name": "Orange Juice",
+                "quantity": 1000,
+                "position": 2
+            },
+            {
+                "name": "Fanta",
+                "quantity": 970,
+                "position": 3
+            },
+            {
+                "name": "Ginger Ale",
+                "quantity": 625,
+                "position": 4
+            }
+        ]
+    },
+    "stock_lemon": 1000,
+    "stock_ice": 925,
+    "cocktail_recipes": [
+        {
+            "name": "Mojito",
+            "glass_bottles": {
+                "Rhum": 50,
+                "Sugar Syrup": 20
+            },
+            "soft_drink_bottles": {
+                "Eau p\u00e9tillante": 20
+            },
+            "lemon": 2,
+            "ice": 5,
+            "comment": "Mint leaves and lime wedges",
+            "image": "ressources/cocktail/mojito.png"
+        },
+        {
+            "name": "Cuba Libre",
+            "glass_bottles": {
+                "Rhum": 50
+            },
+            "soft_drink_bottles": {
+                "Coca-Cola": 20
+            },
+            "lemon": 2,
+            "ice": 5,
+            "comment": "Lime wedge",
+            "image": "ressources/cocktail/cuba_libre.png"
+        },
+        {
+            "name": "Kamikaze",
+            "glass_bottles": {
+                "Vodka": 30,
+                "Triple Sec": 20
+            },
+            "soft_drink_bottles": {
+                "Lime Juice": 20
+            },
+            "lemon": 0,
+            "ice": 5,
+            "comment": "Lime wedge",
+            "image": "ressources/cocktail/kamikaze.png"
+        },
+        {
+            "name": "Tequila Sunrise",
+            "glass_bottles": {
+                "Tequila": 25,
+                "Grenadine Syrup": 10
+            },
+            "soft_drink_bottles": {
+                "Orange Juice": 120
+            },
+            "lemon": 0,
+            "ice": 5,
+            "comment": "Orange slice and cherry",
+            "image": "ressources/cocktail/tequila_sunrise.png"
+        },
+        {
+            "name": "Spritz",
+            "glass_bottles": {
+                "Aperol": 40,
+                "Soda Water": 30
+            },
+            "soft_drink_bottles": {
+                "Prosecco": 60
+            },
+            "lemon": 0,
+            "ice": 5,
+            "comment": "Orange slice",
+            "image": "ressources/cocktail/spritz.png"
+        },
+        {
+            "name": "Gin Tonic",
+            "glass_bottles": {
+                "Gin": 50
+            },
+            "soft_drink_bottles": {
+                "Tonic Water": 120
+            },
+            "lemon": 2,
+            "ice": 5,
+            "comment": "Lemon wedge and rosemary",
+            "image": "ressources/cocktail/gin_tonic.png"
+        },
+        {
+            "name": "Gin Tonic Charg\u00e9",
+            "glass_bottles": {
+                "Gin": 150
+            },
+            "soft_drink_bottles": {
+                "Tonic Water": 20
+            },
+            "lemon": 2,
+            "ice": 5,
+            "comment": "Lemon wedge and rosemary",
+            "image": "ressources/cocktail/default.png"
+        }
+    ]
+}

@@ -2,6 +2,9 @@
     "files": [
         "mainwindow.py",
         "pompetteWidgets.py",
-        "form.ui"
+        "form.ui",
+        "ui_form.py",
+        "cocktailCard.ui",
+        "cocktailCard.ui"
     ]
 }

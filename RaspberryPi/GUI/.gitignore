@@ -72,3 +72,25 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 
+# Environnements virtuels Python (venv)
+venv/
+ENV/
+env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# pytest
+.cache
+
+# mypy
+.mypy_cache/
+
+# Local .env files
+.env
+.env.local
+
+# Mac OS system files
+.DS_Store
