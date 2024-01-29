@@ -30,7 +30,6 @@ void onValveOpen() {
     }
 }
 
-
 void onValveClose(){
     uint8_t valveIndex = cmdMessenger.readBinArg<int>();
     valveManager.close(valveIndex);

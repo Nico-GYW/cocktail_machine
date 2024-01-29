@@ -64,11 +64,13 @@ class DispenserController(Controller):
         msg = self.cmd.receive()
         print(msg)
 
-    def animate_dispensers(self, speed: int, position_max: int, delay_factor: int, dispenser_index: int):
-        self.cmd.send("cmd_SERVO_dispenser_animation", speed, position_max, delay_factor, dispenser_index)
-        msg = self.cmd.receive()
-        print(msg)
+    def animate_dispensers(self, speed: int, position_max: int, delay_factor: int):
+        for i in range(8):
+            self.cmd.send("cmd_SERVO_dispenser_animation", speed, position_max, delay_factor * i, i)
+            msg = self.cmd.receive()
+            print(msg)
 
+    
 class ServoHandler(Controller):
 
     def __init__(self):

@@ -17,11 +17,7 @@ print("Activation du distributeur")
 dispenser_controller.activate_dispenser(dispenser_index, release_time)
 dispenser_controller.set_dispenser_settings(160, 1000, 120)
 
-dispenser_controller.animate_dispensers(100, 150, 0, 0)
-dispenser_controller.animate_dispensers(100, 150, 500, 1)
-dispenser_controller.animate_dispensers(100, 150, 1500, 2)
-dispenser_controller.animate_dispensers(100, 150, 2000, 3)
-
+dispenser_controller.animate_dispensers(20, 100, 100)
 
 time.sleep(5)  # Attendez pour observer l'action
 

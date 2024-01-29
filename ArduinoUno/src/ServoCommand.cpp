@@ -54,15 +54,13 @@ void onDispenserAnimation() {
 
     if (dispenserIndex < NUMBER_OF_DISPENSER) {
         dispenserManager.dispenserAnimation(dispenserIndex, speed, positionMax, delayFactor);
+        cmdMessenger.sendCmd(cmd_ack, "Dispenser(s) animated");
     } else {
-        for (uint8_t i = 0; i < NUMBER_OF_DISPENSER; ++i) {
-            dispenserManager.dispenserAnimation(i, speed, positionMax, delayFactor);
-        }
+        cmdMessenger.sendCmd(cmd_ack, "Dispenser index out of range");
+        return;
     }
-
-    cmdMessenger.sendCmd(cmd_ack, "Dispenser(s) animated");
+    
 }
-
 
 // ------------- Lemon bucket command ------------------ //
 
@@ -74,12 +72,11 @@ void onServoHandlerMove() {
     uint8_t position = cmdMessenger.readBinArg<int>();
     uint8_t id = cmdMessenger.readBinArg<int>();
 
-    if (id >= 0 && id <= 15) {
+    if (id < NUMBER_OF_SERVO) {
         servoHandler.move(position, id);
         cmdMessenger.sendCmd(cmd_ack, "Servo " + String(id) + " stopped at position " + String(position));
     } else {
-        // servoHandler.moveAll(position);
-        cmdMessenger.sendCmd(cmd_ack, "All servos stopped at position " + String(position));
+        cmdMessenger.sendCmd(cmd_ack, "Servo index out of range");
     }
 }
 
