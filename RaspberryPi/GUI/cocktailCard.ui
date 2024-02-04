@@ -76,10 +76,10 @@ font-size: 16px;</string>
    </property>
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>91</width>
-     <height>21</height>
+     <x>10</x>
+     <y>80</y>
+     <width>111</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -97,6 +97,9 @@ font-size: 16px;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

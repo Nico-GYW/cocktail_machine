@@ -89,7 +89,7 @@ QPushButton {
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="LandingPage" name="landingPage">
      <property name="minimumSize">
@@ -618,7 +618,7 @@ font-size: 16px;</string>
        <string>Cocktail</string>
       </property>
      </widget>
-     <widget class="QFrame" name="cocktailReceipe">
+     <widget class="QFrame" name="cocktailReceipeArea">
       <property name="geometry">
        <rect>
         <x>600</x>
@@ -664,7 +664,7 @@ border-radius: 10px;</string>
           <height>211</height>
          </rect>
         </property>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="cocktailReceipe">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -695,7 +695,7 @@ glaçon</string>
      <widget class="QLabel" name="cocktailImage">
       <property name="geometry">
        <rect>
-        <x>630</x>
+        <x>620</x>
         <y>80</y>
         <width>26</width>
         <height>34</height>
@@ -726,10 +726,10 @@ glaçon</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>670</x>
-        <y>90</y>
-        <width>91</width>
-        <height>21</height>
+        <x>660</x>
+        <y>80</y>
+        <width>111</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -743,6 +743,18 @@ glaçon</string>
       </property>
       <property name="text">
        <string>Mojito</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QToolButton" name="toolButtonMainPage">
@@ -778,12 +790,21 @@ glaçon</string>
         <x>600</x>
         <y>380</y>
         <width>71</width>
-        <height>32</height>
+        <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: black;
-font-size: 12px;</string>
+       <string notr="true">QPushButton {
+    color: black;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+QPushButton:pressed {
+    background-color: #f0f0f0; /* Gris clair lorsqu'appuyé */
+}
+</string>
       </property>
       <property name="text">
        <string>Modifier</string>
@@ -795,12 +816,21 @@ font-size: 12px;</string>
         <x>680</x>
         <y>380</y>
         <width>91</width>
-        <height>32</height>
+        <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: black;
-font-size: 12px;</string>
+       <string notr="true">QPushButton {
+    color: black;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+QPushButton:pressed {
+    background-color: #f0f0f0; /* Gris clair lorsqu'appuyé */
+}
+</string>
       </property>
       <property name="text">
        <string>Supplément</string>
@@ -810,14 +840,23 @@ font-size: 12px;</string>
       <property name="geometry">
        <rect>
         <x>600</x>
-        <y>410</y>
+        <y>420</y>
         <width>171</width>
-        <height>32</height>
+        <height>21</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: black;
-font-size: 12px;</string>
+       <string notr="true">QPushButton {
+    color: black;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+QPushButton:pressed {
+    background-color: #f0f0f0; /* Gris clair lorsqu'appuyé */
+}
+</string>
       </property>
       <property name="text">
        <string>Make !</string>
@@ -890,6 +929,13 @@ font-size: 12px;</string>
         <number>0</number>
        </property>
        <widget class="QWidget" name="glassBottles">
+        <property name="font">
+         <font>
+          <family>CoconPro</family>
+          <pointsize>-1</pointsize>
+          <kerning>false</kerning>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color : #F9F8F8;</string>
         </property>
@@ -903,6 +949,15 @@ font-size: 12px;</string>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayoutGlass">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
           <property name="spacing">
            <number>0</number>
           </property>
@@ -1006,7 +1061,7 @@ border-radius: 15px; /* Bords arrondis de 5px */
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="QFrame" name="frame_10">
+           <widget class="BottleParameter" name="glassBottle1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -1049,6 +1104,7 @@ border-radius: 15px; /* Bords arrondis de 5px */
               <font>
                <family>CoconPro</family>
                <pointsize>-1</pointsize>
+               <underline>false</underline>
               </font>
              </property>
              <property name="styleSheet">
@@ -1364,7 +1420,7 @@ color: black;</string>
 }
 
 QPushButton:pressed {
-        background-color: #333; 
+        background-color: #f0f0f0; 
 }</string>
           </property>
           <property name="text">
@@ -1411,7 +1467,7 @@ QPushButton:pressed {
 }
 
 QPushButton:pressed {
-        background-color: #333; 
+        background-color: #f0f0f0; 
 }</string>
           </property>
           <property name="text">
@@ -1455,7 +1511,7 @@ QPushButton:pressed {
 }
 
 QPushButton:pressed {
-        background-color: #333; 
+        background-color: #f0f0f0; 
 }</string>
           </property>
           <property name="text">
@@ -1506,25 +1562,31 @@ QPushButton:pressed {
   <customwidget>
    <class>LandingPage</class>
    <extends>QWidget</extends>
-   <header location="global">pompetteWidgets</header>
+   <header location="global">landingPageWidgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>MainPage</class>
    <extends>QWidget</extends>
-   <header location="global">pompetteWidgets</header>
+   <header location="global">mainPageWidgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>ParameterPage</class>
    <extends>QWidget</extends>
-   <header location="global">pompetteWidgets</header>
+   <header location="global">parameterPageWidgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>CocktailCard</class>
    <extends>QFrame</extends>
-   <header>pompetteWidgets</header>
+   <header location="global">mainPageWidgets</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BottleParameter</class>
+   <extends>QFrame</extends>
+   <header location="global">parameterPageWidgets</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

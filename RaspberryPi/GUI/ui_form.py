@@ -19,7 +19,9 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
     QMainWindow, QPushButton, QScrollArea, QSizePolicy,
     QStackedWidget, QToolButton, QVBoxLayout, QWidget)
 
-from pompetteWidgets import (CocktailCard, LandingPage, MainPage, ParameterPage)
+from landingPageWidgets import LandingPage
+from mainPageWidgets import (CocktailCard, MainPage)
+from parameterPageWidgets import ParameterPage
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -248,32 +250,32 @@ class Ui_MainWindow(object):
         self.title.setGeometry(QRect(620, 20, 141, 31))
         self.title.setFont(font1)
         self.title.setStyleSheet(u"font-size: 32px;")
-        self.cocktailReceipe = QFrame(self.mainPage)
-        self.cocktailReceipe.setObjectName(u"cocktailReceipe")
-        self.cocktailReceipe.setGeometry(QRect(600, 130, 171, 231))
-        self.cocktailReceipe.setStyleSheet(u"background-color: #FFF;\n"
+        self.cocktailReceipeArea = QFrame(self.mainPage)
+        self.cocktailReceipeArea.setObjectName(u"cocktailReceipeArea")
+        self.cocktailReceipeArea.setGeometry(QRect(600, 130, 171, 231))
+        self.cocktailReceipeArea.setStyleSheet(u"background-color: #FFF;\n"
 "border-radius: 10px;")
-        self.cocktailReceipe.setFrameShape(QFrame.NoFrame)
-        self.cocktailReceipe.setFrameShadow(QFrame.Plain)
-        self.cocktailReceipe.setLineWidth(3)
-        self.cocktailReceipe.setMidLineWidth(3)
-        self.receipeScrollArea = QScrollArea(self.cocktailReceipe)
+        self.cocktailReceipeArea.setFrameShape(QFrame.NoFrame)
+        self.cocktailReceipeArea.setFrameShadow(QFrame.Plain)
+        self.cocktailReceipeArea.setLineWidth(3)
+        self.cocktailReceipeArea.setMidLineWidth(3)
+        self.receipeScrollArea = QScrollArea(self.cocktailReceipeArea)
         self.receipeScrollArea.setObjectName(u"receipeScrollArea")
         self.receipeScrollArea.setGeometry(QRect(10, 10, 141, 211))
         self.receipeScrollArea.setWidgetResizable(True)
         self.receipe = QWidget()
         self.receipe.setObjectName(u"receipe")
         self.receipe.setGeometry(QRect(0, 0, 141, 211))
-        self.label = QLabel(self.receipe)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(10, 10, 131, 191))
-        self.label.setStyleSheet(u"color: black;\n"
+        self.cocktailReceipe = QLabel(self.receipe)
+        self.cocktailReceipe.setObjectName(u"cocktailReceipe")
+        self.cocktailReceipe.setGeometry(QRect(10, 10, 131, 191))
+        self.cocktailReceipe.setStyleSheet(u"color: black;\n"
 "font-size: 10px;")
-        self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cocktailReceipe.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.receipeScrollArea.setWidget(self.receipe)
         self.cocktailImage = QLabel(self.mainPage)
         self.cocktailImage.setObjectName(u"cocktailImage")
-        self.cocktailImage.setGeometry(QRect(630, 80, 26, 34))
+        self.cocktailImage.setGeometry(QRect(620, 80, 26, 34))
         self.cocktailImage.setFont(font1)
         self.cocktailImage.setStyleSheet(u"font-size: 32px;")
         self.cocktailImage.setPixmap(QPixmap(u"ressources/cocktail/mojito.png"))
@@ -281,9 +283,13 @@ class Ui_MainWindow(object):
         self.cocktailName = QLabel(self.mainPage)
         self.cocktailName.setObjectName(u"cocktailName")
         self.cocktailName.setEnabled(True)
-        self.cocktailName.setGeometry(QRect(670, 90, 91, 21))
+        self.cocktailName.setGeometry(QRect(660, 80, 111, 41))
         self.cocktailName.setFont(font1)
         self.cocktailName.setStyleSheet(u"")
+        self.cocktailName.setTextFormat(Qt.AutoText)
+        self.cocktailName.setScaledContents(False)
+        self.cocktailName.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cocktailName.setWordWrap(True)
         self.toolButtonMainPage = QToolButton(self.mainPage)
         self.toolButtonMainPage.setObjectName(u"toolButtonMainPage")
         self.toolButtonMainPage.setGeometry(QRect(770, 450, 31, 31))
@@ -295,19 +301,46 @@ class Ui_MainWindow(object):
         self.toolButtonMainPage.setIconSize(QSize(25, 25))
         self.modifyButton = QPushButton(self.mainPage)
         self.modifyButton.setObjectName(u"modifyButton")
-        self.modifyButton.setGeometry(QRect(600, 380, 71, 32))
-        self.modifyButton.setStyleSheet(u"color: black;\n"
-"font-size: 12px;")
+        self.modifyButton.setGeometry(QRect(600, 380, 71, 31))
+        self.modifyButton.setStyleSheet(u"QPushButton {\n"
+"    color: black;\n"
+"    font-size: 12px;\n"
+"    background-color: white;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu'appuy\u00e9 */\n"
+"}\n"
+"")
         self.addButton = QPushButton(self.mainPage)
         self.addButton.setObjectName(u"addButton")
-        self.addButton.setGeometry(QRect(680, 380, 91, 32))
-        self.addButton.setStyleSheet(u"color: black;\n"
-"font-size: 12px;")
+        self.addButton.setGeometry(QRect(680, 380, 91, 31))
+        self.addButton.setStyleSheet(u"QPushButton {\n"
+"    color: black;\n"
+"    font-size: 12px;\n"
+"    background-color: white;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu'appuy\u00e9 */\n"
+"}\n"
+"")
         self.makeButton = QPushButton(self.mainPage)
         self.makeButton.setObjectName(u"makeButton")
-        self.makeButton.setGeometry(QRect(600, 410, 171, 32))
-        self.makeButton.setStyleSheet(u"color: black;\n"
-"font-size: 12px;")
+        self.makeButton.setGeometry(QRect(600, 420, 171, 21))
+        self.makeButton.setStyleSheet(u"QPushButton {\n"
+"    color: black;\n"
+"    font-size: 12px;\n"
+"    background-color: white;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu'appuy\u00e9 */\n"
+"}\n"
+"")
         self.stackedWidget.addWidget(self.mainPage)
         self.parameterPage = ParameterPage()
         self.parameterPage.setObjectName(u"parameterPage")
@@ -621,7 +654,7 @@ class Ui_MainWindow(object):
         self.rightButtonMainPage.setText("")
         self.pageCount.setText(QCoreApplication.translate("MainWindow", u"Page 1/3", None))
         self.title.setText(QCoreApplication.translate("MainWindow", u"Cocktail", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"2 cl de rhum blanc\n"
+        self.cocktailReceipe.setText(QCoreApplication.translate("MainWindow", u"2 cl de rhum blanc\n"
 "1 cl de sirop de sucre de canne\n"
 "4 tranche de citron vert\n"
 "3 feuilles de menthe\n"

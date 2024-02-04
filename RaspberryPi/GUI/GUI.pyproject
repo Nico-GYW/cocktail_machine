@@ -1,10 +1,13 @@
 {
     "files": [
         "mainwindow.py",
-        "pompetteWidgets.py",
+        "mainPageWidgets.py",
+        "landingPageWidgets.py",
+        "parameterPageWidgets.py",
         "form.ui",
         "ui_form.py",
         "cocktailCard.ui",
-        "cocktailCard.ui"
+        "bottleDialog.ui",
+        "bottleParameter.ui"
     ]
 }

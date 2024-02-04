@@ -47,11 +47,12 @@ class Ui_cocktailCard(object):
         self.cocktailCardName = QLabel(cocktailCard)
         self.cocktailCardName.setObjectName(u"cocktailCardName")
         self.cocktailCardName.setEnabled(True)
-        self.cocktailCardName.setGeometry(QRect(20, 100, 91, 21))
+        self.cocktailCardName.setGeometry(QRect(10, 80, 111, 51))
         self.cocktailCardName.setFont(font)
         self.cocktailCardName.setStyleSheet(u"color: black;\n"
 "font-size: 16px;")
         self.cocktailCardName.setAlignment(Qt.AlignCenter)
+        self.cocktailCardName.setWordWrap(True)
 
         self.retranslateUi(cocktailCard)
 

@@ -281,7 +281,34 @@ class CocktailMachine:
             list: The list of stored cocktail recipes.
         """
         return self.cocktail_recipes
+    
 
+    def get_bottle_list(self, is_glass=True):
+        if is_glass:
+            # Liste de noms d'alcool en bouteilles en verre
+            bottle_list = [
+                "Vodka",
+                "Gin",
+                "Rum",
+                "Tequila",
+                "Whiskey",
+                "Brandy",
+                "Cognac",
+                "Absinthe"
+            ]
+        else:
+            # Liste de noms de soft en bouteilles non en verre
+            bottle_list = [
+                "Soda",
+                "Cola",
+                "Lemonade",
+                "Orange Juice",
+                "Apple Juice",
+                "Ginger Ale",
+                "Tonic Water",
+                "Iced Tea"
+            ]
+        return bottle_list
 
 if __name__ == "__main__":
     # Create an instance of the cocktail machine
