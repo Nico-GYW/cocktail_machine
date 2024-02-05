@@ -32,8 +32,14 @@
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #FFFFFF;
-border-radius: 15px;</string>
+   <string notr="true">QFrame {
+    background-color: #FFFFFF; /* Par exemple, fond blanc par défaut */
+	border-radius: 15px;
+}
+
+QFrame:pressed {
+    background-color: #EAEAEA; /* Fond gris clair lorsque le QFrame est appuyé */
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

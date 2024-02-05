@@ -152,6 +152,7 @@ class Ui_bottleDialog(object):
 "    color: #000000; /* Couleur des fl\u00e8ches en noir */\n"
 "}\n"
 "")
+        self.quantitySpinBox.setFrame(False)
         self.quantitySpinBox.setMaximum(1000)
         self.quantitySpinBox.setSingleStep(50)
         self.quantitySpinBox.setValue(750)

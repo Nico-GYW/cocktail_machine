@@ -5,9 +5,10 @@
         "landingPageWidgets.py",
         "parameterPageWidgets.py",
         "form.ui",
-        "ui_form.py",
         "cocktailCard.ui",
         "bottleDialog.ui",
-        "bottleParameter.ui"
+        "bottleParameter.ui",
+        "dispenserControl.ui",
+        "pompetteUtils.py"
     ]
 }

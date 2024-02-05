@@ -5,7 +5,11 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
+#     pyside6-uic form.ui -o ui_form.py
+#     pyside6-uic cocktailCard.ui -o ui_cocktailCard.py
+#     pyside6-uic bottleParameter.ui -o ui_bottleParameter.py
+#     pyside6-uic bottleDialog.ui -o ui_bottleDialog.py
+#     pyside6-uic dispenserControl.ui -o ui_dispenserControl.py
 
 from ui_form import Ui_MainWindow
 

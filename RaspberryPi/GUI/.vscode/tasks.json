@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile All UI Files",
+            "type": "shell",
+            "command": "pyside6-uic form.ui -o ui_form.py && pyside6-uic cocktailCard.ui -o ui_cocktailCard.py && pyside6-uic bottleParameter.ui -o ui_bottleParameter.py && pyside6-uic bottleDialog.ui -o ui_bottleDialog.py && pyside6-uic dispenserControl.ui -o ui_dispenserControl.py",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run mainwindow.py",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "mainwindow.py"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}

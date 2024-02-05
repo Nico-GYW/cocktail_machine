@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 12.0.1, 2024-01-30T00:14:50. -->
+<!-- Written by QtCreator 12.0.1, 2024-02-04T20:13:42. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -172,10 +172,8 @@
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/pompetteWidgets.py</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{2b6a31f3-9a93-47ca-9910-a35c713e78ec}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/pompetteWidgets.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.2">
     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
@@ -189,11 +187,9 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">ui_form.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/ui_form.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/ui_form.py</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/ui_form.py</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.3">
     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
@@ -211,7 +207,79 @@
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
    </valuemap>
-   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">4</value>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.4">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">mainPageWidgets.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/mainPageWidgets.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/mainPageWidgets.py</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/mainPageWidgets.py</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI</value>
+   </valuemap>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.5">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">landingPageWidgets.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/landingPageWidgets.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/landingPageWidgets.py</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/landingPageWidgets.py</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI</value>
+   </valuemap>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.6">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">parameterPageWidgets.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/parameterPageWidgets.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/parameterPageWidgets.py</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/parameterPageWidgets.py</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI</value>
+   </valuemap>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.7">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">pompetteUtils.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/pompetteUtils.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/pompetteUtils.py</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI/pompetteUtils.py</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/nicolasdessambre/Desktop/Machine à cocktail/cocktail_machine/RaspberryPi/GUI</value>
+   </valuemap>
+   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">8</value>
   </valuemap>
  </data>
  <data>

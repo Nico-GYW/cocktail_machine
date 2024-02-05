@@ -55,7 +55,6 @@ class MainPage(QWidget):
                 card.set_cocktail_data(recipe.get_name(), recipe.get_image())
                 # Calcul pour un remplissage de droite à gauche
                 row, col = divmod(i, num_columns)
-                col = num_columns - 1 - col  # Inverse l'ordre des colonnes
                 layout.addWidget(card, row, col)
                 last_card_index = i
 
@@ -66,11 +65,9 @@ class MainPage(QWidget):
                     placeholder.setFixedSize(130, 130)
                     # Même calcul pour les placeholders pour maintenir l'ordre de droite à gauche
                     row, col = divmod(j, num_columns)
-                    col = num_columns - 1 - col
                     layout.addWidget(placeholder, row, col)
 
             self.ui.cocktailCarousel.addWidget(page)
-
 
     def changePage(self, pageIndex):
         stacked_widget = self.parent()

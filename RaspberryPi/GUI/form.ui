@@ -44,7 +44,7 @@ QPushButton {
     </font>
    </property>
    <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
+    <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: #F79643;
@@ -920,13 +920,13 @@ QPushButton:pressed {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">border-radius: 15px; /* Bords arrondis de 5px */</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="glassBottles">
         <property name="font">
@@ -1311,6 +1311,1663 @@ border-radius: 15px; /* Bords arrondis de 5px */
         <property name="styleSheet">
          <string notr="true">background-color : #F9F8F8;</string>
         </property>
+        <widget class="QWidget" name="layoutWidget2_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>471</width>
+           <height>351</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayoutPlastic">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="1" column="0">
+           <widget class="QFrame" name="frame_23">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #FFFFFF; /* Couleur de fond blanc */
+border-radius: 15px; /* Bords arrondis de 5px */
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="BottleParameter" name="glassBottle1_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #FFFFFF; /* Couleur de fond blanc */
+border-radius: 15px; /* Bords arrondis de 5px */
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLabel" name="title_8">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>81</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>CoconPro</family>
+               <pointsize>-1</pointsize>
+               <underline>false</underline>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-size: 12px;
+color: black;</string>
+             </property>
+             <property name="text">
+              <string>Bouteille 1</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QLabel" name="title_9">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>40</y>
+               <width>81</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>CoconPro</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-size: 10px;
+color: black;</string>
+             </property>
+             <property name="text">
+              <string>Rhum Blanc</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QLabel" name="title_10">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>60</y>
+               <width>81</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>CoconPro</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-size: 10px;
+color: black;</string>
+             </property>
+             <property name="text">
+              <string>100 ml</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QFrame" name="frame_26">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #FFFFFF; /* Couleur de fond blanc */
+border-radius: 15px; /* Bords arrondis de 5px */
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QFrame" name="frame_27">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #FFFFFF; /* Couleur de fond blanc */
+border-radius: 15px; /* Bords arrondis de 5px */
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="machineParameter">
+        <property name="styleSheet">
+         <string notr="true">background-color : #F9F8F8;</string>
+        </property>
+        <widget class="QStackedWidget" name="machineParameterStack">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>0</y>
+           <width>411</width>
+           <height>351</height>
+          </rect>
+         </property>
+         <widget class="QWidget" name="dispenserControl">
+          <widget class="QWidget" name="layoutWidget">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>20</y>
+             <width>401</width>
+             <height>311</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="dispenserGridLayout">
+            <item row="0" column="2">
+             <widget class="QFrame" name="frame_8">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_6">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Bouteille 1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_6">
+               <property name="geometry">
+                <rect>
+                 <x>20</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QFrame" name="frame_2">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_4">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Bouteille 1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_4">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="DispenserControl" name="frame_10">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_8">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Bouteille 1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_8">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Bouteille 1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider">
+               <property name="geometry">
+                <rect>
+                 <x>20</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QFrame" name="frame_17">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_10">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Bouteille 1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_10">
+               <property name="geometry">
+                <rect>
+                 <x>20</x>
+                 <y>50</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="otherControl">
+          <widget class="QWidget" name="layoutWidget_3">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>361</width>
+             <height>318</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="otherControlGridLayout">
+            <item row="0" column="2">
+             <widget class="QFrame" name="frame_25">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_13">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>80</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Plateau X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="xStepperSlider">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>60</y>
+                 <width>81</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="minimum">
+                <number>-100</number>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+              <widget class="QPushButton" name="xStepperButton">
+               <property name="geometry">
+                <rect>
+                 <x>6</x>
+                 <y>120</y>
+                 <width>90</width>
+                 <height>20</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+        border-radius: 5px;
+        background-color: #F79643;
+        color: white;
+        font-size: 10px;
+        border: none;
+}
+
+QPushButton:pressed {
+    background-color: #FFBC50; /* Fond gris clair pour les boutons enfoncés */
+}</string>
+               </property>
+               <property name="text">
+                <string>Retour à l'origine</string>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame_28">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_15">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>80</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Verrin</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="cylinderSlider">
+               <property name="geometry">
+                <rect>
+                 <x>9</x>
+                 <y>60</y>
+                 <width>81</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="minimum">
+                <number>-100</number>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+              <widget class="QPushButton" name="cylinderButton">
+               <property name="geometry">
+                <rect>
+                 <x>6</x>
+                 <y>120</y>
+                 <width>90</width>
+                 <height>20</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+        border-radius: 5px;
+        background-color: #F79643;
+        color: white;
+        font-size: 10px;
+        border: none;
+}
+
+QPushButton:pressed {
+    background-color: #FFBC50; /* Fond gris clair pour les boutons enfoncés */
+}</string>
+               </property>
+               <property name="text">
+                <string>Retour à l'origine</string>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QFrame" name="frame_30">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_17">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>80</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Bol à citron</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_17">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>60</y>
+                 <width>40</width>
+                 <height>61</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QFrame" name="frame_32">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_18">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>80</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Plateau Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="yStepperSlider">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>50</y>
+                 <width>40</width>
+                 <height>61</height>
+                </rect>
+               </property>
+               <property name="minimum">
+                <number>-100</number>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+              <widget class="QPushButton" name="yStepperButton">
+               <property name="geometry">
+                <rect>
+                 <x>6</x>
+                 <y>120</y>
+                 <width>90</width>
+                 <height>20</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+        border-radius: 5px;
+        background-color: #F79643;
+        color: white;
+        font-size: 10px;
+        border: none;
+}
+
+QPushButton:pressed {
+    background-color: #FFBC50; /* Fond gris clair pour les boutons enfoncés */
+}</string>
+               </property>
+               <property name="text">
+                <string>Retour à l'origine</string>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QFrame" name="frame_29">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_14">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>80</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Pile glace</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_14">
+               <property name="geometry">
+                <rect>
+                 <x>20</x>
+                 <y>60</y>
+                 <width>71</width>
+                 <height>61</height>
+                </rect>
+               </property>
+               <property name="minimum">
+                <number>-1</number>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="pageStep">
+                <number>1</number>
+               </property>
+               <property name="value">
+                <number>0</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QFrame" name="frame_31">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_16">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>80</width>
+                 <height>30</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 10px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Rampe à citron</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_16">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>60</y>
+                 <width>40</width>
+                 <height>61</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>100</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="invertedControls">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="softControl">
+          <widget class="QWidget" name="layoutWidget_2">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>401</width>
+             <height>141</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="softGridLayout">
+            <item row="0" column="3">
+             <widget class="QFrame" name="frame_20">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_9">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Soft 1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_9">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QFrame" name="frame_18">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_7">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Soft 2</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_7">
+               <property name="geometry">
+                <rect>
+                 <x>20</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QFrame" name="frame_19">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_5">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Soft 3</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_5">
+               <property name="geometry">
+                <rect>
+                 <x>30</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame_21">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_2">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>10</y>
+                 <width>71</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+               </property>
+               <property name="text">
+                <string>Soft 4</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+              <widget class="QSlider" name="verticalSlider_2">
+               <property name="geometry">
+                <rect>
+                 <x>20</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>51</height>
+                </rect>
+               </property>
+               <property name="maximum">
+                <number>1</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="ledControl">
+          <widget class="QComboBox" name="ledStripComboBox">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>120</y>
+             <width>100</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox {
+    background-color: #F9F8F8; /* Fond gris clair */
+    color: #000000; /* Texte noir */
+    font-size: 12px; /* Taille de la police 12 */
+    border: 1px solid #707070; /* Bordure de 1px en noir */
+    border-radius: 3px; /* Coins arrondis de 2px */
+    padding: 2px; /* Espacement interne */
+    selection-background-color: #FFA500; /* Fond d'écran de sélection orange */
+}
+
+QComboBox::drop-down {
+    background-color: #F79643; /* Couleur de fond de la flèche déroulante (même que le fond) */
+    border: 0px solid #707070; /* Bordure de la flèche déroulante en noir */
+    width: 20px; /* Largeur de la flèche déroulante de 20px */
+	margin-right: 0px; /* Marge à droite de la flèche déroulante */
+}
+
+QComboBox::down-arrow {
+    image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */
+	color: #000000; /* Couleur de la flèche en noir */
+}
+
+
+</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="ledStripSpeedSpinBox">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>200</y>
+             <width>100</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSpinBox {
+    background-color: #F9F8F8; /* Fond gris clair */
+    color: #000000; /* Texte noir */
+    font-size: 12px; /* Taille de la police 12 */
+    border: 1px solid #707070; /* Bordure de 1px en noir */
+    border-radius: 3px; /* Coins arrondis de 3px */
+    padding: 2px; /* Espacement interne */
+    selection-background-color: transparent;
+}
+
+QSpinBox::up-button, QSpinBox::down-button {
+    background-color: #F79643; /* Couleur de fond des boutons d'incrémentation/décrémentation */
+    width: 20px; /* Largeur des boutons */
+    border: 0px solid #707070; /* Bordure des boutons en noir */
+	margin: 0px; /* Marge des boutons */
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: padding;
+    subcontrol-position: bottom right;
+}
+
+QSpinBox::up-arrow{
+    image: url(./ressources/generic/arrow_up.svg); /* Chemin relatif vers votre icône SVG */
+    color: #000000; /* Couleur des flèches en noir */
+}
+QSpinBox::down-arrow {
+    image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */
+    color: #000000; /* Couleur des flèches en noir */
+}
+</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="ledStripColorButton">
+           <property name="geometry">
+            <rect>
+             <x>240</x>
+             <y>160</y>
+             <width>100</width>
+             <height>100</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border-radius: 50px; /* Coins arrondis de 3px */
+	background-color: #F79643;
+	border: 1px solid #707070; /* Bordure de 1px en noir */
+}
+
+QPushButton:pressed {
+    background-color: #FFBC50; /* Fond gris clair pour les boutons enfoncés */
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_3">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>100</y>
+             <width>61</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-size: 12px;
+color: black;</string>
+           </property>
+           <property name="text">
+            <string>Mode</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_11">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>180</y>
+             <width>71</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-size: 12px;
+color: black;</string>
+           </property>
+           <property name="text">
+            <string>Vitesse</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_12">
+           <property name="geometry">
+            <rect>
+             <x>260</x>
+             <y>130</y>
+             <width>61</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-size: 12px;
+color: black;</string>
+           </property>
+           <property name="text">
+            <string>Couleur</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_19">
+           <property name="geometry">
+            <rect>
+             <x>170</x>
+             <y>40</y>
+             <width>71</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: black;
+font-size: 12px;
+border-radius: 8px;
+background-color: #A0ACB0;</string>
+           </property>
+           <property name="text">
+            <string>LedStrip</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="ledStripBrightnessSpinBox">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>280</y>
+             <width>100</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSpinBox {
+    background-color: #F9F8F8; /* Fond gris clair */
+    color: #000000; /* Texte noir */
+    font-size: 12px; /* Taille de la police 12 */
+    border: 1px solid #707070; /* Bordure de 1px en noir */
+    border-radius: 3px; /* Coins arrondis de 3px */
+    padding: 2px; /* Espacement interne */
+    selection-background-color: transparent;
+}
+
+QSpinBox::up-button, QSpinBox::down-button {
+    background-color: #F79643; /* Couleur de fond des boutons d'incrémentation/décrémentation */
+    width: 20px; /* Largeur des boutons */
+    border: 0px solid #707070; /* Bordure des boutons en noir */
+	margin: 0px; /* Marge des boutons */
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: padding;
+    subcontrol-position: bottom right;
+}
+
+QSpinBox::up-arrow{
+    image: url(./ressources/generic/arrow_up.svg); /* Chemin relatif vers votre icône SVG */
+    color: #000000; /* Couleur des flèches en noir */
+}
+QSpinBox::down-arrow {
+    image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */
+    color: #000000; /* Couleur des flèches en noir */
+}
+</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_20">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>260</y>
+             <width>71</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-size: 12px;
+color: black;</string>
+           </property>
+           <property name="text">
+            <string>Luminosité</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QPushButton" name="rightButtonControl">
+         <property name="geometry">
+          <rect>
+           <x>440</x>
+           <y>150</y>
+           <width>31</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>CoconPro</family>
+           <pointsize>-1</pointsize>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none; /* Supprime la bordure */
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>ressources/generic/arrow_right.svg</normaloff>ressources/generic/arrow_right.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="leftButtonControl">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>150</y>
+           <width>31</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>CoconPro</family>
+           <pointsize>-1</pointsize>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none; /* Supprime la bordure */</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>ressources/generic/arrow_left.svg</normaloff>ressources/generic/arrow_left.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>
@@ -1419,8 +3076,8 @@ color: black;</string>
 	   padding-left: 15px;
 }
 
-QPushButton:pressed {
-        background-color: #f0f0f0; 
+QPushButton:checked {
+    background-color: #EAEAEA; /* Fond gris clair pour les boutons enfoncés */
 }</string>
           </property>
           <property name="text">
@@ -1437,6 +3094,9 @@ QPushButton:pressed {
            </size>
           </property>
           <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
            <bool>true</bool>
           </property>
           <property name="autoExclusive">
@@ -1466,8 +3126,8 @@ QPushButton:pressed {
 	   padding-left: 10px;
 }
 
-QPushButton:pressed {
-        background-color: #f0f0f0; 
+QPushButton:checked {
+    background-color: #EAEAEA; /* Fond gris clair pour les boutons enfoncés */
 }</string>
           </property>
           <property name="text">
@@ -1510,8 +3170,8 @@ QPushButton:pressed {
 	   padding-left: 0px;
 }
 
-QPushButton:pressed {
-        background-color: #f0f0f0; 
+QPushButton:checked {
+    background-color: #EAEAEA; /* Fond gris clair pour les boutons enfoncés */
 }</string>
           </property>
           <property name="text">
@@ -1585,6 +3245,12 @@ QPushButton:pressed {
   </customwidget>
   <customwidget>
    <class>BottleParameter</class>
+   <extends>QFrame</extends>
+   <header location="global">parameterPageWidgets</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DispenserControl</class>
    <extends>QFrame</extends>
    <header location="global">parameterPageWidgets</header>
    <container>1</container>

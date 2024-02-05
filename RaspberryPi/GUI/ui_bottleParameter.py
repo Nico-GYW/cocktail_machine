@@ -30,8 +30,14 @@ class Ui_bottleParameter(object):
         bottleParameter.setSizePolicy(sizePolicy)
         bottleParameter.setMinimumSize(QSize(100, 100))
         bottleParameter.setMaximumSize(QSize(100, 100))
-        bottleParameter.setStyleSheet(u"background-color: #FFFFFF;\n"
-"border-radius: 15px;")
+        bottleParameter.setStyleSheet(u"QFrame {\n"
+"    background-color: #FFFFFF; /* Par exemple, fond blanc par d\u00e9faut */\n"
+"	border-radius: 15px;\n"
+"}\n"
+"\n"
+"QFrame:pressed {\n"
+"    background-color: #EAEAEA; /* Fond gris clair lorsque le QFrame est appuy\u00e9 */\n"
+"}")
         self.verticalLayout = QVBoxLayout(bottleParameter)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.title = QLabel(bottleParameter)
