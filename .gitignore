@@ -3,3 +3,77 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+# Fichiers de système d'exploitation
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Dossiers de l'environnement virtuel Python
+venv/
+env/
+.virtualenv/
+
+# Fichiers de bytecode Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Packages et environnement
+node_modules/
+jspm_packages/
+
+# Distribution / builds
+dist/
+build/
+site/
+
+# Fichiers JetBrains IDE (PyCharm, IntelliJ)
+.idea/
+
+# Fichiers Visual Studio Code
+.vscode/
+
+# Fichiers de package
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Fichiers de log
+*.log
+log/
+logs/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Fichiers de base de données
+*.db
+*.sql
+*.sqlite
+
+# Fichiers de configuration secrets
+*.pem
+*.key
+*.cert
+config.py
+
+# Fichiers et dossiers de déploiement
+deploy*/
+
+# Fichiers archive (zip/tar/gz etc.)
+*.zip
+*.tar.gz
+*.tgz
+*.bz2
+*.7z
+
+# Autres
+*.bak
+*.orig
+*.rej
