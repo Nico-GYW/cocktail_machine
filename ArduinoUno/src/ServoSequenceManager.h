@@ -43,9 +43,9 @@ class LemonBowlSequenceManager{
     private:
 
         struct LemonBowlParams {
-            uint8_t* positionOpen;
-            uint8_t* positionClosed;
-            uint8_t* speed;
+            uint8_t positionOpen;
+            uint8_t positionClosed;
+            uint8_t speed;
         };
 
         Servo servo;

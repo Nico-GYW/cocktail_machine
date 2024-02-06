@@ -4,7 +4,7 @@
 			"path": ".."
 		},
 		{
-			"path": "../../ArduinoMega"
+			"path": "../../RaspberryPi/PythonScripts"
 		}
 	],
 	"settings": {}
