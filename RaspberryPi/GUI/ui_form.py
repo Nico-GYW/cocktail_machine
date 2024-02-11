@@ -1340,9 +1340,10 @@ class Ui_MainWindow(object):
         self.toolButtonBarManPage = QToolButton(self.parameterRightPannel_2)
         self.toolButtonBarManPage.setObjectName(u"toolButtonBarManPage")
         self.toolButtonBarManPage.setGeometry(QRect(200, 450, 31, 31))
-        self.toolButtonBarManPage.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
-"")
-        self.toolButtonBarManPage.setIcon(icon3)
+        self.toolButtonBarManPage.setStyleSheet(u"border: none; /* Supprime la bordure */")
+        icon7 = QIcon()
+        icon7.addFile(u"ressources/generic/home.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.toolButtonBarManPage.setIcon(icon7)
         self.toolButtonBarManPage.setIconSize(QSize(25, 25))
         self.barmanImage = QLabel(self.parameterRightPannel_2)
         self.barmanImage.setObjectName(u"barmanImage")
@@ -1375,7 +1376,7 @@ class Ui_MainWindow(object):
         self.barmanAlc.setAlignment(Qt.AlignCenter)
         self.barmanCreateButton = QPushButton(self.parameterRightPannel_2)
         self.barmanCreateButton.setObjectName(u"barmanCreateButton")
-        self.barmanCreateButton.setGeometry(QRect(80, 410, 71, 31))
+        self.barmanCreateButton.setGeometry(QRect(30, 410, 81, 31))
         self.barmanCreateButton.setStyleSheet(u"QPushButton {\n"
 "    color: white;\n"
 "    font-size: 12px;\n"
@@ -1387,14 +1388,28 @@ class Ui_MainWindow(object):
 "    background-color: #f0f0f0; /* Gris clair lorsqu'appuy\u00e9 */\n"
 "}\n"
 "")
-        self.barmanCocktailName = QLabel(self.parameterRightPannel_2)
-        self.barmanCocktailName.setObjectName(u"barmanCocktailName")
-        self.barmanCocktailName.setGeometry(QRect(40, 350, 161, 61))
-        self.barmanCocktailName.setStyleSheet(u"font-size: 16px;\n"
-"color: black;")
-        self.barmanCocktailName.setScaledContents(False)
-        self.barmanCocktailName.setAlignment(Qt.AlignCenter)
-        self.barmanCocktailName.setWordWrap(True)
+        self.barmanDeleteButton = QPushButton(self.parameterRightPannel_2)
+        self.barmanDeleteButton.setObjectName(u"barmanDeleteButton")
+        self.barmanDeleteButton.setGeometry(QRect(120, 410, 81, 31))
+        self.barmanDeleteButton.setStyleSheet(u"QPushButton {\n"
+"    color: white;\n"
+"    font-size: 12px;\n"
+"    background-color: #F79643;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu'appuy\u00e9 */\n"
+"}\n"
+"")
+        self.barmanNameButton = QPushButton(self.parameterRightPannel_2)
+        self.barmanNameButton.setObjectName(u"barmanNameButton")
+        self.barmanNameButton.setGeometry(QRect(20, 340, 191, 61))
+        self.barmanNameButton.setAutoFillBackground(False)
+        self.barmanNameButton.setStyleSheet(u"background-color : transparent;\n"
+"font-size: 16px;\n"
+"color: black;\n"
+"border : None")
         self.frame_22 = QFrame(self.barmanPage)
         self.frame_22.setObjectName(u"frame_22")
         self.frame_22.setGeometry(QRect(50, 60, 470, 350))
@@ -1425,17 +1440,17 @@ class Ui_MainWindow(object):
         self.label_33.setStyleSheet(u"color : black;\n"
 "font-size: 10px;\n"
 "background-color: transparent;")
-        self.horizontalSlider = QSlider(self.frame_24)
-        self.horizontalSlider.setObjectName(u"horizontalSlider")
-        self.horizontalSlider.setGeometry(QRect(35, 10, 31, 25))
-        self.horizontalSlider.setMaximum(1)
-        self.horizontalSlider.setPageStep(0)
-        self.horizontalSlider.setValue(1)
-        self.horizontalSlider.setTracking(False)
-        self.horizontalSlider.setOrientation(Qt.Horizontal)
-        self.horizontalSlider.setInvertedAppearance(False)
-        self.horizontalSlider.setInvertedControls(False)
-        self.horizontalSlider.setTickPosition(QSlider.NoTicks)
+        self.iceSlider = QSlider(self.frame_24)
+        self.iceSlider.setObjectName(u"iceSlider")
+        self.iceSlider.setGeometry(QRect(35, 10, 31, 25))
+        self.iceSlider.setMaximum(1)
+        self.iceSlider.setPageStep(0)
+        self.iceSlider.setValue(1)
+        self.iceSlider.setTracking(False)
+        self.iceSlider.setOrientation(Qt.Horizontal)
+        self.iceSlider.setInvertedAppearance(False)
+        self.iceSlider.setInvertedControls(False)
+        self.iceSlider.setTickPosition(QSlider.NoTicks)
         self.frame_33 = QFrame(self.frame_22)
         self.frame_33.setObjectName(u"frame_33")
         self.frame_33.setGeometry(QRect(240, 60, 100, 41))
@@ -1457,17 +1472,17 @@ class Ui_MainWindow(object):
         self.label_37.setStyleSheet(u"color : black;\n"
 "font-size: 10px;\n"
 "background-color: transparent;")
-        self.horizontalSlider_3 = QSlider(self.frame_33)
-        self.horizontalSlider_3.setObjectName(u"horizontalSlider_3")
-        self.horizontalSlider_3.setGeometry(QRect(35, 10, 31, 25))
-        self.horizontalSlider_3.setMaximum(1)
-        self.horizontalSlider_3.setPageStep(0)
-        self.horizontalSlider_3.setValue(1)
-        self.horizontalSlider_3.setTracking(False)
-        self.horizontalSlider_3.setOrientation(Qt.Horizontal)
-        self.horizontalSlider_3.setInvertedAppearance(False)
-        self.horizontalSlider_3.setInvertedControls(False)
-        self.horizontalSlider_3.setTickPosition(QSlider.NoTicks)
+        self.lemonSlider = QSlider(self.frame_33)
+        self.lemonSlider.setObjectName(u"lemonSlider")
+        self.lemonSlider.setGeometry(QRect(35, 10, 31, 25))
+        self.lemonSlider.setMaximum(1)
+        self.lemonSlider.setPageStep(0)
+        self.lemonSlider.setValue(1)
+        self.lemonSlider.setTracking(False)
+        self.lemonSlider.setOrientation(Qt.Horizontal)
+        self.lemonSlider.setInvertedAppearance(False)
+        self.lemonSlider.setInvertedControls(False)
+        self.lemonSlider.setTickPosition(QSlider.NoTicks)
         self.layoutWidget_4 = QWidget(self.frame_22)
         self.layoutWidget_4.setObjectName(u"layoutWidget_4")
         self.layoutWidget_4.setGeometry(QRect(130, 60, 102, 271))
@@ -1911,8 +1926,9 @@ class Ui_MainWindow(object):
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Degr\u00e9 d'alcool", None))
         self.barmanQuantity.setText(QCoreApplication.translate("MainWindow", u"125/250 ml", None))
         self.barmanAlc.setText(QCoreApplication.translate("MainWindow", u"5 %", None))
-        self.barmanCreateButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er", None))
-        self.barmanCocktailName.setText(QCoreApplication.translate("MainWindow", u"Cocktail Perso", None))
+        self.barmanCreateButton.setText(QCoreApplication.translate("MainWindow", u"Dans le bar !", None))
+        self.barmanDeleteButton.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))
+        self.barmanNameButton.setText(QCoreApplication.translate("MainWindow", u"Cocktail Perso", None))
         self.label_32.setText(QCoreApplication.translate("MainWindow", u"Non", None))
         self.label_33.setText(QCoreApplication.translate("MainWindow", u"Oui", None))
         self.label_36.setText(QCoreApplication.translate("MainWindow", u"Non", None))

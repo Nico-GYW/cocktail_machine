@@ -2,12 +2,14 @@ from PySide6.QtWidgets import QWidget, QFrame, QGridLayout, QLabel
 from PySide6.QtGui import QPixmap, QFont
 from PySide6.QtCore import Signal
 
+from copy import deepcopy
 import sys
 import os
 sys.path.append(os.path.abspath('../PythonScripts'))
 
 from ui_cocktailCard import Ui_cocktailCard
 from cocktailMachine import CocktailMachine
+from cocktailRecipe import CocktailRecipe
 
 machine = CocktailMachine()
 machine.load_state()
@@ -18,9 +20,11 @@ class MainPage(QWidget):
 
     def setup(self, ui):
         self.ui = ui
+        self.current_recipe = None
         ui.toolButtonMainPage.clicked.connect(lambda: self.changePage(2))
         self.ui.rightButtonMainPage.clicked.connect(self.incrementerPage)
         self.ui.leftButtonMainPage.clicked.connect(self.decrementerPage)
+        self.ui.modifyButton.clicked.connect(self.changeBarmanPage)
 
         self.populate_cocktail_carousel()
         self.mettreAJourTextePage()
@@ -50,7 +54,7 @@ class MainPage(QWidget):
 
             # Ajouter les cartes de cocktails normales
             for recipe in page_recipes:
-                card = CocktailCard(page, self.ui)
+                card = CocktailCard(page, self)
                 card.set_cocktail_data(recipe.get_name(), recipe.get_image())
                 row, col = divmod(total_cards_added, num_columns)
                 layout.addWidget(card, row, col)
@@ -58,7 +62,7 @@ class MainPage(QWidget):
 
             # Ajouter la carte spéciale sur la dernière page
             if page_index == num_pages - 1:
-                special_card = CocktailCreationCard(page, self.ui, self.changePage)
+                special_card = CocktailCreationCard(page, self, self.changePage)
                 special_card.set_cocktail_data("Cocktail Perso", "ressources/generic/plus.png")
                 row, col = divmod(total_cards_added, num_columns)
                 layout.addWidget(special_card, row, col)
@@ -78,6 +82,15 @@ class MainPage(QWidget):
     def changePage(self, pageIndex):
         stacked_widget = self.parent()
         stacked_widget.setCurrentIndex(pageIndex)
+    
+    def changeBarmanPage(self):
+        if self.current_recipe.save:
+            self.ui.barmanPage.set_cocktail_recipe(deepcopy(self.current_recipe))
+            self.ui.barmanPage.set_cocktail_mode(is_new_cocktail=True)
+        else:
+            self.ui.barmanPage.set_cocktail_recipe(self.current_recipe)
+            self.ui.barmanPage.set_cocktail_mode(is_new_cocktail=False)
+        self.changePage(3)
 
     def mettreAJourTextePage(self):
         index_courant = self.ui.cocktailCarousel.currentIndex() + 1  # +1 car l'index commence à 0
@@ -111,8 +124,10 @@ class CocktailCard(QFrame):
         super(CocktailCard, self).__init__(parent)
         self.ui = Ui_cocktailCard()  # Assurez-vous que cette UI est correctement définie quelque part
         self.ui.setupUi(self)
-        self.mainWindow_ui = mainWindow  # Référence à la MainWindow
-
+        if mainWindow is not None:
+            self.mainWindow = mainWindow
+            self.mainWindow_ui = mainWindow.ui  # Référence à la MainWindow
+                
     def set_cocktail_data(self, name, image_path):
         self.ui.cocktailCardName.setText(name)
         self.ui.cocktailCardImage.setPixmap(QPixmap(image_path))
@@ -124,11 +139,13 @@ class CocktailCard(QFrame):
         self.clicked.emit(self.cocktailName)
         # Mettre à jour l'UI de la MainWindow
         self.update_main_window_ui()
+
         super(CocktailCard, self).mousePressEvent(event)
 
     def update_main_window_ui(self):
         # Récupérer la recette par son nom
         recipe = machine.get_recipe_by_name(self.cocktailName)
+        self.mainWindow.current_recipe = recipe
         if recipe:
             # Mettre à jour les éléments de l'UI de la MainWindow
             self.mainWindow_ui.cocktailImage.setPixmap(QPixmap(self.imagePath))
@@ -151,15 +168,14 @@ class CocktailCard(QFrame):
             self.mainWindow_ui.cocktailReceipe.setText('\n'.join(ingredients_list))
 
 class CocktailCreationCard(CocktailCard):
-    def __init__(self, parent, ui, changePageFunc):
-        super().__init__(parent, ui)
+    def __init__(self, parent, mainPage, changePageFunc):
+        super().__init__(parent, mainPage)
         self.changePageFunc = changePageFunc
-        self.setRecipeFunc = ui.barmanPage.set_cocktail_recipe
+        self.setRecipeFunc = mainPage.ui.barmanPage.set_cocktail_recipe
+        self.set_cocktail_mode = mainPage.ui.barmanPage.set_cocktail_mode
         self.clicked.connect(self.onChangePage)
 
     def onChangePage(self):
-        # Supposons que "Cocktail Perso" soit le nom d'une recette valide
-        recipe = machine.get_recipe_by_name("Cocktail Perso")
-        if recipe:
-            self.setRecipeFunc(recipe)  # Mise à jour de la recette avant de changer de page
+        self.set_cocktail_mode(is_new_cocktail=True)
+        self.setRecipeFunc(CocktailRecipe(name="Mon Cocktail"))  # Mise à jour de la recette avant de changer de page
         self.changePageFunc(3)

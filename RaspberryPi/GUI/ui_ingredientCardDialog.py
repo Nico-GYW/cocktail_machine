@@ -108,9 +108,9 @@ class Ui_ingredientCardDialog(object):
 "}\n"
 "")
         self.quantitySpinBox.setFrame(False)
-        self.quantitySpinBox.setMaximum(1000)
-        self.quantitySpinBox.setSingleStep(50)
-        self.quantitySpinBox.setValue(750)
+        self.quantitySpinBox.setMaximum(100)
+        self.quantitySpinBox.setSingleStep(5)
+        self.quantitySpinBox.setValue(100)
         self.quantitySpinBox.setDisplayIntegerBase(10)
         self.buttonBox = QDialogButtonBox(ingredientCardDialog)
         self.buttonBox.setObjectName(u"buttonBox")

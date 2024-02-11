@@ -12,27 +12,29 @@ class CocktailRecipe:
         image (str): The path to the image of the cocktail recipe.
     """
 
-    def __init__(self, name, glass_bottles, soft_drink_bottles, lemon, ice, comment,
-                 image="ressources/cocktail/default.png"):
+    def __init__(self, name="", glass_bottles=None, soft_drink_bottles=None, lemon=0, ice=0, comment="",
+                 image="ressources/cocktail/default.png", save=False):
         """
-        Initialize a CocktailRecipe instance.
+        Initialize a CocktailRecipe instance with default values for an empty recipe.
 
         Args:
-            name (str): The name of the cocktail recipe.
-            glass_bottles (dict): The dictionary of glass bottles required for the recipe.
-            soft_drink_bottles (dict): The dictionary of soft drink bottles required for the recipe.
-            lemon (int): The quantity of lemon required for the recipe.
-            ice (int): The quantity of ice required for the recipe.
-            comment (str): Additional comment or instructions for the recipe.
+            name (str, optional): The name of the cocktail recipe. Defaults to an empty string.
+            glass_bottles (dict, optional): The dictionary of glass bottles required for the recipe. Defaults to an empty dict.
+            soft_drink_bottles (dict, optional): The dictionary of soft drink bottles required for the recipe. Defaults to an empty dict.
+            lemon (int, optional): The quantity of lemon required for the recipe. Defaults to 0.
+            ice (int, optional): The quantity of ice required for the recipe. Defaults to 0.
+            comment (str, optional): Additional comment or instructions for the recipe. Defaults to an empty string.
             image (str, optional): The path to the image of the cocktail recipe. Defaults to "ressources/cocktail/default.png".
+            save (bool, optional): Flag indicating whether the recipe should be saved. Defaults to False.
         """
         self.name = name
-        self.glass_bottles = glass_bottles
-        self.soft_drink_bottles = soft_drink_bottles
+        self.glass_bottles = glass_bottles if glass_bottles is not None else {}
+        self.soft_drink_bottles = soft_drink_bottles if soft_drink_bottles is not None else {}
         self.lemon = lemon
         self.ice = ice
         self.comment = comment
         self.image = image
+        self.save = save
 
     def to_dict(self):
         """
@@ -42,7 +44,7 @@ class CocktailRecipe:
             dict: The dictionary representation of the CocktailRecipe instance.
         """
         return {'name': self.name, 'glass_bottles': self.glass_bottles, 'soft_drink_bottles': self.soft_drink_bottles,
-                'lemon': self.lemon, 'ice': self.ice, 'comment': self.comment, 'image': self.image}
+                'lemon': self.lemon, 'ice': self.ice, 'comment': self.comment, 'image': self.image, 'save': self.save}
 
     def get_name(self):
         return self.name
@@ -94,3 +96,19 @@ class CocktailRecipe:
             # Supprime la bouteille du dictionnaire
             del bottle_dict[bottle_name]
 
+    def clear_ingredients(self):
+        """
+        Removes all ingredients from the cocktail recipe and resets the image to the default.
+        """
+        # Réinitialiser les dictionnaires d'ingrédients
+        self.glass_bottles = {}
+        self.soft_drink_bottles = {}
+
+        # Réinitialiser les autres attributs d'ingrédients
+        self.lemon = 0
+        self.ice = 0
+
+        # Réinitialiser l'image à la valeur par défaut
+        self.image = "ressources/cocktail/default.png"
+
+        self.comment = ""

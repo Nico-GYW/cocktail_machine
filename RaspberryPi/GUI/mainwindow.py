@@ -1,5 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import sys
+import os
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 
@@ -12,6 +13,8 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 #     pyside6-uic dispenserControl.ui -o ui_dispenserControl.py
 
 from ui_form import Ui_MainWindow
+
+os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):

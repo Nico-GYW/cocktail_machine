@@ -165,7 +165,7 @@ class CocktailMachine:
             "soft_drink_bottles": self.soft_drink_bottle_holder.to_dict(),
             "stock_lemon": self.stock_lemon,
             "stock_ice": self.stock_ice,
-            "cocktail_recipes": [r.to_dict() for r in self.cocktail_recipes]
+            "cocktail_recipes": [r.to_dict() for r in self.cocktail_recipes if r.save]
         }
         with open(file_path, "w") as f:
             json.dump(state, f)
