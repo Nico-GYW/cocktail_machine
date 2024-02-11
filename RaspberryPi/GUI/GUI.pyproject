@@ -9,6 +9,8 @@
         "bottleDialog.ui",
         "bottleParameter.ui",
         "dispenserControl.ui",
-        "pompetteUtils.py"
+        "pompetteUtils.py",
+        "ingredientCard.ui",
+        "ingredientCardDialog.ui"
     ]
 }

@@ -16,10 +16,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QLabel, QLayout, QMainWindow, QPushButton,
-    QScrollArea, QSizePolicy, QSlider, QSpinBox,
-    QStackedWidget, QToolButton, QVBoxLayout, QWidget)
+    QHBoxLayout, QLabel, QLayout, QMainWindow,
+    QPushButton, QScrollArea, QSizePolicy, QSlider,
+    QSpacerItem, QSpinBox, QStackedWidget, QToolButton,
+    QVBoxLayout, QWidget)
 
+from barmanPageWidgets import BarmanPage
 from landingPageWidgets import LandingPage
 from mainPageWidgets import (CocktailCard, MainPage)
 from parameterPageWidgets import (BottleParameter, DispenserControl, ParameterPage)
@@ -1208,7 +1210,7 @@ class Ui_MainWindow(object):
         self.parameterStack.addWidget(self.machineParameter)
         self.parameterRightPannel = QFrame(self.parameterPage)
         self.parameterRightPannel.setObjectName(u"parameterRightPannel")
-        self.parameterRightPannel.setGeometry(QRect(570, 0, 231, 481))
+        self.parameterRightPannel.setGeometry(QRect(570, 0, 230, 490))
         self.parameterRightPannel.setStyleSheet(u"background-color : #F9F8F8;\n"
 "")
         self.parameterRightPannel.setFrameShape(QFrame.StyledPanel)
@@ -1318,10 +1320,510 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.pushButtonMachineParameter)
 
         self.stackedWidget.addWidget(self.parameterPage)
-        self.barManPage = QWidget()
-        self.barManPage.setObjectName(u"barManPage")
-        self.barManPage.setMinimumSize(QSize(800, 0))
-        self.stackedWidget.addWidget(self.barManPage)
+        self.barmanPage = BarmanPage()
+        self.barmanPage.setObjectName(u"barmanPage")
+        self.barmanPage.setMinimumSize(QSize(800, 0))
+        self.parameterRightPannel_2 = QFrame(self.barmanPage)
+        self.parameterRightPannel_2.setObjectName(u"parameterRightPannel_2")
+        self.parameterRightPannel_2.setGeometry(QRect(570, 0, 230, 490))
+        self.parameterRightPannel_2.setStyleSheet(u"background-color : #F9F8F8;\n"
+"")
+        self.parameterRightPannel_2.setFrameShape(QFrame.StyledPanel)
+        self.parameterRightPannel_2.setFrameShadow(QFrame.Raised)
+        self.titleBarMan = QLabel(self.parameterRightPannel_2)
+        self.titleBarMan.setObjectName(u"titleBarMan")
+        self.titleBarMan.setGeometry(QRect(30, 20, 171, 91))
+        self.titleBarMan.setFont(font1)
+        self.titleBarMan.setStyleSheet(u"font-size: 32px;\n"
+"color: black;")
+        self.titleBarMan.setAlignment(Qt.AlignCenter)
+        self.toolButtonBarManPage = QToolButton(self.parameterRightPannel_2)
+        self.toolButtonBarManPage.setObjectName(u"toolButtonBarManPage")
+        self.toolButtonBarManPage.setGeometry(QRect(200, 450, 31, 31))
+        self.toolButtonBarManPage.setStyleSheet(u"border: none; /* Supprime la bordure */\n"
+"")
+        self.toolButtonBarManPage.setIcon(icon3)
+        self.toolButtonBarManPage.setIconSize(QSize(25, 25))
+        self.barmanImage = QLabel(self.parameterRightPannel_2)
+        self.barmanImage.setObjectName(u"barmanImage")
+        self.barmanImage.setGeometry(QRect(80, 160, 71, 121))
+        self.barmanImage.setPixmap(QPixmap(u"ressources/cocktail/default.png"))
+        self.barmanImage.setScaledContents(True)
+        self.label_22 = QLabel(self.parameterRightPannel_2)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setGeometry(QRect(40, 300, 58, 16))
+        self.label_22.setStyleSheet(u"font-size: 12px;\n"
+"color: black;")
+        self.label_22.setAlignment(Qt.AlignCenter)
+        self.label_23 = QLabel(self.parameterRightPannel_2)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setGeometry(QRect(120, 300, 91, 16))
+        self.label_23.setStyleSheet(u"font-size: 12px;\n"
+"color: black;")
+        self.label_23.setAlignment(Qt.AlignCenter)
+        self.barmanQuantity = QLabel(self.parameterRightPannel_2)
+        self.barmanQuantity.setObjectName(u"barmanQuantity")
+        self.barmanQuantity.setGeometry(QRect(40, 320, 58, 16))
+        self.barmanQuantity.setStyleSheet(u"font-size: 8px;\n"
+"color: black;")
+        self.barmanQuantity.setAlignment(Qt.AlignCenter)
+        self.barmanAlc = QLabel(self.parameterRightPannel_2)
+        self.barmanAlc.setObjectName(u"barmanAlc")
+        self.barmanAlc.setGeometry(QRect(140, 320, 58, 16))
+        self.barmanAlc.setStyleSheet(u"font-size: 8px;\n"
+"color: black;")
+        self.barmanAlc.setAlignment(Qt.AlignCenter)
+        self.barmanCreateButton = QPushButton(self.parameterRightPannel_2)
+        self.barmanCreateButton.setObjectName(u"barmanCreateButton")
+        self.barmanCreateButton.setGeometry(QRect(80, 410, 71, 31))
+        self.barmanCreateButton.setStyleSheet(u"QPushButton {\n"
+"    color: white;\n"
+"    font-size: 12px;\n"
+"    background-color: #F79643;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu'appuy\u00e9 */\n"
+"}\n"
+"")
+        self.barmanCocktailName = QLabel(self.parameterRightPannel_2)
+        self.barmanCocktailName.setObjectName(u"barmanCocktailName")
+        self.barmanCocktailName.setGeometry(QRect(40, 350, 161, 61))
+        self.barmanCocktailName.setStyleSheet(u"font-size: 16px;\n"
+"color: black;")
+        self.barmanCocktailName.setScaledContents(False)
+        self.barmanCocktailName.setAlignment(Qt.AlignCenter)
+        self.barmanCocktailName.setWordWrap(True)
+        self.frame_22 = QFrame(self.barmanPage)
+        self.frame_22.setObjectName(u"frame_22")
+        self.frame_22.setGeometry(QRect(50, 60, 470, 350))
+        self.frame_22.setStyleSheet(u"background-color : #F9F8F8;\n"
+"border-radius: 15px;")
+        self.frame_22.setFrameShape(QFrame.NoFrame)
+        self.frame_22.setFrameShadow(QFrame.Sunken)
+        self.frame_22.setLineWidth(0)
+        self.frame_22.setMidLineWidth(0)
+        self.frame_24 = QFrame(self.frame_22)
+        self.frame_24.setObjectName(u"frame_24")
+        self.frame_24.setGeometry(QRect(350, 60, 100, 41))
+        self.frame_24.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.frame_24.setFrameShape(QFrame.StyledPanel)
+        self.frame_24.setFrameShadow(QFrame.Raised)
+        self.label_32 = QLabel(self.frame_24)
+        self.label_32.setObjectName(u"label_32")
+        self.label_32.setGeometry(QRect(10, 10, 21, 16))
+        self.label_32.setStyleSheet(u"color : black;\n"
+"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_33 = QLabel(self.frame_24)
+        self.label_33.setObjectName(u"label_33")
+        self.label_33.setGeometry(QRect(72, 10, 21, 16))
+        self.label_33.setStyleSheet(u"color : black;\n"
+"font-size: 10px;\n"
+"background-color: transparent;")
+        self.horizontalSlider = QSlider(self.frame_24)
+        self.horizontalSlider.setObjectName(u"horizontalSlider")
+        self.horizontalSlider.setGeometry(QRect(35, 10, 31, 25))
+        self.horizontalSlider.setMaximum(1)
+        self.horizontalSlider.setPageStep(0)
+        self.horizontalSlider.setValue(1)
+        self.horizontalSlider.setTracking(False)
+        self.horizontalSlider.setOrientation(Qt.Horizontal)
+        self.horizontalSlider.setInvertedAppearance(False)
+        self.horizontalSlider.setInvertedControls(False)
+        self.horizontalSlider.setTickPosition(QSlider.NoTicks)
+        self.frame_33 = QFrame(self.frame_22)
+        self.frame_33.setObjectName(u"frame_33")
+        self.frame_33.setGeometry(QRect(240, 60, 100, 41))
+        self.frame_33.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.frame_33.setFrameShape(QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QFrame.Raised)
+        self.label_36 = QLabel(self.frame_33)
+        self.label_36.setObjectName(u"label_36")
+        self.label_36.setGeometry(QRect(10, 10, 21, 16))
+        self.label_36.setStyleSheet(u"color : black;\n"
+"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_37 = QLabel(self.frame_33)
+        self.label_37.setObjectName(u"label_37")
+        self.label_37.setGeometry(QRect(72, 10, 21, 16))
+        self.label_37.setStyleSheet(u"color : black;\n"
+"font-size: 10px;\n"
+"background-color: transparent;")
+        self.horizontalSlider_3 = QSlider(self.frame_33)
+        self.horizontalSlider_3.setObjectName(u"horizontalSlider_3")
+        self.horizontalSlider_3.setGeometry(QRect(35, 10, 31, 25))
+        self.horizontalSlider_3.setMaximum(1)
+        self.horizontalSlider_3.setPageStep(0)
+        self.horizontalSlider_3.setValue(1)
+        self.horizontalSlider_3.setTracking(False)
+        self.horizontalSlider_3.setOrientation(Qt.Horizontal)
+        self.horizontalSlider_3.setInvertedAppearance(False)
+        self.horizontalSlider_3.setInvertedControls(False)
+        self.horizontalSlider_3.setTickPosition(QSlider.NoTicks)
+        self.layoutWidget_4 = QWidget(self.frame_22)
+        self.layoutWidget_4.setObjectName(u"layoutWidget_4")
+        self.layoutWidget_4.setGeometry(QRect(130, 60, 102, 271))
+        self.verticalLayoutSoftBottleBarMan = QVBoxLayout(self.layoutWidget_4)
+        self.verticalLayoutSoftBottleBarMan.setSpacing(10)
+        self.verticalLayoutSoftBottleBarMan.setObjectName(u"verticalLayoutSoftBottleBarMan")
+        self.verticalLayoutSoftBottleBarMan.setSizeConstraint(QLayout.SetMinimumSize)
+        self.verticalLayoutSoftBottleBarMan.setContentsMargins(0, 0, 0, 0)
+        self.frame_39 = QFrame(self.layoutWidget_4)
+        self.frame_39.setObjectName(u"frame_39")
+        sizePolicy.setHeightForWidth(self.frame_39.sizePolicy().hasHeightForWidth())
+        self.frame_39.setSizePolicy(sizePolicy)
+        self.frame_39.setMinimumSize(QSize(100, 40))
+        self.frame_39.setMaximumSize(QSize(100, 40))
+        self.frame_39.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.frame_39.setFrameShape(QFrame.NoFrame)
+        self.frame_39.setFrameShadow(QFrame.Plain)
+        self.frame_39.setLineWidth(10)
+        self.frame_39.setMidLineWidth(10)
+        self.layoutWidget_12 = QWidget(self.frame_39)
+        self.layoutWidget_12.setObjectName(u"layoutWidget_12")
+        self.layoutWidget_12.setGeometry(QRect(10, 7, 81, 31))
+        self.verticalLayout_9 = QVBoxLayout(self.layoutWidget_12)
+        self.verticalLayout_9.setSpacing(0)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.label_56 = QLabel(self.layoutWidget_12)
+        self.label_56.setObjectName(u"label_56")
+        self.label_56.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_56.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_9.addWidget(self.label_56)
+
+        self.label_57 = QLabel(self.layoutWidget_12)
+        self.label_57.setObjectName(u"label_57")
+        self.label_57.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_57.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_9.addWidget(self.label_57)
+
+
+        self.verticalLayoutSoftBottleBarMan.addWidget(self.frame_39)
+
+        self.frame_40 = QFrame(self.layoutWidget_4)
+        self.frame_40.setObjectName(u"frame_40")
+        sizePolicy.setHeightForWidth(self.frame_40.sizePolicy().hasHeightForWidth())
+        self.frame_40.setSizePolicy(sizePolicy)
+        self.frame_40.setMinimumSize(QSize(100, 40))
+        self.frame_40.setMaximumSize(QSize(100, 40))
+        self.frame_40.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.frame_40.setFrameShape(QFrame.NoFrame)
+        self.frame_40.setFrameShadow(QFrame.Plain)
+        self.frame_40.setLineWidth(10)
+        self.frame_40.setMidLineWidth(10)
+        self.layoutWidget_13 = QWidget(self.frame_40)
+        self.layoutWidget_13.setObjectName(u"layoutWidget_13")
+        self.layoutWidget_13.setGeometry(QRect(10, 7, 81, 31))
+        self.verticalLayout_12 = QVBoxLayout(self.layoutWidget_13)
+        self.verticalLayout_12.setSpacing(0)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.label_58 = QLabel(self.layoutWidget_13)
+        self.label_58.setObjectName(u"label_58")
+        self.label_58.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_58.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_12.addWidget(self.label_58)
+
+        self.label_59 = QLabel(self.layoutWidget_13)
+        self.label_59.setObjectName(u"label_59")
+        self.label_59.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_59.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_12.addWidget(self.label_59)
+
+
+        self.verticalLayoutSoftBottleBarMan.addWidget(self.frame_40)
+
+        self.frame_41 = QFrame(self.layoutWidget_4)
+        self.frame_41.setObjectName(u"frame_41")
+        sizePolicy.setHeightForWidth(self.frame_41.sizePolicy().hasHeightForWidth())
+        self.frame_41.setSizePolicy(sizePolicy)
+        self.frame_41.setMinimumSize(QSize(100, 40))
+        self.frame_41.setMaximumSize(QSize(100, 40))
+        self.frame_41.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.frame_41.setFrameShape(QFrame.NoFrame)
+        self.frame_41.setFrameShadow(QFrame.Plain)
+        self.frame_41.setLineWidth(10)
+        self.frame_41.setMidLineWidth(10)
+        self.layoutWidget_14 = QWidget(self.frame_41)
+        self.layoutWidget_14.setObjectName(u"layoutWidget_14")
+        self.layoutWidget_14.setGeometry(QRect(10, 7, 81, 31))
+        self.verticalLayout_13 = QVBoxLayout(self.layoutWidget_14)
+        self.verticalLayout_13.setSpacing(0)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.label_60 = QLabel(self.layoutWidget_14)
+        self.label_60.setObjectName(u"label_60")
+        self.label_60.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_60.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_13.addWidget(self.label_60)
+
+        self.label_61 = QLabel(self.layoutWidget_14)
+        self.label_61.setObjectName(u"label_61")
+        self.label_61.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_61.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_13.addWidget(self.label_61)
+
+
+        self.verticalLayoutSoftBottleBarMan.addWidget(self.frame_41)
+
+        self.ingredientSpacer = QWidget(self.layoutWidget_4)
+        self.ingredientSpacer.setObjectName(u"ingredientSpacer")
+        self.ingredientSpacer.setEnabled(True)
+        self.verticalLayout_3 = QVBoxLayout(self.ingredientSpacer)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.label_62 = QLabel(self.ingredientSpacer)
+        self.label_62.setObjectName(u"label_62")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_62.sizePolicy().hasHeightForWidth())
+        self.label_62.setSizePolicy(sizePolicy1)
+        self.label_62.setPixmap(QPixmap(u"ressources/generic/plus.svg"))
+        self.label_62.setScaledContents(False)
+        self.label_62.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_3.addWidget(self.label_62)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_3.addItem(self.verticalSpacer_4)
+
+
+        self.verticalLayoutSoftBottleBarMan.addWidget(self.ingredientSpacer)
+
+        self.widget = QWidget(self.frame_22)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(20, 20, 431, 31))
+        self.horizontalLayout = QHBoxLayout(self.widget)
+        self.horizontalLayout.setSpacing(10)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label_27 = QLabel(self.widget)
+        self.label_27.setObjectName(u"label_27")
+        self.label_27.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: #A0ACB0;")
+        self.label_27.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout.addWidget(self.label_27)
+
+        self.label_28 = QLabel(self.widget)
+        self.label_28.setObjectName(u"label_28")
+        self.label_28.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: #A0ACB0;")
+        self.label_28.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout.addWidget(self.label_28)
+
+        self.label_29 = QLabel(self.widget)
+        self.label_29.setObjectName(u"label_29")
+        self.label_29.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: #A0ACB0;")
+        self.label_29.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout.addWidget(self.label_29)
+
+        self.label_30 = QLabel(self.widget)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: #A0ACB0;")
+        self.label_30.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout.addWidget(self.label_30)
+
+        self.widget1 = QWidget(self.frame_22)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(20, 60, 102, 271))
+        self.verticalLayoutGlassBottleBarMan = QVBoxLayout(self.widget1)
+        self.verticalLayoutGlassBottleBarMan.setSpacing(10)
+        self.verticalLayoutGlassBottleBarMan.setObjectName(u"verticalLayoutGlassBottleBarMan")
+        self.verticalLayoutGlassBottleBarMan.setSizeConstraint(QLayout.SetMinimumSize)
+        self.verticalLayoutGlassBottleBarMan.setContentsMargins(0, 0, 0, 0)
+        self.ingredientCard = QFrame(self.widget1)
+        self.ingredientCard.setObjectName(u"ingredientCard")
+        sizePolicy.setHeightForWidth(self.ingredientCard.sizePolicy().hasHeightForWidth())
+        self.ingredientCard.setSizePolicy(sizePolicy)
+        self.ingredientCard.setMinimumSize(QSize(100, 40))
+        self.ingredientCard.setMaximumSize(QSize(100, 40))
+        self.ingredientCard.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.ingredientCard.setFrameShape(QFrame.NoFrame)
+        self.ingredientCard.setFrameShadow(QFrame.Plain)
+        self.ingredientCard.setLineWidth(10)
+        self.ingredientCard.setMidLineWidth(10)
+        self.layoutWidget_8 = QWidget(self.ingredientCard)
+        self.layoutWidget_8.setObjectName(u"layoutWidget_8")
+        self.layoutWidget_8.setGeometry(QRect(10, 7, 81, 31))
+        self.verticalLayout_7 = QVBoxLayout(self.layoutWidget_8)
+        self.verticalLayout_7.setSpacing(0)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.label_47 = QLabel(self.layoutWidget_8)
+        self.label_47.setObjectName(u"label_47")
+        self.label_47.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_47.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_7.addWidget(self.label_47)
+
+        self.label_48 = QLabel(self.layoutWidget_8)
+        self.label_48.setObjectName(u"label_48")
+        self.label_48.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_48.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_7.addWidget(self.label_48)
+
+
+        self.verticalLayoutGlassBottleBarMan.addWidget(self.ingredientCard)
+
+        self.frame_37 = QFrame(self.widget1)
+        self.frame_37.setObjectName(u"frame_37")
+        sizePolicy.setHeightForWidth(self.frame_37.sizePolicy().hasHeightForWidth())
+        self.frame_37.setSizePolicy(sizePolicy)
+        self.frame_37.setMinimumSize(QSize(100, 40))
+        self.frame_37.setMaximumSize(QSize(100, 40))
+        self.frame_37.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.frame_37.setFrameShape(QFrame.NoFrame)
+        self.frame_37.setFrameShadow(QFrame.Plain)
+        self.frame_37.setLineWidth(10)
+        self.frame_37.setMidLineWidth(10)
+        self.layoutWidget_9 = QWidget(self.frame_37)
+        self.layoutWidget_9.setObjectName(u"layoutWidget_9")
+        self.layoutWidget_9.setGeometry(QRect(10, 7, 81, 31))
+        self.verticalLayout_8 = QVBoxLayout(self.layoutWidget_9)
+        self.verticalLayout_8.setSpacing(0)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.label_49 = QLabel(self.layoutWidget_9)
+        self.label_49.setObjectName(u"label_49")
+        self.label_49.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_49.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_8.addWidget(self.label_49)
+
+        self.label_50 = QLabel(self.layoutWidget_9)
+        self.label_50.setObjectName(u"label_50")
+        self.label_50.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_50.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_8.addWidget(self.label_50)
+
+
+        self.verticalLayoutGlassBottleBarMan.addWidget(self.frame_37)
+
+        self.frame_38 = QFrame(self.widget1)
+        self.frame_38.setObjectName(u"frame_38")
+        sizePolicy.setHeightForWidth(self.frame_38.sizePolicy().hasHeightForWidth())
+        self.frame_38.setSizePolicy(sizePolicy)
+        self.frame_38.setMinimumSize(QSize(100, 40))
+        self.frame_38.setMaximumSize(QSize(100, 40))
+        self.frame_38.setStyleSheet(u"color: black;\n"
+"font-size: 12px;\n"
+"border-radius: 8px;\n"
+"background-color: white;")
+        self.frame_38.setFrameShape(QFrame.NoFrame)
+        self.frame_38.setFrameShadow(QFrame.Plain)
+        self.frame_38.setLineWidth(10)
+        self.frame_38.setMidLineWidth(10)
+        self.layoutWidget_11 = QWidget(self.frame_38)
+        self.layoutWidget_11.setObjectName(u"layoutWidget_11")
+        self.layoutWidget_11.setGeometry(QRect(10, 7, 81, 31))
+        self.verticalLayout_11 = QVBoxLayout(self.layoutWidget_11)
+        self.verticalLayout_11.setSpacing(0)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.label_54 = QLabel(self.layoutWidget_11)
+        self.label_54.setObjectName(u"label_54")
+        self.label_54.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_54.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_11.addWidget(self.label_54)
+
+        self.label_55 = QLabel(self.layoutWidget_11)
+        self.label_55.setObjectName(u"label_55")
+        self.label_55.setStyleSheet(u"font-size: 10px;\n"
+"background-color: transparent;")
+        self.label_55.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_11.addWidget(self.label_55)
+
+
+        self.verticalLayoutGlassBottleBarMan.addWidget(self.frame_38)
+
+        self.widget_2 = QWidget(self.widget1)
+        self.widget_2.setObjectName(u"widget_2")
+        self.widget_2.setEnabled(True)
+        self.verticalLayout_4 = QVBoxLayout(self.widget_2)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.label_63 = QLabel(self.widget_2)
+        self.label_63.setObjectName(u"label_63")
+        sizePolicy1.setHeightForWidth(self.label_63.sizePolicy().hasHeightForWidth())
+        self.label_63.setSizePolicy(sizePolicy1)
+        self.label_63.setPixmap(QPixmap(u"ressources/generic/plus.svg"))
+        self.label_63.setScaledContents(False)
+        self.label_63.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_4.addWidget(self.label_63)
+
+        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_4.addItem(self.verticalSpacer_5)
+
+
+        self.verticalLayoutGlassBottleBarMan.addWidget(self.widget_2)
+
+        self.logo_3 = QLabel(self.barmanPage)
+        self.logo_3.setObjectName(u"logo_3")
+        self.logo_3.setGeometry(QRect(230, 450, 91, 21))
+        self.logo_3.setPixmap(QPixmap(u"ressources/generic/pompette_noir.png"))
+        self.logo_3.setScaledContents(True)
+        self.stackedWidget.addWidget(self.barmanPage)
         self.processingPage = QWidget()
         self.processingPage.setObjectName(u"processingPage")
         self.processingPage.setMinimumSize(QSize(800, 0))
@@ -1330,7 +1832,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.parameterStack.setCurrentIndex(2)
         self.pushButtonBottleParameter.setDefault(True)
 
@@ -1401,5 +1903,38 @@ class Ui_MainWindow(object):
         self.pushButtonBottleParameter.setText(QCoreApplication.translate("MainWindow", u"     Bouteilles", None))
         self.pushButtonSoftParameter.setText(QCoreApplication.translate("MainWindow", u"   Soft", None))
         self.pushButtonMachineParameter.setText(QCoreApplication.translate("MainWindow", u"  Machine", None))
+        self.titleBarMan.setText(QCoreApplication.translate("MainWindow", u"Mode\n"
+"bar man", None))
+        self.toolButtonBarManPage.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.barmanImage.setText("")
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Quantit\u00e9", None))
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"Degr\u00e9 d'alcool", None))
+        self.barmanQuantity.setText(QCoreApplication.translate("MainWindow", u"125/250 ml", None))
+        self.barmanAlc.setText(QCoreApplication.translate("MainWindow", u"5 %", None))
+        self.barmanCreateButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er", None))
+        self.barmanCocktailName.setText(QCoreApplication.translate("MainWindow", u"Cocktail Perso", None))
+        self.label_32.setText(QCoreApplication.translate("MainWindow", u"Non", None))
+        self.label_33.setText(QCoreApplication.translate("MainWindow", u"Oui", None))
+        self.label_36.setText(QCoreApplication.translate("MainWindow", u"Non", None))
+        self.label_37.setText(QCoreApplication.translate("MainWindow", u"Oui", None))
+        self.label_56.setText(QCoreApplication.translate("MainWindow", u"Schweppes", None))
+        self.label_57.setText(QCoreApplication.translate("MainWindow", u"100 ml", None))
+        self.label_58.setText(QCoreApplication.translate("MainWindow", u"Schweppes", None))
+        self.label_59.setText(QCoreApplication.translate("MainWindow", u"100 ml", None))
+        self.label_60.setText(QCoreApplication.translate("MainWindow", u"Schweppes", None))
+        self.label_61.setText(QCoreApplication.translate("MainWindow", u"100 ml", None))
+        self.label_62.setText("")
+        self.label_27.setText(QCoreApplication.translate("MainWindow", u"Bouteille", None))
+        self.label_28.setText(QCoreApplication.translate("MainWindow", u"Soft", None))
+        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Citron", None))
+        self.label_30.setText(QCoreApplication.translate("MainWindow", u"Gla\u00e7on", None))
+        self.label_47.setText(QCoreApplication.translate("MainWindow", u"Schweppes", None))
+        self.label_48.setText(QCoreApplication.translate("MainWindow", u"100 ml", None))
+        self.label_49.setText(QCoreApplication.translate("MainWindow", u"Schweppes", None))
+        self.label_50.setText(QCoreApplication.translate("MainWindow", u"100 ml", None))
+        self.label_54.setText(QCoreApplication.translate("MainWindow", u"Schweppes", None))
+        self.label_55.setText(QCoreApplication.translate("MainWindow", u"100 ml", None))
+        self.label_63.setText("")
+        self.logo_3.setText("")
     # retranslateUi
 

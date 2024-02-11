@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ingredientCardDialog</class>
+ <widget class="QDialog" name="ingredientCardDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>443</width>
+    <height>93</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font-family: &quot;CoconPro&quot;;
+background-color: #F9F8F8;
+border-radius: 15px;</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>20</y>
+     <width>58</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-family: &quot;CoconPro&quot;;
+background-color: #F9F8F8;
+border-radius: 15px;</string>
+   </property>
+   <property name="text">
+    <string>Contenu</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="bottleComboBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>50</y>
+     <width>141</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox {
+    background-color: #F9F8F8; /* Fond gris clair */
+    color: #000000; /* Texte noir */
+    font-size: 12px; /* Taille de la police 12 */
+    border: 1px solid #707070; /* Bordure de 1px en noir */
+    border-radius: 3px; /* Coins arrondis de 2px */
+    padding: 2px; /* Espacement interne */
+    selection-background-color: #FFA500; /* Fond d'écran de sélection orange */
+}
+
+QComboBox::drop-down {
+    background-color: #F79643; /* Couleur de fond de la flèche déroulante (même que le fond) */
+    border: 0px solid #707070; /* Bordure de la flèche déroulante en noir */
+    width: 20px; /* Largeur de la flèche déroulante de 20px */
+	margin-right: 0px; /* Marge à droite de la flèche déroulante */
+}
+
+QComboBox::down-arrow {
+    image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */
+	color: #000000; /* Couleur de la flèche en noir */
+}
+
+
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>20</y>
+     <width>58</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-family: &quot;CoconPro&quot;;
+background-color: #F9F8F8;
+border-radius: 15px;</string>
+   </property>
+   <property name="text">
+    <string>Quantité</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="quantitySpinBox">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>50</y>
+     <width>121</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSpinBox {
+    background-color: #F9F8F8; /* Fond gris clair */
+    color: #000000; /* Texte noir */
+    font-size: 12px; /* Taille de la police 12 */
+    border: 1px solid #707070; /* Bordure de 1px en noir */
+    border-radius: 3px; /* Coins arrondis de 3px */
+    padding: 2px; /* Espacement interne */
+    selection-background-color: transparent;
+}
+
+QSpinBox::up-button, QSpinBox::down-button {
+    background-color: #F79643; /* Couleur de fond des boutons d'incrémentation/décrémentation */
+    width: 20px; /* Largeur des boutons */
+    border: 0px solid #707070; /* Bordure des boutons en noir */
+	margin: 0px; /* Marge des boutons */
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: padding;
+    subcontrol-position: bottom right;
+}
+
+QSpinBox::up-arrow{
+    image: url(./ressources/generic/arrow_up.svg); /* Chemin relatif vers votre icône SVG */
+    color: #000000; /* Couleur des flèches en noir */
+}
+QSpinBox::down-arrow {
+    image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */
+    color: #000000; /* Couleur des flèches en noir */
+}
+</string>
+   </property>
+   <property name="frame">
+    <bool>false</bool>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="singleStep">
+    <number>50</number>
+   </property>
+   <property name="value">
+    <number>750</number>
+   </property>
+   <property name="displayIntegerBase">
+    <number>10</number>
+   </property>
+  </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>10</y>
+     <width>91</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* Style pour tous les boutons QDialogButton */
+QDialogButtonBox {
+    background-color: transparent; /* Fond transparent */
+    border: none; /* Pas de bordure */
+    spacing: 10px; /* Espacement entre les boutons */
+}
+
+/* Style spécifique pour le bouton &quot;Valider&quot; */
+QDialogButtonBox QPushButton:enabled {
+    background-color: #F79643; /* Fond orange pour le bouton &quot;Valider&quot; */
+    color: #FFFFFF; /* Texte en blanc */
+    border: 1px solid #FFA500; /* Bordure orange */
+    border-radius: 3px; /* Coins arrondis de 3px */
+    padding: 5px 10px; /* Espacement interne */
+    font-size: 12px; /* Taille de la police 12 */
+}
+
+/* Style pour les autres boutons (Annuler, etc.) */
+QDialogButtonBox QPushButton:enabled:hover {
+    background-color: #F79643; /* Fond orange clair au survol */
+    border: 1px solid #F79643; /* Bordure orange clair au survol */
+}
+
+/* Style pour les boutons désactivés */
+QDialogButtonBox QPushButton:disabled {
+    background-color: transparent; /* Fond transparent pour les boutons désactivés */
+    color: #C0C0C0; /* Texte en gris pour les boutons désactivés */
+    border: 1px solid #C0C0C0; /* Bordure grise pour les boutons désactivés */
+}
+</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+   <property name="centerButtons">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

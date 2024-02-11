@@ -26,46 +26,52 @@ class MainPage(QWidget):
         self.mettreAJourTextePage()
 
     def populate_cocktail_carousel(self):
-        # self.ui.cocktailCarousel.clear()
         cocktail_recipes = machine.get_recipes()
-        cocktails_per_page = 6
-        num_pages = (len(cocktail_recipes) + cocktails_per_page - 1) // cocktails_per_page
+        cocktails_per_page = 6  # Nombre total de cartes par page
+        num_pages = (len(cocktail_recipes) + 1 + cocktails_per_page - 1) // cocktails_per_page  # +1 pour la carte de création
 
-        # Supprime les deux premières pages du CocktailCarousel
-        for _ in range(2):  # Répète l'opération deux fois
-            widgetToRemove = self.ui.cocktailCarousel.widget(0)  # Obtient le widget actuellement au début
-            if widgetToRemove:  # Vérifie si widgetToRemove n'est pas None
+        for _ in range(2):
+            widgetToRemove = self.ui.cocktailCarousel.widget(0)
+            if widgetToRemove:
                 self.ui.cocktailCarousel.removeWidget(widgetToRemove)
-                widgetToRemove.deleteLater()  # Supprime le widget de manière sûre
+                widgetToRemove.deleteLater()
 
         for page_index in range(num_pages):
-            page = QFrame(self.ui.cocktailCarousel)  # Créez une nouvelle page
-            layout = QGridLayout()  # Créez un QGridLayout pour la page
+            page = QFrame(self.ui.cocktailCarousel)
+            layout = QGridLayout()
             page.setLayout(layout)
 
             start_index = page_index * cocktails_per_page
-            end_index = start_index + cocktails_per_page
+            end_index = min(start_index + cocktails_per_page, len(cocktail_recipes))
             page_recipes = cocktail_recipes[start_index:end_index]
 
-            num_columns = 3  # Nombre total de colonnes dans le gridLayout
-            # Ajoutez les cartes de cocktails et notez le dernier index utilisé
-            last_card_index = -1
-            for i, recipe in enumerate(page_recipes):
+            num_columns = 3
+            total_cards_added = 0  # Compteur pour les cartes ajoutées, y compris la carte spéciale
+
+            # Ajouter les cartes de cocktails normales
+            for recipe in page_recipes:
                 card = CocktailCard(page, self.ui)
                 card.set_cocktail_data(recipe.get_name(), recipe.get_image())
-                # Calcul pour un remplissage de droite à gauche
-                row, col = divmod(i, num_columns)
+                row, col = divmod(total_cards_added, num_columns)
                 layout.addWidget(card, row, col)
-                last_card_index = i
+                total_cards_added += 1
 
-            # Ajoutez des widgets vides pour combler les espaces restants, si nécessaire
+            # Ajouter la carte spéciale sur la dernière page
             if page_index == num_pages - 1:
-                for j in range(last_card_index + 1, cocktails_per_page):
-                    placeholder = QWidget(page)
-                    placeholder.setFixedSize(130, 130)
-                    # Même calcul pour les placeholders pour maintenir l'ordre de droite à gauche
-                    row, col = divmod(j, num_columns)
-                    layout.addWidget(placeholder, row, col)
+                special_card = CocktailCreationCard(page, self.ui, self.changePage)
+                special_card.set_cocktail_data("Cocktail Perso", "ressources/generic/plus.png")
+                row, col = divmod(total_cards_added, num_columns)
+                layout.addWidget(special_card, row, col)
+                total_cards_added += 1
+
+            # Compléter avec des widgets vides si nécessaire pour maintenir la structure 3x2
+            remaining_slots = cocktails_per_page - total_cards_added
+            for _ in range(remaining_slots):
+                placeholder = QWidget(page)
+                placeholder.setFixedSize(130, 130)
+                row, col = divmod(total_cards_added, num_columns)
+                layout.addWidget(placeholder, row, col)
+                total_cards_added += 1
 
             self.ui.cocktailCarousel.addWidget(page)
 
@@ -143,3 +149,17 @@ class CocktailCard(QFrame):
 
             # Mettre à jour le QLabel avec les ingrédients
             self.mainWindow_ui.cocktailReceipe.setText('\n'.join(ingredients_list))
+
+class CocktailCreationCard(CocktailCard):
+    def __init__(self, parent, ui, changePageFunc):
+        super().__init__(parent, ui)
+        self.changePageFunc = changePageFunc
+        self.setRecipeFunc = ui.barmanPage.set_cocktail_recipe
+        self.clicked.connect(self.onChangePage)
+
+    def onChangePage(self):
+        # Supposons que "Cocktail Perso" soit le nom d'une recette valide
+        recipe = machine.get_recipe_by_name("Cocktail Perso")
+        if recipe:
+            self.setRecipeFunc(recipe)  # Mise à jour de la recette avant de changer de page
+        self.changePageFunc(3)

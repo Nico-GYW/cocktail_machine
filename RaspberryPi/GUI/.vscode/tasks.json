@@ -4,7 +4,7 @@
         {
             "label": "Compile All UI Files",
             "type": "shell",
-            "command": "pyside6-uic form.ui -o ui_form.py && pyside6-uic cocktailCard.ui -o ui_cocktailCard.py && pyside6-uic bottleParameter.ui -o ui_bottleParameter.py && pyside6-uic bottleDialog.ui -o ui_bottleDialog.py && pyside6-uic dispenserControl.ui -o ui_dispenserControl.py",
+            "command": "pyside6-uic form.ui -o ui_form.py && pyside6-uic cocktailCard.ui -o ui_cocktailCard.py && pyside6-uic bottleParameter.ui -o ui_bottleParameter.py && pyside6-uic bottleDialog.ui -o ui_bottleDialog.py && pyside6-uic dispenserControl.ui -o ui_dispenserControl.py && pyside6-uic ingredientCard.ui -o ui_ingredientCard.py && pyside6-uic ingredientCardDialog.ui -o ui_ingredientCardDialog.py",
             "group": {
                 "kind": "build",
                 "isDefault": true

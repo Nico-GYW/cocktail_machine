@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
 
         self.ui.mainPage.setup(self.ui)
         self.ui.parameterPage.setup(self.ui)
+        self.ui.barmanPage.setup(self.ui)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
