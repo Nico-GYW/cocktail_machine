@@ -2,7 +2,7 @@
 import sys
 import os
 
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 # Important:
 # You need to run the following command to generate the ui_form.py file

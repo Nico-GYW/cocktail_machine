@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget
 
 class LandingPage(QWidget):
     def __init__(self, parent=None):

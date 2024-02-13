@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QWidget, QFrame, QLabel, QSpacerItem, QDialogButtonBox, QVBoxLayout, QWidget, QSizePolicy, QDialog, QLineEdit, QPushButton
-from PySide6.QtGui import QPixmap, QColor
-from PySide6.QtCore import Qt, QTimer
+from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QSpacerItem, QDialogButtonBox, QVBoxLayout, QWidget, QSizePolicy, QDialog, QLineEdit, QPushButton
+from PyQt5.QtGui import QPixmap, QColor
+from PyQt5.QtCore import Qt, QTimer
 
 import re
 

@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QWidget, QFrame, QGridLayout, QDialog, QComboBox, QColorDialog
-from PySide6.QtGui import QColor
-from PySide6.QtCore import Qt, QTimer
+from PyQt5.QtWidgets import QWidget, QFrame, QGridLayout, QDialog, QComboBox, QColorDialog
+from PyQt5.QtGui import QColor
+from PyQt5.QtCore import Qt, QTimer
 
 import sys
 import os

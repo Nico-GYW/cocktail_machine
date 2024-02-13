@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QWidget, QFrame, QGridLayout, QLabel
-from PySide6.QtGui import QPixmap, QFont
-from PySide6.QtCore import Signal
+from PyQt5.QtWidgets import QWidget, QFrame, QGridLayout, QLabel
+from PyQt5.QtGui import QPixmap, QFont
+from PyQt5.QtCore import pyqtSignal as Signal
 
 from copy import deepcopy
 import sys

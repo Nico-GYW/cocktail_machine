@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QMessageBox
-from PySide6.QtGui import QPixmap
-from PySide6.QtCore import Qt
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
 
 def clear_grid_layout(grid_layout):
     """Efface tous les widgets d'un QGridLayout."""
