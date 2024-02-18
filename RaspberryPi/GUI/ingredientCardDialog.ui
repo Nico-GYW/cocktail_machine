@@ -118,19 +118,16 @@ QSpinBox::up-button, QSpinBox::down-button {
     width: 20px; /* Largeur des boutons */
     border: 0px solid #707070; /* Bordure des boutons en noir */
 	margin: 0px; /* Marge des boutons */
-    color: black; /* Définit la couleur du texte à noir */
 }
 
 QSpinBox::up-button {
     subcontrol-origin: padding;
     subcontrol-position: top right;
-    color: black; /* Définit la couleur du texte à noir */
 }
 
 QSpinBox::down-button {
     subcontrol-origin: padding;
     subcontrol-position: bottom right;
-    color: black; /* Définit la couleur du texte à noir */
 }
 
 QSpinBox::up-arrow{
@@ -140,6 +137,12 @@ QSpinBox::up-arrow{
 QSpinBox::down-arrow {
     image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */
     color: #000000; /* Couleur des flèches en noir */
+}
+
+QLineEdit, QLineEdit:focus, QSpinBox QLineEdit, QSpinBox QLineEdit:focus {
+    color: black; /* Couleur du texte */
+    selection-background-color: blue; /* Couleur de fond de la sélection de texte */
+    selection-color: black; /* Couleur du texte sélectionné */
 }</string>
    </property>
    <property name="frame">
