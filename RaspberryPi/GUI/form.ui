@@ -2984,19 +2984,7 @@ color: black;</string>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QSlider::handle:horizontal {
-     margin: -15px 0; /* Agrandit la zone de saisie verticalement */
-	height: 30px; 
-}
-
-QSlider::handle:vertical {
-    background: #5c5c5c; /* Couleur de fond du bouton */
-    
-    height: 30px; /* Hauteur du bouton pour slider vertical */
-    margin: 0 -10px; /* Extension au-delà du groove, ajustez selon besoin */
-
-}
-</string>
+          <string notr="true"/>
          </property>
          <property name="maximum">
           <number>255</number>
