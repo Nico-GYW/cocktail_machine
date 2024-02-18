@@ -2986,7 +2986,7 @@ color: black;</string>
          <property name="styleSheet">
           <string notr="true">QSlider::handle:horizontal {
     background-color: transparent;
-    background-image: url('/ressources/generic/engrenage_orange.png');
+    background-image: url('ressources/generic/engrenage_orange.png');
 }
 
 QSlider::handle:vertical {
