@@ -2979,15 +2979,14 @@ color: black;</string>
           <rect>
            <x>160</x>
            <y>110</y>
-           <width>111</width>
+           <width>121</width>
            <height>31</height>
           </rect>
          </property>
          <property name="styleSheet">
           <string notr="true">QSlider::handle:horizontal {
-    background-color: white;
-	border: 1px solid #D8D8D8; /* Couleur de bordure, ajustez selon besoin */
-	border-radius: 15px; /* Rend le bouton rond */
+     margin: -15px 0; /* Agrandit la zone de saisie verticalement */
+	height: 30px; 
 }
 
 QSlider::handle:vertical {
