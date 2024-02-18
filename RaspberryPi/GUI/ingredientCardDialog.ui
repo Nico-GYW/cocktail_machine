@@ -138,11 +138,8 @@ QSpinBox::down-arrow {
     color: #000000; /* Couleur des flèches en noir */
 }
 
-QSpinBox, QSpinBox:focus {
-    color: black; /* Change la couleur du texte */
-}
-QSpinBox QLineEdit {
-    color: black; /* Assure que le texte est noir dans toutes les situations */
+QSpinBox, QSpinBox::up-button, QSpinBox::down-button, QSpinBox QLineEdit {
+    color: black; /* Définit la couleur du texte à noir */
 }
 </string>
    </property>
