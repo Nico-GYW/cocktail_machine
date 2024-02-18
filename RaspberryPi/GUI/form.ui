@@ -89,7 +89,7 @@ QPushButton {
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="LandingPage" name="landingPage">
      <property name="minimumSize">
@@ -120,9 +120,9 @@ QPushButton {
      <widget class="QLabel" name="tagline">
       <property name="geometry">
        <rect>
-        <x>290</x>
+        <x>240</x>
         <y>390</y>
-        <width>201</width>
+        <width>321</width>
         <height>51</height>
        </rect>
       </property>
@@ -207,7 +207,7 @@ QPushButton {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #F9F8F8;</string>
+       <string notr="true">background-color: #F0F0F0;</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -3972,7 +3972,7 @@ background-color: transparent;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -4054,7 +4054,7 @@ background-color: #A0ACB0;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
