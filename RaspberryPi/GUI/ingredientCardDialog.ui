@@ -141,6 +141,9 @@ QSpinBox::down-arrow {
 QSpinBox, QSpinBox:focus {
     color: black; /* Change la couleur du texte */
 }
+QSpinBox QLineEdit {
+    color: black; /* Assure que le texte est noir dans toutes les situations */
+}
 </string>
    </property>
    <property name="frame">
