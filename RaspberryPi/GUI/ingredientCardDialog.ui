@@ -21,16 +21,17 @@ border-radius: 15px;</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>20</y>
-     <width>58</width>
-     <height>16</height>
+     <width>81</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">font-family: &quot;CoconPro&quot;;
 background-color: #F9F8F8;
-border-radius: 15px;</string>
+color: black;
+font-size: 16px;</string>
    </property>
    <property name="text">
     <string>Contenu</string>
@@ -75,16 +76,17 @@ QComboBox::down-arrow {
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>210</x>
      <y>20</y>
-     <width>58</width>
-     <height>16</height>
+     <width>81</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">font-family: &quot;CoconPro&quot;;
 background-color: #F9F8F8;
-border-radius: 15px;</string>
+color: black;
+font-size: 16px;</string>
    </property>
    <property name="text">
     <string>Quantité</string>
@@ -136,8 +138,8 @@ QSpinBox::down-arrow {
     color: #000000; /* Couleur des flèches en noir */
 }
 
-QSpinBox::edit-focus {
-    color: black;
+QSpinBox, QSpinBox:focus {
+    color: black; /* Change la couleur du texte */
 }
 </string>
    </property>
