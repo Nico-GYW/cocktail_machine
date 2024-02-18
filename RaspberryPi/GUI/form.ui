@@ -727,9 +727,9 @@ glaçon</string>
       <property name="geometry">
        <rect>
         <x>660</x>
-        <y>80</y>
+        <y>60</y>
         <width>111</width>
-        <height>41</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -751,7 +751,7 @@ glaçon</string>
        <bool>false</bool>
       </property>
       <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
@@ -2982,6 +2982,21 @@ color: black;</string>
            <width>111</width>
            <height>25</height>
           </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSlider::handle:horizontal {
+    background-color: transparent;
+    background-image: url('/ressources/generic/engrenage_orange.png');
+}
+
+QSlider::handle:vertical {
+    background: #5c5c5c; /* Couleur de fond du bouton */
+    border: 1px solid #5c5c5c; /* Couleur de bordure, ajustez selon besoin */
+    height: 30px; /* Hauteur du bouton pour slider vertical */
+    margin: 0 -10px; /* Extension au-delà du groove, ajustez selon besoin */
+    border-radius: 15px; /* Rend le bouton rond */
+}
+</string>
          </property>
          <property name="maximum">
           <number>255</number>
