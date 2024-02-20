@@ -25,6 +25,7 @@ class MainPage(QWidget):
         self.ui.rightButtonMainPage.clicked.connect(self.incrementerPage)
         self.ui.leftButtonMainPage.clicked.connect(self.decrementerPage)
         self.ui.modifyButton.clicked.connect(self.changeBarmanPage)
+        self.ui.extraButton.clicked.connect(self.changeExtraPage)
 
         self.populate_cocktail_carousel()
         self.mettreAJourTextePage()
@@ -92,6 +93,10 @@ class MainPage(QWidget):
             self.ui.barmanPage.set_cocktail_recipe(self.current_recipe)
             self.ui.barmanPage.set_cocktail_mode(is_new_cocktail=False)
         self.changePage(3)
+
+    def changeExtraPage(self):
+        self.ui.mainPageStacked.setCurrentIndex(1)
+        self.ui.extraStack.setCurrentIndex(0)
 
     def mettreAJourTextePage(self):
         index_courant = self.ui.cocktailCarousel.currentIndex() + 1  # +1 car l'index commence à 0

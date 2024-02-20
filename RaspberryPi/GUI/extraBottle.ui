@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Frame</class>
- <widget class="QFrame" name="Frame">
+ <class>extraBottle</class>
+ <widget class="QFrame" name="extraBottle">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -87,11 +87,13 @@ border-radius: 8px;
 background-color: #A0ACB0;</string>
    </property>
    <property name="text">
-    <string>Bouteille 1
-Rhum</string>
+    <string>Bouteille 1 Rhum</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">
@@ -109,6 +111,9 @@ border-radius: 0px;
 color: black;
 font-size: 12px;
 background-color: white;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButtonRight">

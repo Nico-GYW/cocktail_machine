@@ -24,6 +24,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(0)
 
         self.ui.mainPage.setup(self.ui)
+        self.ui.extraPage.setup(self.ui)
         self.ui.parameterPage.setup(self.ui)
         self.ui.barmanPage.setup(self.ui)
 

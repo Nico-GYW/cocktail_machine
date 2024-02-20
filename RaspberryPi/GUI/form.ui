@@ -597,7 +597,7 @@ font-size: 16px;</string>
         </property>
        </widget>
       </widget>
-      <widget class="QFrame" name="extraView">
+      <widget class="extraPage" name="extraPage">
        <property name="styleSheet">
         <string notr="true">background-color : #F0F0F0;
 </string>
@@ -654,7 +654,7 @@ color: black;</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QPushButton" name="modifyButton_2">
+         <widget class="QPushButton" name="extraCloseButton">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -690,8 +690,8 @@ QPushButton:pressed {
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0">
-            <widget class="QPushButton" name="pushButton">
+           <item row="0" column="1">
+            <widget class="QToolButton" name="extraSoftButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -716,7 +716,57 @@ QPushButton:pressed {
              <property name="styleSheet">
               <string notr="true">
 
-QPushButton {
+QToolButton {
+    text-align: center;
+    padding: 15px;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Test</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>ressources/generic/soft.png</normaloff>ressources/generic/soft.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QToolButton" name="extraGlassButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+
+QToolButton {
     text-align: center;
     padding: 15px;
     background-color: white;
@@ -740,58 +790,8 @@ QPushButton {
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="pushButton_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="layoutDirection">
-              <enum>Qt::LeftToRight</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">
-
-QPushButton {
-    text-align: center;
-    padding: 15px;
-    background-color: white;
-    color: black;
-    font-size: 12px;
-}
-</string>
-             </property>
-             <property name="text">
-              <string>Soft</string>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>ressources/generic/soft.png</normaloff>ressources/generic/soft.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QToolButton" name="extraLemonButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -816,7 +816,7 @@ QPushButton {
              <property name="styleSheet">
               <string notr="true">
 
-QPushButton {
+QToolButton {
     text-align: center;
     padding: 15px;
     background-color: white;
@@ -841,7 +841,7 @@ QPushButton {
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QPushButton" name="pushButton_3">
+            <widget class="QToolButton" name="extraIceButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -866,7 +866,7 @@ QPushButton {
              <property name="styleSheet">
               <string notr="true">
 
-QPushButton {
+QToolButton {
     text-align: center;
     padding: 15px;
     background-color: white;
@@ -893,7 +893,7 @@ QPushButton {
           </layout>
          </widget>
         </widget>
-        <widget class="QFrame" name="extraBottle">
+        <widget class="QFrame" name="extraGlassBottle">
          <property name="styleSheet">
           <string notr="true">background-color : #D8D8D8;
 border-radius: 15px;</string>
@@ -930,7 +930,7 @@ color: black;</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QPushButton" name="modifyButton_2">
+         <widget class="QPushButton" name="extraGlassBottleButton">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -965,7 +965,7 @@ QPushButton:pressed {
             <height>231</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout_2">
+          <layout class="QGridLayout" name="extraGlassBottleGrid">
            <item row="0" column="0">
             <widget class="QFrame" name="frame_35">
              <property name="sizePolicy">
@@ -1681,7 +1681,7 @@ color: black;</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QPushButton" name="modifyButton_2">
+         <widget class="QPushButton" name="extraSoftBottleButton">
           <property name="geometry">
            <rect>
             <x>440</x>
@@ -1716,7 +1716,7 @@ QPushButton:pressed {
             <height>231</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout_2">
+          <layout class="QGridLayout" name="extraSoftBottleGrid">
            <item row="1" column="0">
             <widget class="QFrame" name="frame_44">
              <property name="sizePolicy">
@@ -2361,7 +2361,7 @@ QPushButton:pressed {
        <string>Modifier</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="addButton">
+     <widget class="QPushButton" name="extraButton">
       <property name="geometry">
        <rect>
         <x>680</x>
@@ -6159,6 +6159,12 @@ background-color: transparent;</string>
    <class>BarmanPage</class>
    <extends>QWidget</extends>
    <header location="global">barmanPageWidgets</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>extraPage</class>
+   <extends>QFrame</extends>
+   <header location="global">extraPageWidgets</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
