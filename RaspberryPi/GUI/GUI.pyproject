@@ -11,6 +11,7 @@
         "dispenserControl.ui",
         "pompetteUtils.py",
         "ingredientCard.ui",
-        "ingredientCardDialog.ui"
+        "ingredientCardDialog.ui",
+        "extraBottle.ui"
     ]
 }
