@@ -33,7 +33,8 @@ class MainPage(QWidget):
         cocktail_recipes = machine.get_recipes()
         cocktails_per_page = 6  # Nombre total de cartes par page
         num_pages = (len(cocktail_recipes) + 1 + cocktails_per_page - 1) // cocktails_per_page  # +1 pour la carte de création
-
+        self.current_recipe = cocktail_recipes[0]
+        
         for _ in range(2):
             widgetToRemove = self.ui.cocktailCarousel.widget(0)
             if widgetToRemove:

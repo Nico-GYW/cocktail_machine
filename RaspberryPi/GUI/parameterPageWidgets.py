@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QFrame, QGridLayout, QDialog, QComboBox, QColorDialog
+from PyQt5.QtWidgets import QWidget, QFrame, QGridLayout, QDialog, QComboBox, QColorDialog, QMessageBox
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt, QTimer
 
@@ -25,13 +25,16 @@ class ParameterPage(QWidget):
         ui.pushButtonBottleParameter.clicked.connect(lambda: self.changeParameterPage(0))
         ui.pushButtonSoftParameter.clicked.connect(lambda: self.changeParameterPage(1))
         ui.pushButtonMachineParameter.clicked.connect(lambda: self.changeParameterPage(2))
+        ui.pushButtonMachineSettings.clicked.connect(lambda: self.changeParameterPage(3))
         self.ui.rightButtonControl.clicked.connect(self.incrementerPage)
         self.ui.leftButtonControl.clicked.connect(self.decrementerPage)
 
+        self.adjust_brightness(255)
         self.set_bottle_glasses()
         self.set_bottle_plastic()
         self.set_dispenser_control_page()
         self.set_soft_control_page()
+        self.set_settings_page()
         self.set_other_control_page()
 
     def changeMainPage(self, pageIndex):
@@ -55,6 +58,62 @@ class ParameterPage(QWidget):
         # Décrémenter l'index ou aller à la dernière page si à la première page
         nouvel_index = (index_courant - 1 + nombre_total_pages) % nombre_total_pages
         self.ui.machineParameterStack.setCurrentIndex(nouvel_index)
+
+    def set_settings_page(self):
+        # Connexion du powerButton pour quitter l'application
+        self.ui.powerButton.clicked.connect(self.confirm_quit)
+
+        # Connexion du brightnessSlider pour ajuster la luminosité
+        self.ui.brightnessSlider.valueChanged.connect(self.adjust_brightness)
+
+        # Lire la valeur actuelle de la luminosité et l'ajuster si nécessaire
+        self.initialize_brightness()
+
+    def confirm_quit(self):
+        reply = QMessageBox.question(self, 'Confirmation',
+                                     "Êtes-vous sûr de vouloir quitter ?", QMessageBox.Yes |
+                                     QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            QApplication.instance().quit()
+
+    def initialize_brightness(self):
+        # Chemin vers le fichier de luminosité
+        brightness_file_path = "/sys/class/backlight/10-0045/brightness"
+        
+        try:
+            # Lire la valeur actuelle de la luminosité
+            with open(brightness_file_path, 'r') as file:
+                current_brightness = int(file.read().strip())
+
+            # Si la luminosité actuelle est inférieure à 50, la régler sur 100
+            if current_brightness < 50:
+                current_brightness = 100
+                with open(brightness_file_path, 'w') as file:
+                    file.write(str(current_brightness))
+
+            # Régler la valeur du slider sur la luminosité actuelle
+            self.ui.brightnessSlider.setValue(current_brightness)
+
+        except FileNotFoundError:
+            print("Le fichier de luminosité n'a pas été trouvé.")
+        except Exception as e:
+            print(f"Une erreur est survenue lors de la lecture ou de l'écriture de la luminosité: {e}")
+
+    def adjust_brightness(self, value):
+        # Chemin vers le fichier de luminosité, remplacez '<id_backlight>' par le votre
+        brightness_file_path = "/sys/class/backlight/10-0045/brightness"
+
+        # Assurez-vous d'avoir les permissions nécessaires pour écrire dans ce fichier
+        try:
+            with open(brightness_file_path, 'w') as f:
+                f.write(str(value))
+        except PermissionError:
+            QMessageBox.critical(self, 'Erreur', "Permission refusée pour écrire dans le fichier de luminosité.")
+        except FileNotFoundError:
+            QMessageBox.critical(self, 'Erreur', "Le fichier de luminosité n'a pas été trouvé.")
+        except Exception as e:
+            QMessageBox.critical(self, 'Erreur', f"Une erreur inattendue est survenue: {str(e)}")
 
     def set_bottle_glasses(self):
         clear_grid_layout(self.ui.gridLayoutGlass)

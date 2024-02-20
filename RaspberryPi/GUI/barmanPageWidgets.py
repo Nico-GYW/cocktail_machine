@@ -282,6 +282,8 @@ class IngredientCardDialog(QDialog):
         self.is_glass = parent.is_glass
         self.is_new_ingredient = parent.is_new_ingredient
 
+        self.ui.quantitySpinBox.lineEdit().setStyleSheet("QLineEdit:focus { color: black; }")
+
         # Remplir le QComboBox avec les noms de bouteilles
         bottle_list = machine.get_bottle_list(self.is_glass)  # Assume 'machine' est accessible depuis le parent
         self.ui.bottleComboBox.addItems(bottle_list)
