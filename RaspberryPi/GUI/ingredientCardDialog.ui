@@ -137,12 +137,6 @@ QSpinBox::up-arrow{
 QSpinBox::down-arrow {
     image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */
     color: #000000; /* Couleur des flèches en noir */
-}
-
-QLineEdit, QLineEdit:focus, QSpinBox QLineEdit, QSpinBox QLineEdit:focus {
-    color: black; /* Couleur du texte */
-    selection-background-color: blue; /* Couleur de fond de la sélection de texte */
-    selection-color: black; /* Couleur du texte sélectionné */
 }</string>
    </property>
    <property name="frame">
