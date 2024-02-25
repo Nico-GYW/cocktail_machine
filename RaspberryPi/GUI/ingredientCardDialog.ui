@@ -17,7 +17,8 @@
    <string notr="true">font-family: &quot;CoconPro&quot;;
 background-color: #F9F8F8;
 border-radius: 15px;
-color: black; /* Définit la couleur du texte à noir */</string>
+color: black; /* Définit la couleur du texte à noir */
+border: 2px black;</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -61,7 +62,7 @@ font-size: 16px;</string>
 QComboBox::drop-down {
     background-color: #F79643; /* Couleur de fond de la flèche déroulante (même que le fond) */
     border: 0px solid #707070; /* Bordure de la flèche déroulante en noir */
-    width: 20px; /* Largeur de la flèche déroulante de 20px */
+    width: 30px; /* Largeur de la flèche déroulante de 20px */
 	margin-right: 0px; /* Marge à droite de la flèche déroulante */
 }
 
@@ -115,7 +116,7 @@ font-size: 16px;</string>
 
 QSpinBox::up-button, QSpinBox::down-button {
     background-color: #F79643; /* Couleur de fond des boutons d'incrémentation/décrémentation */
-    width: 20px; /* Largeur des boutons */
+    width: 30px; /* Largeur des boutons */
     border: 0px solid #707070; /* Bordure des boutons en noir */
 	margin: 0px; /* Marge des boutons */
 }

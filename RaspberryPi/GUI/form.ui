@@ -89,7 +89,7 @@ QPushButton {
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="LandingPage" name="landingPage">
      <property name="minimumSize">
@@ -2478,7 +2478,7 @@ QPushButton:pressed {
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="glassBottles">
         <property name="font">
@@ -3468,12 +3468,12 @@ background-color: #A0ACB0;</string>
                  <x>6</x>
                  <y>120</y>
                  <width>90</width>
-                 <height>20</height>
+                 <height>31</height>
                 </rect>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
-        border-radius: 5px;
+        border-radius: 8px;
         background-color: #F79643;
         color: white;
         font-size: 10px;
@@ -3581,12 +3581,12 @@ background-color: #A0ACB0;</string>
                  <x>6</x>
                  <y>120</y>
                  <width>90</width>
-                 <height>20</height>
+                 <height>31</height>
                 </rect>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
-        border-radius: 5px;
+        border-radius: 8px;
         background-color: #F79643;
         color: white;
         font-size: 10px;
@@ -3778,12 +3778,12 @@ background-color: #A0ACB0;</string>
                  <x>6</x>
                  <y>120</y>
                  <width>90</width>
-                 <height>20</height>
+                 <height>31</height>
                 </rect>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
-        border-radius: 5px;
+        border-radius: 8px;
         background-color: #F79643;
         color: white;
         font-size: 10px;
@@ -3791,7 +3791,7 @@ background-color: #A0ACB0;</string>
 }
 
 QPushButton:pressed {
-    background-color: #FFBC50; /* Fond gris clair pour les boutons enfoncés */
+    background-color: #FFBC50; 
 }</string>
                </property>
                <property name="text">

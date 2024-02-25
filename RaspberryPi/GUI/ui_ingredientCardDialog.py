@@ -18,7 +18,8 @@ class Ui_ingredientCardDialog(object):
         ingredientCardDialog.setStyleSheet("font-family: \"CoconPro\";\n"
 "background-color: #F9F8F8;\n"
 "border-radius: 15px;\n"
-"color: black; /* Définit la couleur du texte à noir */")
+"color: black; /* Définit la couleur du texte à noir */\n"
+"border: 2px black;")
         self.label = QtWidgets.QLabel(ingredientCardDialog)
         self.label.setGeometry(QtCore.QRect(60, 20, 81, 21))
         self.label.setStyleSheet("font-family: \"CoconPro\";\n"
@@ -41,7 +42,7 @@ class Ui_ingredientCardDialog(object):
 "QComboBox::drop-down {\n"
 "    background-color: #F79643; /* Couleur de fond de la flèche déroulante (même que le fond) */\n"
 "    border: 0px solid #707070; /* Bordure de la flèche déroulante en noir */\n"
-"    width: 20px; /* Largeur de la flèche déroulante de 20px */\n"
+"    width: 30px; /* Largeur de la flèche déroulante de 20px */\n"
 "    margin-right: 0px; /* Marge à droite de la flèche déroulante */\n"
 "}\n"
 "\n"
@@ -74,7 +75,7 @@ class Ui_ingredientCardDialog(object):
 "\n"
 "QSpinBox::up-button, QSpinBox::down-button {\n"
 "    background-color: #F79643; /* Couleur de fond des boutons d\'incrémentation/décrémentation */\n"
-"    width: 20px; /* Largeur des boutons */\n"
+"    width: 30px; /* Largeur des boutons */\n"
 "    border: 0px solid #707070; /* Bordure des boutons en noir */\n"
 "    margin: 0px; /* Marge des boutons */\n"
 "}\n"

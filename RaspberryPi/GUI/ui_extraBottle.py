@@ -24,13 +24,17 @@ class Ui_extraBottle(object):
         extraBottle.setMaximumSize(QtCore.QSize(100, 100))
         extraBottle.setStyleSheet("font-family: \"CoconPro\";")
         self.pushButtonLeft = QtWidgets.QPushButton(extraBottle)
-        self.pushButtonLeft.setGeometry(QtCore.QRect(0, 60, 31, 31))
-        self.pushButtonLeft.setStyleSheet("\n"
-"background-color: orange;\n"
-"border-top-left-radius: 10px;\n"
-"border-bottom-left-radius: 10px;\n"
-"border-top-right-radius: 0px;\n"
-"border-bottom-right-radius: 0px;")
+        self.pushButtonLeft.setGeometry(QtCore.QRect(0, 50, 31, 41))
+        self.pushButtonLeft.setStyleSheet("QPushButton {\n"
+"    background-color: orange;\n"
+"    border-top-right-radius: 0px;\n"
+"    border-bottom-right-radius: 0px;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-bottom-left-radius: 10px;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #FFBC50; \n"
+"}")
         self.pushButtonLeft.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ressources/generic/arrow_left.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -52,7 +56,7 @@ class Ui_extraBottle(object):
         self.titleLabel.setWordWrap(True)
         self.titleLabel.setObjectName("titleLabel")
         self.lineEdit = QtWidgets.QLineEdit(extraBottle)
-        self.lineEdit.setGeometry(QtCore.QRect(30, 60, 41, 31))
+        self.lineEdit.setGeometry(QtCore.QRect(30, 50, 41, 41))
         self.lineEdit.setStyleSheet("border: 0px;\n"
 "border-radius: 0px;\n"
 "color: black;\n"
@@ -61,13 +65,17 @@ class Ui_extraBottle(object):
         self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEdit.setObjectName("lineEdit")
         self.pushButtonRight = QtWidgets.QPushButton(extraBottle)
-        self.pushButtonRight.setGeometry(QtCore.QRect(70, 60, 31, 31))
-        self.pushButtonRight.setStyleSheet("\n"
-"background-color: orange;\n"
-"border-top-right-radius: 10px;\n"
-"border-bottom-right-radius: 10px;\n"
-"border-top-left-radius: 0px;\n"
-"border-bottom-left-radius: 0px;")
+        self.pushButtonRight.setGeometry(QtCore.QRect(70, 50, 31, 41))
+        self.pushButtonRight.setStyleSheet("QPushButton {\n"
+"    background-color: orange;\n"
+"    border-top-right-radius: 10px;\n"
+"    border-bottom-right-radius: 10px;\n"
+"    border-top-left-radius: 0px;\n"
+"    border-bottom-left-radius: 0px;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #FFBC50;\n"
+"}")
         self.pushButtonRight.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("ressources/generic/arrow_right.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
