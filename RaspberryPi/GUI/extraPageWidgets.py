@@ -70,6 +70,8 @@ class extraPage(QFrame):
 
         self.ui.extraSoftBottleButton.clicked.connect(lambda: self.changeExtraPage(0))        
 
+        # modify recipe self.ui.mainpage.recipe
+
 class ExtraBottle(QFrame):
     def __init__(self, title, parent=None):
         super(ExtraBottle, self).__init__(parent)
