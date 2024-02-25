@@ -40,6 +40,7 @@ class ParameterPage(QWidget):
     def changeMainPage(self, pageIndex):
         stacked_widget = self.parent()
         stacked_widget.setCurrentIndex(pageIndex)
+        self.ui.mainPageStacked.setCurrentIndex(0)
 
     def changeParameterPage(self, pageIndex):
         stacked_widget = self.ui.parameterStack

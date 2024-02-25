@@ -81,6 +81,7 @@ class BarmanPage(QWidget):
     def changeParameterPage(self, pageIndex):
         stacked_widget = self.ui.stackedWidget
         stacked_widget.setCurrentIndex(pageIndex)
+        self.ui.mainPageStacked.setCurrentIndex(0)
 
     def set_name_button(self):
             self.ui.barmanNameButton.clicked.connect(self.showInputDialog)
