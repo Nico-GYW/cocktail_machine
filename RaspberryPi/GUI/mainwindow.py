@@ -3,6 +3,7 @@ import sys
 import os
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtGui import QFontDatabase, QFont
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -21,6 +22,12 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        # Charger la police
+        fontId = QFontDatabase.addApplicationFont("./ressources/font/CoconPro-Regular Regular.ttf")
+        fontFamilies = QFontDatabase.applicationFontFamilies(fontId)
+        QApplication.setFont(QFont(fontFamilies[0]))
+        
         self.ui.stackedWidget.setCurrentIndex(0)
 
         self.ui.mainPage.setup(self.ui)

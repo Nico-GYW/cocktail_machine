@@ -97,6 +97,9 @@ class MainPage(QWidget):
     def changeExtraPage(self):
         self.ui.mainPageStacked.setCurrentIndex(1)
         self.ui.extraStack.setCurrentIndex(0)
+        self.current_recipe = deepcopy(self.current_recipe)
+        self.ui.extraPage.set_current_recipe(self.current_recipe)
+        self.ui.extraPage.reset_all_extras()
 
     def mettreAJourTextePage(self):
         index_courant = self.ui.cocktailCarousel.currentIndex() + 1  # +1 car l'index commence à 0
