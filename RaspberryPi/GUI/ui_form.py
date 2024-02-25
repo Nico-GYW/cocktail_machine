@@ -1514,9 +1514,9 @@ class Ui_MainWindow(object):
         self.xStepperSlider.setOrientation(QtCore.Qt.Horizontal)
         self.xStepperSlider.setObjectName("xStepperSlider")
         self.xStepperButton = QtWidgets.QPushButton(self.frame_25)
-        self.xStepperButton.setGeometry(QtCore.QRect(6, 120, 90, 20))
+        self.xStepperButton.setGeometry(QtCore.QRect(6, 120, 90, 31))
         self.xStepperButton.setStyleSheet("QPushButton {\n"
-"        border-radius: 5px;\n"
+"        border-radius: 8px;\n"
 "        background-color: #F79643;\n"
 "        color: white;\n"
 "        font-size: 10px;\n"
@@ -1561,9 +1561,9 @@ class Ui_MainWindow(object):
         self.cylinderSlider.setOrientation(QtCore.Qt.Horizontal)
         self.cylinderSlider.setObjectName("cylinderSlider")
         self.cylinderButton = QtWidgets.QPushButton(self.frame_28)
-        self.cylinderButton.setGeometry(QtCore.QRect(6, 120, 90, 20))
+        self.cylinderButton.setGeometry(QtCore.QRect(6, 120, 90, 31))
         self.cylinderButton.setStyleSheet("QPushButton {\n"
-"        border-radius: 5px;\n"
+"        border-radius: 8px;\n"
 "        background-color: #F79643;\n"
 "        color: white;\n"
 "        font-size: 10px;\n"
@@ -1640,9 +1640,9 @@ class Ui_MainWindow(object):
         self.yStepperSlider.setOrientation(QtCore.Qt.Vertical)
         self.yStepperSlider.setObjectName("yStepperSlider")
         self.yStepperButton = QtWidgets.QPushButton(self.frame_32)
-        self.yStepperButton.setGeometry(QtCore.QRect(6, 120, 90, 20))
+        self.yStepperButton.setGeometry(QtCore.QRect(6, 120, 90, 31))
         self.yStepperButton.setStyleSheet("QPushButton {\n"
-"        border-radius: 5px;\n"
+"        border-radius: 8px;\n"
 "        background-color: #F79643;\n"
 "        color: white;\n"
 "        font-size: 10px;\n"
@@ -1650,7 +1650,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QPushButton:pressed {\n"
-"    background-color: #FFBC50; /* Fond gris clair pour les boutons enfoncés */\n"
+"    background-color: #FFBC50; \n"
 "}")
         self.yStepperButton.setObjectName("yStepperButton")
         self.otherControlGridLayout.addWidget(self.frame_32, 0, 1, 1, 1)
@@ -2647,9 +2647,9 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
         self.extraStack.setCurrentIndex(2)
-        self.parameterStack.setCurrentIndex(3)
+        self.parameterStack.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

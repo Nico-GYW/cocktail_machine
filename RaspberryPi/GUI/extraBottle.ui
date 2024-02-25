@@ -38,18 +38,22 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>60</y>
+     <y>50</y>
      <width>31</width>
-     <height>31</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: orange;
-border-top-left-radius: 10px;
-border-bottom-left-radius: 10px;
-border-top-right-radius: 0px;
-border-bottom-right-radius: 0px;</string>
+    <string notr="true">QPushButton {
+	background-color: orange;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+QPushButton:pressed {
+    background-color: #FFBC50; 
+}</string>
    </property>
    <property name="text">
     <string/>
@@ -100,9 +104,9 @@ background-color: #A0ACB0;</string>
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>60</y>
+     <y>50</y>
      <width>41</width>
-     <height>31</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -120,18 +124,22 @@ background-color: white;</string>
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>60</y>
+     <y>50</y>
      <width>31</width>
-     <height>31</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: orange;
-border-top-right-radius: 10px;
-border-bottom-right-radius: 10px;
-border-top-left-radius: 0px;
-border-bottom-left-radius: 0px;</string>
+    <string notr="true">QPushButton {
+	background-color: orange;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+QPushButton:pressed {
+    background-color: #FFBC50;
+}</string>
    </property>
    <property name="text">
     <string/>

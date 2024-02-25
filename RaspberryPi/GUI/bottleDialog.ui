@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>200</height>
+    <height>250</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>350</width>
-    <height>200</height>
+    <height>250</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>350</width>
-    <height>200</height>
+    <height>250</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -35,14 +35,15 @@
    <string notr="true">background-color: #FFFFFF;
 font-family: &quot;CoconPro&quot;;
 color: black;
-font-size: 12pt;
+font-size: 16pt;
+border: 2px black;
 </string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>140</y>
+     <y>190</y>
      <width>241</width>
      <height>51</height>
     </rect>
@@ -93,7 +94,7 @@ QDialogButtonBox QPushButton:disabled {
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>60</y>
+     <y>70</y>
      <width>150</width>
      <height>30</height>
     </rect>
@@ -112,7 +113,7 @@ QDialogButtonBox QPushButton:disabled {
 QComboBox::drop-down {
     background-color: #F79643; /* Couleur de fond de la flèche déroulante (même que le fond) */
     border: 0px solid #707070; /* Bordure de la flèche déroulante en noir */
-    width: 20px; /* Largeur de la flèche déroulante de 20px */
+    width: 30px; /* Largeur de la flèche déroulante de 20px */
 	margin-right: 0px; /* Marge à droite de la flèche déroulante */
 }
 
@@ -147,10 +148,10 @@ QComboBox::down-arrow {
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>70</y>
-     <width>58</width>
-     <height>16</height>
+     <x>30</x>
+     <y>80</y>
+     <width>101</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
@@ -160,9 +161,9 @@ QComboBox::down-arrow {
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>110</y>
-     <width>58</width>
+     <x>30</x>
+     <y>140</y>
+     <width>101</width>
      <height>16</height>
     </rect>
    </property>
@@ -174,9 +175,9 @@ QComboBox::down-arrow {
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>100</y>
+     <y>120</y>
      <width>150</width>
-     <height>30</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -192,7 +193,7 @@ QComboBox::down-arrow {
 
 QSpinBox::up-button, QSpinBox::down-button {
     background-color: #F79643; /* Couleur de fond des boutons d'incrémentation/décrémentation */
-    width: 20px; /* Largeur des boutons */
+    width: 30px; /* Largeur des boutons */
     border: 0px solid #707070; /* Bordure des boutons en noir */
 	margin: 0px; /* Marge des boutons */
 }
@@ -231,6 +232,22 @@ QSpinBox::down-arrow {
    </property>
    <property name="displayIntegerBase">
     <number>10</number>
+   </property>
+  </widget>
+  <widget class="QDial" name="dial">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>180</y>
+     <width>50</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="singleStep">
+    <number>50</number>
    </property>
   </widget>
  </widget>

@@ -14,21 +14,22 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_bottleDialog(object):
     def setupUi(self, bottleDialog):
         bottleDialog.setObjectName("bottleDialog")
-        bottleDialog.resize(350, 200)
+        bottleDialog.resize(350, 250)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(bottleDialog.sizePolicy().hasHeightForWidth())
         bottleDialog.setSizePolicy(sizePolicy)
-        bottleDialog.setMinimumSize(QtCore.QSize(350, 200))
-        bottleDialog.setMaximumSize(QtCore.QSize(350, 200))
+        bottleDialog.setMinimumSize(QtCore.QSize(350, 250))
+        bottleDialog.setMaximumSize(QtCore.QSize(350, 250))
         bottleDialog.setStyleSheet("background-color: #FFFFFF;\n"
 "font-family: \"CoconPro\";\n"
 "color: black;\n"
-"font-size: 12pt;\n"
+"font-size: 16pt;\n"
+"border: 2px black;\n"
 "")
         self.buttonBox = QtWidgets.QDialogButtonBox(bottleDialog)
-        self.buttonBox.setGeometry(QtCore.QRect(50, 140, 241, 51))
+        self.buttonBox.setGeometry(QtCore.QRect(50, 190, 241, 51))
         self.buttonBox.setStyleSheet("/* Style pour tous les boutons QDialogButton */\n"
 "QDialogButtonBox {\n"
 "    background-color: transparent; /* Fond transparent */\n"
@@ -64,7 +65,7 @@ class Ui_bottleDialog(object):
         self.buttonBox.setCenterButtons(True)
         self.buttonBox.setObjectName("buttonBox")
         self.bottleComboBox = QtWidgets.QComboBox(bottleDialog)
-        self.bottleComboBox.setGeometry(QtCore.QRect(150, 60, 150, 30))
+        self.bottleComboBox.setGeometry(QtCore.QRect(150, 70, 150, 30))
         self.bottleComboBox.setStyleSheet("QComboBox {\n"
 "    background-color: #F9F8F8; /* Fond gris clair */\n"
 "    color: #000000; /* Texte noir */\n"
@@ -78,7 +79,7 @@ class Ui_bottleDialog(object):
 "QComboBox::drop-down {\n"
 "    background-color: #F79643; /* Couleur de fond de la flèche déroulante (même que le fond) */\n"
 "    border: 0px solid #707070; /* Bordure de la flèche déroulante en noir */\n"
-"    width: 20px; /* Largeur de la flèche déroulante de 20px */\n"
+"    width: 30px; /* Largeur de la flèche déroulante de 20px */\n"
 "    margin-right: 0px; /* Marge à droite de la flèche déroulante */\n"
 "}\n"
 "\n"
@@ -96,13 +97,13 @@ class Ui_bottleDialog(object):
         self.title.setAlignment(QtCore.Qt.AlignCenter)
         self.title.setObjectName("title")
         self.label = QtWidgets.QLabel(bottleDialog)
-        self.label.setGeometry(QtCore.QRect(40, 70, 58, 16))
+        self.label.setGeometry(QtCore.QRect(30, 80, 101, 20))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(bottleDialog)
-        self.label_2.setGeometry(QtCore.QRect(40, 110, 58, 16))
+        self.label_2.setGeometry(QtCore.QRect(30, 140, 101, 16))
         self.label_2.setObjectName("label_2")
         self.quantitySpinBox = QtWidgets.QSpinBox(bottleDialog)
-        self.quantitySpinBox.setGeometry(QtCore.QRect(150, 100, 150, 30))
+        self.quantitySpinBox.setGeometry(QtCore.QRect(150, 120, 150, 51))
         self.quantitySpinBox.setStyleSheet("QSpinBox {\n"
 "    background-color: #F9F8F8; /* Fond gris clair */\n"
 "    color: #000000; /* Texte noir */\n"
@@ -115,7 +116,7 @@ class Ui_bottleDialog(object):
 "\n"
 "QSpinBox::up-button, QSpinBox::down-button {\n"
 "    background-color: #F79643; /* Couleur de fond des boutons d\'incrémentation/décrémentation */\n"
-"    width: 20px; /* Largeur des boutons */\n"
+"    width: 30px; /* Largeur des boutons */\n"
 "    border: 0px solid #707070; /* Bordure des boutons en noir */\n"
 "    margin: 0px; /* Marge des boutons */\n"
 "}\n"
@@ -145,6 +146,11 @@ class Ui_bottleDialog(object):
         self.quantitySpinBox.setProperty("value", 750)
         self.quantitySpinBox.setDisplayIntegerBase(10)
         self.quantitySpinBox.setObjectName("quantitySpinBox")
+        self.dial = QtWidgets.QDial(bottleDialog)
+        self.dial.setGeometry(QtCore.QRect(280, 180, 50, 64))
+        self.dial.setMaximum(1000)
+        self.dial.setSingleStep(50)
+        self.dial.setObjectName("dial")
 
         self.retranslateUi(bottleDialog)
         self.buttonBox.accepted.connect(bottleDialog.accept) # type: ignore
