@@ -615,7 +615,7 @@ font-size: 16px;</string>
          <number>0</number>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QFrame" name="extraMenu">
          <property name="styleSheet">
@@ -726,7 +726,7 @@ QToolButton {
 </string>
              </property>
              <property name="text">
-              <string>Test</string>
+              <string>Soft</string>
              </property>
              <property name="icon">
               <iconset>
@@ -2478,7 +2478,7 @@ QPushButton:pressed {
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="glassBottles">
         <property name="font">
@@ -4528,8 +4528,8 @@ color: black;</string>
         <widget class="QSlider" name="brightnessSlider">
          <property name="geometry">
           <rect>
-           <x>160</x>
-           <y>110</y>
+           <x>50</x>
+           <y>90</y>
            <width>121</width>
            <height>31</height>
           </rect>
@@ -4547,8 +4547,8 @@ color: black;</string>
         <widget class="QLabel" name="label_21">
          <property name="geometry">
           <rect>
-           <x>160</x>
-           <y>50</y>
+           <x>40</x>
+           <y>40</y>
            <width>121</width>
            <height>41</height>
           </rect>
@@ -4567,8 +4567,8 @@ font-size: 16px;</string>
         <widget class="QPushButton" name="powerButton">
          <property name="geometry">
           <rect>
-           <x>200</x>
-           <y>200</y>
+           <x>70</x>
+           <y>230</y>
            <width>50</width>
            <height>50</height>
           </rect>
@@ -4583,6 +4583,33 @@ border-radius: 25px;</string>
          <property name="icon">
           <iconset>
            <normaloff>ressources/generic/power.png</normaloff>ressources/generic/power.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="mouseButton">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>230</y>
+           <width>50</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: white;
+border-radius: 25px;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>ressources/generic/mouse-cursor.png</normaloff>ressources/generic/mouse-cursor.png</iconset>
          </property>
          <property name="iconSize">
           <size>

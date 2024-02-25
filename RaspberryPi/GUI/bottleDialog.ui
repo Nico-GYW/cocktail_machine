@@ -35,9 +35,7 @@
    <string notr="true">background-color: #FFFFFF;
 font-family: &quot;CoconPro&quot;;
 color: black;
-font-size: 16pt;
-border: 2px black;
-</string>
+font-size: 16pt;</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -149,9 +147,9 @@ QComboBox::down-arrow {
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>80</y>
+     <y>69</y>
      <width>101</width>
-     <height>20</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -162,9 +160,9 @@ QComboBox::down-arrow {
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>140</y>
+     <y>125</y>
      <width>101</width>
-     <height>16</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">

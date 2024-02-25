@@ -25,9 +25,7 @@ class Ui_bottleDialog(object):
         bottleDialog.setStyleSheet("background-color: #FFFFFF;\n"
 "font-family: \"CoconPro\";\n"
 "color: black;\n"
-"font-size: 16pt;\n"
-"border: 2px black;\n"
-"")
+"font-size: 16pt;")
         self.buttonBox = QtWidgets.QDialogButtonBox(bottleDialog)
         self.buttonBox.setGeometry(QtCore.QRect(50, 190, 241, 51))
         self.buttonBox.setStyleSheet("/* Style pour tous les boutons QDialogButton */\n"
@@ -97,10 +95,10 @@ class Ui_bottleDialog(object):
         self.title.setAlignment(QtCore.Qt.AlignCenter)
         self.title.setObjectName("title")
         self.label = QtWidgets.QLabel(bottleDialog)
-        self.label.setGeometry(QtCore.QRect(30, 80, 101, 20))
+        self.label.setGeometry(QtCore.QRect(30, 69, 101, 31))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(bottleDialog)
-        self.label_2.setGeometry(QtCore.QRect(30, 140, 101, 16))
+        self.label_2.setGeometry(QtCore.QRect(30, 125, 101, 41))
         self.label_2.setObjectName("label_2")
         self.quantitySpinBox = QtWidgets.QSpinBox(bottleDialog)
         self.quantitySpinBox.setGeometry(QtCore.QRect(150, 120, 150, 51))
