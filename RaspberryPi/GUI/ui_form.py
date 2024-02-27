@@ -2651,15 +2651,178 @@ class Ui_MainWindow(object):
         self.logo_3.setObjectName("logo_3")
         self.stackedWidget.addWidget(self.barmanPage)
         self.processingPage = QtWidgets.QWidget()
-        self.processingPage.setMinimumSize(QtCore.QSize(800, 0))
+        self.processingPage.setStyleSheet("background-color : #F0F0F0;\n"
+"")
         self.processingPage.setObjectName("processingPage")
+        self.proccessingStackedWidget = QtWidgets.QStackedWidget(self.processingPage)
+        self.proccessingStackedWidget.setGeometry(QtCore.QRect(0, 0, 800, 480))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.proccessingStackedWidget.sizePolicy().hasHeightForWidth())
+        self.proccessingStackedWidget.setSizePolicy(sizePolicy)
+        self.proccessingStackedWidget.setMinimumSize(QtCore.QSize(800, 480))
+        self.proccessingStackedWidget.setMaximumSize(QtCore.QSize(800, 480))
+        self.proccessingStackedWidget.setStyleSheet("background-color : #F0F0F0;\n"
+"")
+        self.proccessingStackedWidget.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.proccessingStackedWidget.setObjectName("proccessingStackedWidget")
+        self.processPage = ProcessPage()
+        self.processPage.setMinimumSize(QtCore.QSize(800, 0))
+        font = QtGui.QFont()
+        font.setFamily("CoconPro")
+        font.setPointSize(-1)
+        self.processPage.setFont(font)
+        self.processPage.setStyleSheet("background-color : #F0F0F0;\n"
+"")
+        self.processPage.setObjectName("processPage")
+        self.logo2_2 = QtWidgets.QLabel(self.processPage)
+        self.logo2_2.setGeometry(QtCore.QRect(260, 80, 261, 61))
+        self.logo2_2.setText("")
+        self.logo2_2.setPixmap(QtGui.QPixmap("ressources/generic/pompette_noir.png"))
+        self.logo2_2.setScaledContents(True)
+        self.logo2_2.setObjectName("logo2_2")
+        self.titleBarMan_2 = QtWidgets.QLabel(self.processPage)
+        self.titleBarMan_2.setGeometry(QtCore.QRect(150, 170, 481, 41))
+        font = QtGui.QFont()
+        font.setFamily("CoconPro")
+        font.setPointSize(-1)
+        self.titleBarMan_2.setFont(font)
+        self.titleBarMan_2.setStyleSheet("font-size: 30px;\n"
+"color: black;")
+        self.titleBarMan_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.titleBarMan_2.setObjectName("titleBarMan_2")
+        self.cocktailProgressBar = QtWidgets.QProgressBar(self.processPage)
+        self.cocktailProgressBar.setGeometry(QtCore.QRect(120, 220, 531, 21))
+        self.cocktailProgressBar.setStyleSheet("QProgressBar {\n"
+"    border: 2px solid grey;\n"
+"    border-radius: 10px;\n"
+"    background-color: white;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: orange;\n"
+"    border-radius: 8px; /* Assure que les chunks respectent l\'arrondi */\n"
+"    margin: 0px; /* Important pour que les chunks ne dépassent pas */\n"
+"}")
+        self.cocktailProgressBar.setProperty("value", 80)
+        self.cocktailProgressBar.setTextVisible(False)
+        self.cocktailProgressBar.setObjectName("cocktailProgressBar")
+        self.logo2_4 = QtWidgets.QLabel(self.processPage)
+        self.logo2_4.setGeometry(QtCore.QRect(50, 390, 51, 61))
+        self.logo2_4.setText("")
+        self.logo2_4.setPixmap(QtGui.QPixmap("ressources/generic/drop_glass.png"))
+        self.logo2_4.setScaledContents(True)
+        self.logo2_4.setObjectName("logo2_4")
+        self.logo2_5 = QtWidgets.QLabel(self.processPage)
+        self.logo2_5.setGeometry(QtCore.QRect(370, 390, 51, 61))
+        self.logo2_5.setText("")
+        self.logo2_5.setPixmap(QtGui.QPixmap("ressources/generic/mid_glass.png"))
+        self.logo2_5.setScaledContents(True)
+        self.logo2_5.setObjectName("logo2_5")
+        self.logo2_6 = QtWidgets.QLabel(self.processPage)
+        self.logo2_6.setGeometry(QtCore.QRect(700, 390, 51, 61))
+        self.logo2_6.setText("")
+        self.logo2_6.setPixmap(QtGui.QPixmap("ressources/generic/full_glass.png"))
+        self.logo2_6.setScaledContents(True)
+        self.logo2_6.setObjectName("logo2_6")
+        self.horizontalSlider = QtWidgets.QSlider(self.processPage)
+        self.horizontalSlider.setGeometry(QtCore.QRect(60, 460, 671, 25))
+        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider.setObjectName("horizontalSlider")
+        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.processPage)
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(180, 260, 421, 121))
+        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
+        self.CocktailStepVerticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
+        self.CocktailStepVerticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.CocktailStepVerticalLayout.setObjectName("CocktailStepVerticalLayout")
+        self.cocktailStep = QtWidgets.QWidget(self.verticalLayoutWidget_2)
+        self.cocktailStep.setObjectName("cocktailStep")
+        self.stepdetail = QtWidgets.QLabel(self.cocktailStep)
+        self.stepdetail.setGeometry(QtCore.QRect(90, 80, 181, 20))
+        font = QtGui.QFont()
+        font.setFamily("CoconPro")
+        font.setPointSize(-1)
+        self.stepdetail.setFont(font)
+        self.stepdetail.setStyleSheet("font-size: 20px;\n"
+"color: black;")
+        self.stepdetail.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.stepdetail.setObjectName("stepdetail")
+        self.stepTitle = QtWidgets.QLabel(self.cocktailStep)
+        self.stepTitle.setGeometry(QtCore.QRect(40, 10, 361, 41))
+        font = QtGui.QFont()
+        font.setFamily("CoconPro")
+        font.setPointSize(-1)
+        self.stepTitle.setFont(font)
+        self.stepTitle.setStyleSheet("font-size: 30px;\n"
+"color: black;")
+        self.stepTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.stepTitle.setObjectName("stepTitle")
+        self.stepButton = QtWidgets.QPushButton(self.cocktailStep)
+        self.stepButton.setGeometry(QtCore.QRect(290, 70, 61, 31))
+        self.stepButton.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    font-size: 16px;\n"
+"    background-color: #F79643;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu\'appuyé */\n"
+"}\n"
+"")
+        self.stepButton.setObjectName("stepButton")
+        self.CocktailStepVerticalLayout.addWidget(self.cocktailStep)
+        self.proccessingStackedWidget.addWidget(self.processPage)
+        self.endingPage = QtWidgets.QWidget()
+        self.endingPage.setStyleSheet("background-color : #F0F0F0;\n"
+"")
+        self.endingPage.setObjectName("endingPage")
+        self.logo2_3 = QtWidgets.QLabel(self.endingPage)
+        self.logo2_3.setGeometry(QtCore.QRect(260, 70, 261, 61))
+        self.logo2_3.setText("")
+        self.logo2_3.setPixmap(QtGui.QPixmap("ressources/generic/pompette_noir.png"))
+        self.logo2_3.setScaledContents(True)
+        self.logo2_3.setObjectName("logo2_3")
+        self.endCocktaiImage = QtWidgets.QLabel(self.endingPage)
+        self.endCocktaiImage.setGeometry(QtCore.QRect(310, 230, 131, 141))
+        self.endCocktaiImage.setText("")
+        self.endCocktaiImage.setPixmap(QtGui.QPixmap("ressources/cocktail/gin_tonic.png"))
+        self.endCocktaiImage.setScaledContents(True)
+        self.endCocktaiImage.setObjectName("endCocktaiImage")
+        self.endTitle = QtWidgets.QLabel(self.endingPage)
+        self.endTitle.setGeometry(QtCore.QRect(140, 170, 481, 41))
+        font = QtGui.QFont()
+        font.setFamily("CoconPro")
+        font.setPointSize(-1)
+        self.endTitle.setFont(font)
+        self.endTitle.setStyleSheet("font-size: 30px;\n"
+"color: black;")
+        self.endTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.endTitle.setObjectName("endTitle")
+        self.endButton = QtWidgets.QPushButton(self.endingPage)
+        self.endButton.setGeometry(QtCore.QRect(320, 420, 121, 31))
+        self.endButton.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    font-size: 16px;\n"
+"    background-color: #F79643;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu\'appuyé */\n"
+"}\n"
+"")
+        self.endButton.setObjectName("endButton")
+        self.proccessingStackedWidget.addWidget(self.endingPage)
         self.stackedWidget.addWidget(self.processingPage)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(4)
         self.extraStack.setCurrentIndex(0)
-        self.parameterStack.setCurrentIndex(3)
+        self.parameterStack.setCurrentIndex(2)
+        self.proccessingStackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -2772,8 +2935,15 @@ class Ui_MainWindow(object):
         self.label_50.setText(_translate("MainWindow", "100 ml"))
         self.label_54.setText(_translate("MainWindow", "Schweppes"))
         self.label_55.setText(_translate("MainWindow", "100 ml"))
+        self.titleBarMan_2.setText(_translate("MainWindow", "Préparation du Mojito"))
+        self.stepdetail.setText(_translate("MainWindow", "Rhum blanc - 20 ml"))
+        self.stepTitle.setText(_translate("MainWindow", "Étape 1 : bouteilles"))
+        self.stepButton.setText(_translate("MainWindow", "Fait !"))
+        self.endTitle.setText(_translate("MainWindow", "Mojito prêt !"))
+        self.endButton.setText(_translate("MainWindow", "Au suivant !"))
 from barmanPageWidgets import BarmanPage
 from extraPageWidgets import extraPage
 from landingPageWidgets import LandingPage
 from mainPageWidgets import CocktailCard, MainPage
 from parameterPageWidgets import BottleParameter, DispenserControl, ParameterPage
+from processPageWidgets import ProcessPage

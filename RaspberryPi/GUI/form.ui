@@ -615,7 +615,7 @@ font-size: 16px;</string>
          <number>0</number>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QFrame" name="extraMenu">
          <property name="styleSheet">
@@ -2478,7 +2478,7 @@ QPushButton:pressed {
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="glassBottles">
         <property name="font">
@@ -6134,7 +6134,11 @@ background-color: transparent;</string>
       </property>
      </widget>
     </widget>
-    <widget class="ProcessingPage" name="processingPage">
+    <widget class="QWidget" name="processingPage">
+     <property name="styleSheet">
+      <string notr="true">background-color : #F0F0F0;
+</string>
+     </property>
      <widget class="QStackedWidget" name="proccessingStackedWidget">
       <property name="geometry">
        <rect>
@@ -6161,6 +6165,10 @@ background-color: transparent;</string>
         <width>800</width>
         <height>480</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color : #F0F0F0;
+</string>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Plain</enum>
@@ -6230,7 +6238,7 @@ color: black;</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QProgressBar" name="progressBar">
+       <widget class="QProgressBar" name="cocktailProgressBar">
         <property name="geometry">
          <rect>
           <x>120</x>
@@ -6277,94 +6285,6 @@ QProgressBar::chunk {
         <property name="scaledContents">
          <bool>true</bool>
         </property>
-       </widget>
-       <widget class="QWidget" name="widget" native="true">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>250</y>
-          <width>431</width>
-          <height>131</height>
-         </rect>
-        </property>
-        <widget class="QLabel" name="titleBarMan_3">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>70</y>
-           <width>181</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>CoconPro</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font-size: 20px;
-color: black;</string>
-         </property>
-         <property name="text">
-          <string>Rhum blanc - 20 ml</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="titleBarMan_4">
-         <property name="geometry">
-          <rect>
-           <x>-20</x>
-           <y>10</y>
-           <width>481</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>CoconPro</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font-size: 30px;
-color: black;</string>
-         </property>
-         <property name="text">
-          <string>Étape 1 : bouteilles</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="extraSoftBottleButton_2">
-         <property name="geometry">
-          <rect>
-           <x>290</x>
-           <y>65</y>
-           <width>61</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    color: white;
-    font-size: 16px;
-    background-color: #F79643;
-    border-radius: 5px;
-}
-
-QPushButton:pressed {
-    background-color: #f0f0f0; /* Gris clair lorsqu'appuyé */
-}
-</string>
-         </property>
-         <property name="text">
-          <string>Fait !</string>
-         </property>
-        </widget>
        </widget>
        <widget class="QLabel" name="logo2_5">
         <property name="geometry">
@@ -6417,6 +6337,100 @@ QPushButton:pressed {
          <enum>Qt::Horizontal</enum>
         </property>
        </widget>
+       <widget class="QWidget" name="verticalLayoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>260</y>
+          <width>421</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="CocktailStepVerticalLayout">
+         <item>
+          <widget class="QWidget" name="cocktailStep" native="true">
+           <widget class="QLabel" name="stepdetail">
+            <property name="geometry">
+             <rect>
+              <x>90</x>
+              <y>80</y>
+              <width>181</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>CoconPro</family>
+              <pointsize>-1</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-size: 20px;
+color: black;</string>
+            </property>
+            <property name="text">
+             <string>Rhum blanc - 20 ml</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+           <widget class="QLabel" name="stepTitle">
+            <property name="geometry">
+             <rect>
+              <x>40</x>
+              <y>10</y>
+              <width>361</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>CoconPro</family>
+              <pointsize>-1</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-size: 30px;
+color: black;</string>
+            </property>
+            <property name="text">
+             <string>Étape 1 : bouteilles</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="stepButton">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>70</y>
+              <width>61</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    color: white;
+    font-size: 16px;
+    background-color: #F79643;
+    border-radius: 5px;
+}
+
+QPushButton:pressed {
+    background-color: #f0f0f0; /* Gris clair lorsqu'appuyé */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Fait !</string>
+            </property>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
       <widget class="QWidget" name="endingPage">
        <property name="styleSheet">
@@ -6442,7 +6456,7 @@ QPushButton:pressed {
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="logo2_7">
+       <widget class="QLabel" name="endCocktaiImage">
         <property name="geometry">
          <rect>
           <x>310</x>
@@ -6461,7 +6475,7 @@ QPushButton:pressed {
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="titleBarMan_5">
+       <widget class="QLabel" name="endTitle">
         <property name="geometry">
          <rect>
           <x>140</x>
@@ -6487,7 +6501,7 @@ color: black;</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QPushButton" name="extraSoftBottleButton_3">
+       <widget class="QPushButton" name="endButton">
         <property name="geometry">
          <rect>
           <x>320</x>
@@ -6567,11 +6581,6 @@ QPushButton:pressed {
    <extends>QFrame</extends>
    <header location="global">extraPageWidgets</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ProcessingPage</class>
-   <extends>QWidget</extends>
-   <header>processingpage.h</header>
   </customwidget>
   <customwidget>
    <class>ProcessPage</class>

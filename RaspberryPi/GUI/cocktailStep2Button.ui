@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>cocktailStep2Button</class>
+ <widget class="QFrame" name="cocktailStep2Button">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>120</height>
+   </rect>
+  </property>
+  <widget class="QLabel" name="stepTitle">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>CoconPro</family>
+     <pointsize>-1</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 30px;
+color: black;</string>
+   </property>
+   <property name="text">
+    <string>Étape 1 : Citron</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="subtitle">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>40</y>
+     <width>400</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>CoconPro</family>
+     <pointsize>-1</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 20px;
+color: black;</string>
+   </property>
+   <property name="text">
+    <string>Y-a-t-il des citron dans le bol ?</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_1">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>80</y>
+     <width>60</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    color: white;
+    font-size: 16px;
+    background-color: #F79643;
+    border-radius: 5px;
+}
+
+QPushButton:pressed {
+    background-color: #f0f0f0; /* Gris clair lorsqu'appuyé */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Oui</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_2">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>80</y>
+     <width>60</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    color: white;
+    font-size: 16px;
+    background-color: #F79643;
+    border-radius: 5px;
+}
+
+QPushButton:pressed {
+    background-color: #f0f0f0; /* Gris clair lorsqu'appuyé */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Non</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

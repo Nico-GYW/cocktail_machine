@@ -4,7 +4,7 @@
         {
             "label": "Compile All UI Files",
             "type": "shell",
-            "command": "pyuic5 form.ui -o ui_form.py && pyuic5 cocktailCard.ui -o ui_cocktailCard.py && pyuic5 bottleParameter.ui -o ui_bottleParameter.py && pyuic5 bottleDialog.ui -o ui_bottleDialog.py && pyuic5 dispenserControl.ui -o ui_dispenserControl.py && pyuic5 ingredientCard.ui -o ui_ingredientCard.py && pyuic5 ingredientCardDialog.ui -o ui_ingredientCardDialog.py && pyuic5 extraBottle.ui -o ui_extraBottle.py",
+            "command": "pyuic5 form.ui -o ui_form.py && pyuic5 cocktailCard.ui -o ui_cocktailCard.py && pyuic5 bottleParameter.ui -o ui_bottleParameter.py && pyuic5 bottleDialog.ui -o ui_bottleDialog.py && pyuic5 dispenserControl.ui -o ui_dispenserControl.py && pyuic5 ingredientCard.ui -o ui_ingredientCard.py && pyuic5 ingredientCardDialog.ui -o ui_ingredientCardDialog.py && pyuic5 extraBottle.ui -o ui_extraBottle.py && pyuic5 cocktailStep2Button.ui -o ui_cocktailStep2Button.py && pyuic5 cocktailStep1Button.ui -o ui_cocktailStep1Button.py && pyuic5 cocktailStep.ui -o ui_cocktailStep.py",
             "group": {
                 "kind": "build",
                 "isDefault": true

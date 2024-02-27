@@ -26,9 +26,11 @@ class MainPage(QWidget):
         self.ui.leftButtonMainPage.clicked.connect(self.decrementerPage)
         self.ui.modifyButton.clicked.connect(self.changeBarmanPage)
         self.ui.extraButton.clicked.connect(self.changeExtraPage)
+        self.ui.makeButton.clicked.connect(self.changeProcessPage)
 
         self.populate_cocktail_carousel()
         self.mettreAJourTextePage()
+
 
     def populate_cocktail_carousel(self):
         cocktail_recipes = machine.get_recipes()
@@ -100,6 +102,11 @@ class MainPage(QWidget):
         self.current_recipe = deepcopy(self.current_recipe)
         self.ui.extraPage.set_current_recipe(self.current_recipe)
         self.ui.extraPage.reset_all_extras()
+
+    def changeProcessPage(self):
+        self.ui.proccessingStackedWidget.setCurrentIndex(0)
+        self.ui.processPage.setRecipe(self.current_recipe)
+        self.changePage(4)
 
     def mettreAJourTextePage(self):
         index_courant = self.ui.cocktailCarousel.currentIndex() + 1  # +1 car l'index commence à 0

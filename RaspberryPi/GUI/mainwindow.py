@@ -24,9 +24,9 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         # Charger la police
-        fontId = QFontDatabase.addApplicationFont("./ressources/font/CoconPro-Regular Regular.ttf")
-        fontFamilies = QFontDatabase.applicationFontFamilies(fontId)
-        QApplication.setFont(QFont(fontFamilies[0]))
+        #fontId = QFontDatabase.addApplicationFont("./ressources/font/CoconPro-Regular Regular.ttf")
+        #fontFamilies = QFontDatabase.applicationFontFamilies(fontId)
+        #QApplication.setFont(QFont(fontFamilies[0]))
         
         self.ui.stackedWidget.setCurrentIndex(0)
 
@@ -34,6 +34,7 @@ class MainWindow(QMainWindow):
         self.ui.extraPage.setup(self.ui)
         self.ui.parameterPage.setup(self.ui)
         self.ui.barmanPage.setup(self.ui)
+        self.ui.processPage.setup(self.ui)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

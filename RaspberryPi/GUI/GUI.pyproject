@@ -12,6 +12,9 @@
         "pompetteUtils.py",
         "ingredientCard.ui",
         "ingredientCardDialog.ui",
-        "extraBottle.ui"
+        "extraBottle.ui",
+        "cocktailStep2Button.ui",
+        "cocktailStep1Button.ui",
+        "cocktailStep.ui"
     ]
 }
