@@ -14,6 +14,7 @@ from ui_dispenserControl import Ui_dispenserControl
 from pompetteUtils import  clear_grid_layout
 from mainPageWidgets import machine
 from commandMega import *
+from commandUno import *
 
 class ParameterPage(QWidget):
     def __init__(self, parent=None):
@@ -168,9 +169,11 @@ class ParameterPage(QWidget):
         clear_grid_layout(self.ui.dispenserGridLayout)
 
         num_columns = 4
-        for i in range(8):  # Pour 8 bouteilles
-            bottle_name = f"Bouteille {i+1}"
-            dispenser_param = DispenserControl(self, bottle_name)
+        dispenserController = DispenserController()
+        for i in range(8):  # Pour 8 distributeurs
+            title = f"Bouteille {i+1}"
+            # Créer une instance de BottleControl avec les paramètres corrects
+            dispenser_param = BottleControl(dispenserController, i, "D", title, self)
             row, col = divmod(i, num_columns)
             self.ui.dispenserGridLayout.addWidget(dispenser_param, row, col)
 
@@ -178,11 +181,13 @@ class ParameterPage(QWidget):
         clear_grid_layout(self.ui.softGridLayout)
 
         num_columns = 4
+        valveController = DCValveController()
         for i in range(4):  # Pour 8 bouteilles
             bottle_name = f"Bouteille {i+1}"
-            soft_param = SoftControl(self, bottle_name)
+            soft_param = BottleControl(valveController, i, "S", bottle_name, self)
             row, col = divmod(i, num_columns)
             self.ui.softGridLayout.addWidget(soft_param, row, col)
+
 
     def set_other_control_page(self):
         # Créer une instance de StepperControl et la stocker dans la liste
@@ -201,7 +206,6 @@ class ParameterPage(QWidget):
         self.ui.xStepperButton.clicked.connect(xStepperControl.goHome)
         self.ui.yStepperButton.clicked.connect(yStepperControl.goHome)
         # self.ui.cylinderButton.clicked.connect(cylinderControl.goHome)
-
 
 
 class BottleParameter(QFrame):
@@ -268,16 +272,36 @@ class BottleDialog(QDialog):
             self.parent().ui.quantity.setText(f"{new_quantity}ml")
             self.accept()  # Fermer la boîte de dialogue après la mise à jour
 
-class DispenserControl(QFrame):
-    def __init__(self, parent=None, title=""):
-        super(DispenserControl, self).__init__(parent)
-        self.ui = Ui_dispenserControl()
+class BottleControl(QFrame):
+    def __init__(self, controller, actuator_id, control_type="D", title="", parent=None):
+        super(BottleControl, self).__init__(parent)
+        self.controller = controller
+        self.actuator_id = actuator_id
+        self.control_type = control_type  # "D" pour Dispenser, "S" pour Soft (valve)
+        
+        self.ui = Ui_dispenserControl()  # Assurez-vous que cette UI correspond à vos besoins
         self.ui.setupUi(self)
         self.ui.titleLabel.setText(title)
-
-class SoftControl(DispenserControl):
-    def __init__(self, parent=None, title=""):
-        super(SoftControl, self).__init__(parent, title)
+        
+        # Connecter les signaux du bouton
+        self.ui.pushButton.pressed.connect(self.onButtonPressed)
+        self.ui.pushButton.released.connect(self.onButtonReleased)
+    
+    def onButtonPressed(self):
+        if self.control_type == "D":
+            # Comportement pour les distributeurs
+            self.controller.activate_dispenser(self.actuator_id, release_time=0)
+        elif self.control_type == "S":
+            # Comportement pour les valves
+            self.controller.open_valve(self.actuator_id, release_time=0)
+    
+    def onButtonReleased(self):
+        if self.control_type == "D":
+            # Comportement pour arrêter les distributeurs
+            self.controller.stop_dispenser(self.actuator_id)
+        elif self.control_type == "S":
+            # Comportement pour fermer les valves
+            self.controller.close_valve(self.actuator_id)
 
 class SliderLinearControl():
     def __init__(self, stepperSlider, controller, control_type="X"):
@@ -286,7 +310,7 @@ class SliderLinearControl():
         self.controller = controller
         self.isSliderPressed = False
         self.currentCommand = None  # None, 'home', ou 'moveTo'
-        self.lastPosition = None  # Dernière position envoyée pour moveTo
+        self.lastPosition = None  # Réinitialisé à None après stop
         
         # Connecter les signaux du slider
         self.stepperSlider.sliderPressed.connect(self.onSliderPressed)
@@ -306,12 +330,10 @@ class SliderLinearControl():
 
     def sendCommand(self):
         position = self.stepperSlider.value()
-        # Inversez la logique ici : moveToPosition si négatif, goHome si positif
-        if position > 0 and self.currentCommand != 'moveTo':
+        if position < 0 and (self.currentCommand != 'moveTo' or self.lastPosition != position):
             targetPosition = 3000 if self.control_type == "X" else 4000
-            if self.lastPosition != targetPosition:
-                self.moveToPosition(targetPosition)
-        elif position < 0 and self.currentCommand != 'home':
+            self.moveToPosition(targetPosition)
+        elif position > 0 and self.currentCommand != 'home':
             self.goHome()
 
     def stopMotor(self):
@@ -320,6 +342,7 @@ class SliderLinearControl():
         else:
             self.controller.stop('Y')
         self.currentCommand = None
+        self.lastPosition = None  # Réinitialiser lastPosition ici
         self.stepperSlider.setValue(0)  # Réinitialiser la valeur du slider à 0
 
     def goHome(self):
@@ -328,6 +351,7 @@ class SliderLinearControl():
         else:
             self.controller.home('Y')
         self.currentCommand = 'home'
+        self.lastPosition = None  # Considérez de réinitialiser également ici si nécessaire
 
     def moveToPosition(self, position):
         if self.control_type == "X":
@@ -335,7 +359,7 @@ class SliderLinearControl():
         else:
             self.controller.moveTo('Y', position)
         self.currentCommand = 'moveTo'
-        self.lastPosition = position
+        self.lastPosition = position  # Mise à jour de lastPosition
 
 
 class ledStripControl:
