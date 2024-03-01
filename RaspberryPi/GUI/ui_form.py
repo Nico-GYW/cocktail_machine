@@ -1418,7 +1418,7 @@ class Ui_MainWindow(object):
         self.verticalSlider_4.setOrientation(QtCore.Qt.Vertical)
         self.verticalSlider_4.setObjectName("verticalSlider_4")
         self.dispenserGridLayout.addWidget(self.frame_2, 0, 1, 1, 1)
-        self.frame_10 = DispenserControl(self.layoutWidget4)
+        self.frame_10 = QtWidgets.QFrame(self.layoutWidget4)
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
@@ -1511,6 +1511,7 @@ class Ui_MainWindow(object):
         self.xStepperSlider.setGeometry(QtCore.QRect(10, 60, 81, 51))
         self.xStepperSlider.setMinimum(-100)
         self.xStepperSlider.setMaximum(100)
+        self.xStepperSlider.setProperty("value", 0)
         self.xStepperSlider.setOrientation(QtCore.Qt.Horizontal)
         self.xStepperSlider.setObjectName("xStepperSlider")
         self.xStepperButton = QtWidgets.QPushButton(self.frame_25)
@@ -1635,9 +1636,14 @@ class Ui_MainWindow(object):
         self.label_18.setObjectName("label_18")
         self.yStepperSlider = QtWidgets.QSlider(self.frame_32)
         self.yStepperSlider.setGeometry(QtCore.QRect(30, 50, 40, 61))
+        self.yStepperSlider.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.yStepperSlider.setMinimum(-100)
         self.yStepperSlider.setMaximum(100)
+        self.yStepperSlider.setPageStep(0)
+        self.yStepperSlider.setProperty("value", 0)
         self.yStepperSlider.setOrientation(QtCore.Qt.Vertical)
+        self.yStepperSlider.setInvertedAppearance(True)
+        self.yStepperSlider.setInvertedControls(False)
         self.yStepperSlider.setObjectName("yStepperSlider")
         self.yStepperButton = QtWidgets.QPushButton(self.frame_32)
         self.yStepperButton.setGeometry(QtCore.QRect(6, 120, 90, 31))
@@ -2900,5 +2906,5 @@ from barmanPageWidgets import BarmanPage
 from extraPageWidgets import extraPage
 from landingPageWidgets import LandingPage
 from mainPageWidgets import CocktailCard, MainPage
-from parameterPageWidgets import BottleParameter, DispenserControl, ParameterPage
+from parameterPageWidgets import BottleParameter, ParameterPage
 from processPageWidgets import ProcessPage

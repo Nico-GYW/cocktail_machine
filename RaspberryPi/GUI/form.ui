@@ -3220,7 +3220,7 @@ background-color: #A0ACB0;</string>
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="DispenserControl" name="frame_10">
+             <widget class="QFrame" name="frame_10">
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -3457,6 +3457,9 @@ background-color: #A0ACB0;</string>
                </property>
                <property name="maximum">
                 <number>100</number>
+               </property>
+               <property name="value">
+                <number>0</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -3762,14 +3765,29 @@ background-color: #A0ACB0;</string>
                  <height>61</height>
                 </rect>
                </property>
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
                <property name="minimum">
                 <number>-100</number>
                </property>
                <property name="maximum">
                 <number>100</number>
                </property>
+               <property name="pageStep">
+                <number>0</number>
+               </property>
+               <property name="value">
+                <number>0</number>
+               </property>
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
+               </property>
+               <property name="invertedAppearance">
+                <bool>true</bool>
+               </property>
+               <property name="invertedControls">
+                <bool>false</bool>
                </property>
               </widget>
               <widget class="QPushButton" name="yStepperButton">
@@ -6535,12 +6553,6 @@ QPushButton:pressed {
   </customwidget>
   <customwidget>
    <class>BottleParameter</class>
-   <extends>QFrame</extends>
-   <header location="global">parameterPageWidgets</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>DispenserControl</class>
    <extends>QFrame</extends>
    <header location="global">parameterPageWidgets</header>
    <container>1</container>
