@@ -76,78 +76,39 @@ class StepperMotorController(Controller):
     def __init__(self):
         super().__init__(cmd_arduino_mega)
 
-    def moveToX(self, position: int):
-        # Send the command to move StepperMotorX to a specific position
-        self.cmd.send("cmd_moveToX", position)
-        # Receive the acknowledgement message from Arduino
-        time.sleep(1)
+    def moveTo(self, motor: str, position: int):
+        # Envoie la commande pour déplacer le moteur spécifié à une position spécifique
+        self.cmd.send(f"cmd_moveTo{motor}", position)
+        # Recevoir le message d'accusé de réception de l'Arduino
         msg = self.cmd.receive()
         print(msg)
 
-    def homeX(self):
-        # Send the command to initiate homing sequence for StepperMotorX
-        self.cmd.send("cmd_homeX")
-        # Receive the acknowledgement message from Arduino
-        time.sleep(0.1)
+    def home(self, motor: str):
+        # Envoie la commande pour initier la séquence de retour à l'origine pour le moteur spécifié
+        self.cmd.send(f"cmd_home{motor}")
+        # Recevoir le message d'accusé de réception de l'Arduino
         msg = self.cmd.receive()
         print(msg)
 
-    def stopX(self):
-        # Send the command to stop StepperMotorX immediately
-        self.cmd.send("cmd_stopX")
-        # Receive the acknowledgement message from Arduino
+    def stop(self, motor: str):
+        # Envoie la commande pour arrêter immédiatement le moteur spécifié
+        self.cmd.send(f"cmd_stop{motor}")
+        # Recevoir le message d'accusé de réception de l'Arduino
         msg = self.cmd.receive()
         print(msg)
 
-    def getPositionX(self):
-        # Send the command to get the current position of StepperMotorX
-        self.cmd.send("cmd_getPositionX")
-        # Receive the position value from Arduino
+    def getPosition(self, motor: str):
+        # Envoie la commande pour obtenir la position actuelle du moteur spécifié
+        self.cmd.send(f"cmd_getPosition{motor}")
+        # Recevoir la valeur de position de l'Arduino
         msg = self.cmd.receive()
         position = msg[1][0]
         return position
 
-    def getStateX(self):
-        # Send the command to get the current state of StepperMotorX
-        self.cmd.send("cmd_getStateX")
-        # Receive the state value from Arduino
-        msg = self.cmd.receive()
-        state = msg[1][0]
-        return state
-
-    def moveToY(self, position):
-        # Send the command to move StepperMotorY to a specific position
-        self.cmd.send("cmd_moveToY", position)
-        # Receive the acknowledgement message from Arduino
-        msg = self.cmd.receive()
-        print(msg)
-
-    def homeY(self):
-        # Send the command to initiate homing sequence for StepperMotorY
-        self.cmd.send("cmd_homeY")
-        # Receive the acknowledgement message from Arduino
-        msg = self.cmd.receive()
-        print(msg)
-
-    def stopY(self):
-        # Send the command to stop StepperMotorY immediately
-        self.cmd.send("cmd_stopY")
-        # Receive the acknowledgement message from Arduino
-        msg = self.cmd.receive()
-        print(msg)
-
-    def getPositionY(self):
-        # Send the command to get the current position of StepperMotorY
-        self.cmd.send("cmd_getPositionY")
-        # Receive the position value from Arduino
-        msg = self.cmd.receive()
-        position = msg[1][0]
-        return position
-
-    def getStateY(self):
-        # Send the command to get the current state of StepperMotorY
-        self.cmd.send("cmd_getStateY")
-        # Receive the state value from Arduino
+    def getState(self, motor: str):
+        # Envoie la commande pour obtenir l'état actuel du moteur spécifié
+        self.cmd.send(f"cmd_getState{motor}")
+        # Recevoir la valeur d'état de l'Arduino
         msg = self.cmd.receive()
         state = msg[1][0]
         return state

@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QFrame, QLabel, QSpacerItem, QDialogButtonBox, QVBoxLayout, QWidget, QSizePolicy, QDialog, QLineEdit, QPushButton
 from PyQt5.QtGui import QPixmap, QColor
-from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtCore import Qt, QTimer, QSize
 
 import re
 
@@ -257,16 +257,18 @@ class IngredientSpacer(QWidget):
         
         # Configuration de la politique de taille pour le label
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
         
         # Ajout de l'icône au label
-        self.label.setPixmap(QPixmap("ressources/generic/plus.svg"))
-        self.label.setScaledContents(False)
-        self.label.setAlignment(Qt.AlignCenter)
-        
+        # Charger l'icône SVG, la redimensionner à 40x40 pixels, et l'ajouter au label
+        pixmap = QPixmap("ressources/generic/plus.svg")
+        pixmapHeight = 25  # Hauteur désirée
+        # Calculer la nouvelle largeur tout en conservant le rapport d'aspect
+        scaledPixmap = pixmap.scaledToHeight(pixmapHeight, Qt.SmoothTransformation)
+        self.label.setPixmap(scaledPixmap)
+        self.label.setScaledContents(False)  # Assurez-vous de ne pas étirer le contenu pour remplir tout le QLabel
+        self.label.setAlignment(Qt.AlignCenter) 
+
         # Ajout du label au layout
         self.verticalLayout.addWidget(self.label)
 
@@ -283,7 +285,7 @@ class IngredientCardDialog(QDialog):
         self.is_glass = parent.is_glass
         self.is_new_ingredient = parent.is_new_ingredient
 
-        self.ui.quantitySpinBox.lineEdit().setStyleSheet("QLineEdit:focus { color: black; }")
+        self.ui.quantitySpinBox.lineEdit().setStyleSheet("color: black;")
 
         # Remplir le QComboBox avec les noms de bouteilles
         bottle_list = machine.get_bottle_list(self.is_glass)  # Assume 'machine' est accessible depuis le parent
