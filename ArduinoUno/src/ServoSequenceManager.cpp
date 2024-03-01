@@ -81,14 +81,12 @@ LemonBowlSequenceManager::LemonBowlSequenceManager(ServoHandler& handler, uint8_
     openIdle = ServoAction(IDLE, lemonBowlParams.positionOpen, 0, 0);
     closedMove = ServoAction(MOVE, lemonBowlParams.positionClosed, lemonBowlParams.speed, 0);
     closedIdle = ServoAction(IDLE, lemonBowlParams.positionClosed, 0, 0);
-    idle = ServoAction();
 
     servo.ServoID = servoID;
     for (int j = 0; j < MAX_ACTIONS - 1; ++j) {
-        servo.actionList[j] = &idle;
+        servo.actionList[j] = &closedIdle;
     }
-    servoHandler.addServo(&servo)
-
+    servoHandler.addServo(&servo);
 }
 
 void LemonBowlSequenceManager::setLemonBowlParams(uint8_t positionOpen, uint16_t positionClosed, uint8_t speed) {
@@ -103,4 +101,20 @@ void LemonBowlSequenceManager::setLemonBowlParams(uint8_t positionOpen, uint16_t
     closedMove.targetPosition = positionClosed;
     closedMove.speed = speed;
     closedIdle.targetPosition = positionClosed;
+}
+
+void LemonBowlSequenceManager::openBowl() {
+    servo.actionList[0] = &openMove;
+    servo.actionList[1] = &openIdle;
+    servoHandler.initializeAction(servo, true);
+}
+
+void LemonBowlSequenceManager::closeBowl() {
+    servo.actionList[0] = &closedMove;
+    servo.actionList[1] = &closedIdle;
+    servoHandler.initializeAction(servo, true);
+}
+
+bool LemonBowlSequenceManager::isBowlOpen() {
+    return servo.currentPosition == lemonBowlParams.positionOpen;
 }

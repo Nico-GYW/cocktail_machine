@@ -48,6 +48,7 @@ class LemonBowlSequenceManager{
             uint8_t speed;
         };
 
+        ServoHandler& servoHandler;
         Servo servo;
         ServoAction openMove;
         ServoAction openIdle;
@@ -56,10 +57,10 @@ class LemonBowlSequenceManager{
         LemonBowlParams lemonBowlParams;
 
     public:
-        LemonBowManager(ServoHandler& handler, uint8_t servoID);
+        LemonBowlSequenceManager(ServoHandler& handler, uint8_t servoID);
 
         void setLemonBowlParams(uint8_t positionOpen, uint16_t positionClosed, uint8_t speed);
-
         void closeBowl();
         void openBowl();
+        bool isBowlOpen();
 };

@@ -26,9 +26,12 @@ commands_uno = [
     ["cmd_SERVO_dispenser_animation", "iiii"], 
     ["cmd_SERVO_handler_move", "ii"], 
     ["cmd_SERVO_handler_stop", ""],
-    ["cmd_VALVE_open", "ii"], # 
-    ["cmd_VALVE_close", "i"], # Get the current state of StepperMotorX
-    ["cmd_VALVE_stop", "i"], # Move StepperMotorY to a specific position
+    ["cmd_VALVE_open", "ii"],
+    ["cmd_VALVE_close", "i"],
+    ["cmd_VALVE_stop", "i"], 
+    ["cmd_EC_forward", "i"],
+    ["cmd_EC_backward", "i"],
+    ["cmd_EC_stop", ""],
     ["cmd_ack","s"] # Acknowledge a command,
 ]
 
@@ -114,5 +117,33 @@ class DCValveController(Controller):
         Ferme toutes les vannes.
         """
         self.cmd.send("cmd_VALVE_stop")
+        msg = self.cmd.receive()
+        print(msg)
+
+class ElectricCylinderController(Controller):
+    def __init__(self):
+        super().__init__(cmd_arduino_uno)
+
+    def move_forward(self, duration: int):
+        """
+        Commande le vérin électrique pour avancer pendant une durée spécifiée.
+        """
+        self.cmd.send("cmd_EC_forward", duration)
+        msg = self.cmd.receive()
+        print(msg)
+
+    def move_backward(self, duration: int):
+        """
+        Commande le vérin électrique pour reculer pendant une durée spécifiée.
+        """
+        self.cmd.send("cmd_EC_backward", duration)
+        msg = self.cmd.receive()
+        print(msg)
+
+    def stop(self):
+        """
+        Arrête le vérin électrique et le met en état d'arrêt (idle).
+        """
+        self.cmd.send("cmd_EC_stop")
         msg = self.cmd.receive()
         print(msg)

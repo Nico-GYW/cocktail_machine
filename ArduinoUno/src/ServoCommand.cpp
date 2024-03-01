@@ -12,7 +12,7 @@ ServoHandler servoHandler(pwmDriver);
 uint8_t servoOrder[NUMBER_OF_DISPENSER] = {0, 1, 14, 3, 11, 12, 4, 2, 15};
 // {0, 1, 2, 3, 4, 5, 6, 7, 8};
 DispenserSequenceManager dispenserManager(servoHandler, servoOrder);
-
+LemonBowlSequenceManager lemonBowlSequenceManager(servoHandler, 13);
 
 void beginServo(){
     servoHandler.begin();
@@ -64,6 +64,30 @@ void onDispenserAnimation() {
 
 // ------------- Lemon bucket command ------------------ //
 
+void onLemonBowlOpen() {
+    lemonBowlSequenceManager.openBowl();
+    cmdMessenger.sendCmd(cmd_ack, "Lemon Bowl Opened");
+}
+
+void onLemonBowlClose() {
+    lemonBowlSequenceManager.closeBowl();
+    cmdMessenger.sendCmd(cmd_ack, "Lemon Bowl Closed");
+}
+
+void onLemonBowlSetting() {
+    uint8_t positionOpen = cmdMessenger.readBinArg<int>();
+    uint16_t positionClosed = cmdMessenger.readBinArg<int>();
+    uint8_t speed = cmdMessenger.readBinArg<int>();
+
+    lemonBowlSequenceManager.setLemonBowlParams(positionOpen, positionClosed, speed);
+    cmdMessenger.sendCmd(cmd_ack, "Lemon Bowl Settings Updated");
+}
+
+void onLemonBowlIsOpen() {
+    bool isOpen = lemonBowlSequenceManager.isBowlOpen();
+    cmdMessenger.sendCmd(cmd_ack, isOpen ? "Open" : "Closed");
+}
+
 // ------------- Lemon ramp command ------------------ //
 
 // ------------- Servo Handler ramp command ------------------ //
@@ -86,10 +110,20 @@ void onServoHandlerStop(){
 
 // Attacher les commandes du servo-moteur du distributeur au CmdMessenger
 void attachServoCommands() {
+
+    // Commandes pour le Dispenser
     cmdMessenger.attach(cmd_SERVO_dispenser, onDispenser);
     cmdMessenger.attach(cmd_SERVO_dispenser_setting, onDispenserSettings);
     cmdMessenger.attach(cmd_SERVO_dispenser_stop, onDispenserStop);
     cmdMessenger.attach(cmd_SERVO_dispenser_animation, onDispenserAnimation);
+
+    // Commandes pour Lemon Bowl
+    cmdMessenger.attach(cmd_SERVO_lemonBowl_open, onLemonBowlOpen);
+    cmdMessenger.attach(cmd_SERVO_lemonBowl_close, onLemonBowlClose);
+    cmdMessenger.attach(cmd_SERVO_lemonBowl_setting, onLemonBowlSetting);
+    cmdMessenger.attach(cmd_SERVO_lemonBowl_is_open, onLemonBowlIsOpen);
+
+    // Commandes pour le ServoHandler
     cmdMessenger.attach(cmd_SERVO_handler_move, onServoHandlerMove);
     cmdMessenger.attach(cmd_SERVO_handler_stop, onServoHandlerStop);
 }
