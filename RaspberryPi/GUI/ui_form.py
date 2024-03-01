@@ -1808,7 +1808,7 @@ class Ui_MainWindow(object):
         self.ledControl = QtWidgets.QWidget()
         self.ledControl.setObjectName("ledControl")
         self.ledStripComboBox = QtWidgets.QComboBox(self.ledControl)
-        self.ledStripComboBox.setGeometry(QtCore.QRect(70, 120, 100, 30))
+        self.ledStripComboBox.setGeometry(QtCore.QRect(60, 120, 100, 30))
         self.ledStripComboBox.setStyleSheet("QComboBox {\n"
 "    background-color: #F9F8F8; /* Fond gris clair */\n"
 "    color: #000000; /* Texte noir */\n"
@@ -1834,45 +1834,6 @@ class Ui_MainWindow(object):
 "\n"
 "")
         self.ledStripComboBox.setObjectName("ledStripComboBox")
-        self.ledStripSpeedSpinBox = QtWidgets.QSpinBox(self.ledControl)
-        self.ledStripSpeedSpinBox.setGeometry(QtCore.QRect(70, 200, 100, 30))
-        self.ledStripSpeedSpinBox.setStyleSheet("QSpinBox {\n"
-"    background-color: #F9F8F8; /* Fond gris clair */\n"
-"    color: #000000; /* Texte noir */\n"
-"    font-size: 12px; /* Taille de la police 12 */\n"
-"    border: 1px solid #707070; /* Bordure de 1px en noir */\n"
-"    border-radius: 3px; /* Coins arrondis de 3px */\n"
-"    padding: 2px; /* Espacement interne */\n"
-"    selection-background-color: transparent;\n"
-"}\n"
-"\n"
-"QSpinBox::up-button, QSpinBox::down-button {\n"
-"    background-color: #F79643; /* Couleur de fond des boutons d\'incrémentation/décrémentation */\n"
-"    width: 20px; /* Largeur des boutons */\n"
-"    border: 0px solid #707070; /* Bordure des boutons en noir */\n"
-"    margin: 0px; /* Marge des boutons */\n"
-"}\n"
-"\n"
-"QSpinBox::up-button {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"}\n"
-"\n"
-"QSpinBox::down-button {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: bottom right;\n"
-"}\n"
-"\n"
-"QSpinBox::up-arrow{\n"
-"    image: url(./ressources/generic/arrow_up.svg); /* Chemin relatif vers votre icône SVG */\n"
-"    color: #000000; /* Couleur des flèches en noir */\n"
-"}\n"
-"QSpinBox::down-arrow {\n"
-"    image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */\n"
-"    color: #000000; /* Couleur des flèches en noir */\n"
-"}\n"
-"")
-        self.ledStripSpeedSpinBox.setObjectName("ledStripSpeedSpinBox")
         self.ledStripColorButton = QtWidgets.QPushButton(self.ledControl)
         self.ledStripColorButton.setGeometry(QtCore.QRect(240, 160, 100, 100))
         self.ledStripColorButton.setStyleSheet("QPushButton {\n"
@@ -1887,16 +1848,16 @@ class Ui_MainWindow(object):
         self.ledStripColorButton.setText("")
         self.ledStripColorButton.setObjectName("ledStripColorButton")
         self.label_3 = QtWidgets.QLabel(self.ledControl)
-        self.label_3.setGeometry(QtCore.QRect(80, 100, 61, 16))
+        self.label_3.setGeometry(QtCore.QRect(60, 100, 61, 16))
         self.label_3.setStyleSheet("font-size: 12px;\n"
 "color: black;")
-        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_3.setObjectName("label_3")
         self.label_11 = QtWidgets.QLabel(self.ledControl)
-        self.label_11.setGeometry(QtCore.QRect(80, 180, 71, 16))
+        self.label_11.setGeometry(QtCore.QRect(60, 180, 71, 16))
         self.label_11.setStyleSheet("font-size: 12px;\n"
 "color: black;")
-        self.label_11.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_11.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_11.setObjectName("label_11")
         self.label_12 = QtWidgets.QLabel(self.ledControl)
         self.label_12.setGeometry(QtCore.QRect(260, 130, 61, 16))
@@ -1912,51 +1873,43 @@ class Ui_MainWindow(object):
 "background-color: #A0ACB0;")
         self.label_19.setAlignment(QtCore.Qt.AlignCenter)
         self.label_19.setObjectName("label_19")
-        self.ledStripBrightnessSpinBox = QtWidgets.QSpinBox(self.ledControl)
-        self.ledStripBrightnessSpinBox.setGeometry(QtCore.QRect(70, 280, 100, 30))
-        self.ledStripBrightnessSpinBox.setStyleSheet("QSpinBox {\n"
+        self.label_20 = QtWidgets.QLabel(self.ledControl)
+        self.label_20.setGeometry(QtCore.QRect(60, 260, 71, 16))
+        self.label_20.setStyleSheet("font-size: 12px;\n"
+"color: black;")
+        self.label_20.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_20.setObjectName("label_20")
+        self.ledBrightnessDial = QtWidgets.QDial(self.ledControl)
+        self.ledBrightnessDial.setGeometry(QtCore.QRect(140, 270, 51, 61))
+        self.ledBrightnessDial.setMaximum(255)
+        self.ledBrightnessDial.setObjectName("ledBrightnessDial")
+        self.ledSpeedDial = QtWidgets.QDial(self.ledControl)
+        self.ledSpeedDial.setGeometry(QtCore.QRect(140, 190, 51, 61))
+        self.ledSpeedDial.setObjectName("ledSpeedDial")
+        self.ledSpeed = QtWidgets.QLabel(self.ledControl)
+        self.ledSpeed.setGeometry(QtCore.QRect(60, 210, 61, 31))
+        self.ledSpeed.setStyleSheet("QLabel {\n"
 "    background-color: #F9F8F8; /* Fond gris clair */\n"
 "    color: #000000; /* Texte noir */\n"
 "    font-size: 12px; /* Taille de la police 12 */\n"
 "    border: 1px solid #707070; /* Bordure de 1px en noir */\n"
 "    border-radius: 3px; /* Coins arrondis de 3px */\n"
 "    padding: 2px; /* Espacement interne */\n"
-"    selection-background-color: transparent;\n"
-"}\n"
-"\n"
-"QSpinBox::up-button, QSpinBox::down-button {\n"
-"    background-color: #F79643; /* Couleur de fond des boutons d\'incrémentation/décrémentation */\n"
-"    width: 20px; /* Largeur des boutons */\n"
-"    border: 0px solid #707070; /* Bordure des boutons en noir */\n"
-"    margin: 0px; /* Marge des boutons */\n"
-"}\n"
-"\n"
-"QSpinBox::up-button {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"}\n"
-"\n"
-"QSpinBox::down-button {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: bottom right;\n"
-"}\n"
-"\n"
-"QSpinBox::up-arrow{\n"
-"    image: url(./ressources/generic/arrow_up.svg); /* Chemin relatif vers votre icône SVG */\n"
-"    color: #000000; /* Couleur des flèches en noir */\n"
-"}\n"
-"QSpinBox::down-arrow {\n"
-"    image: url(./ressources/generic/arrow_down.svg); /* Chemin relatif vers votre icône SVG */\n"
-"    color: #000000; /* Couleur des flèches en noir */\n"
 "}\n"
 "")
-        self.ledStripBrightnessSpinBox.setObjectName("ledStripBrightnessSpinBox")
-        self.label_20 = QtWidgets.QLabel(self.ledControl)
-        self.label_20.setGeometry(QtCore.QRect(90, 260, 71, 16))
-        self.label_20.setStyleSheet("font-size: 12px;\n"
-"color: black;")
-        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_20.setObjectName("label_20")
+        self.ledSpeed.setObjectName("ledSpeed")
+        self.ledBrightness = QtWidgets.QLabel(self.ledControl)
+        self.ledBrightness.setGeometry(QtCore.QRect(60, 290, 61, 31))
+        self.ledBrightness.setStyleSheet("QLabel {\n"
+"    background-color: #F9F8F8; /* Fond gris clair */\n"
+"    color: #000000; /* Texte noir */\n"
+"    font-size: 12px; /* Taille de la police 12 */\n"
+"    border: 1px solid #707070; /* Bordure de 1px en noir */\n"
+"    border-radius: 3px; /* Coins arrondis de 3px */\n"
+"    padding: 2px; /* Espacement interne */\n"
+"}\n"
+"")
+        self.ledBrightness.setObjectName("ledBrightness")
         self.machineParameterStack.addWidget(self.ledControl)
         self.rightButtonControl = QtWidgets.QPushButton(self.machineParameter)
         self.rightButtonControl.setGeometry(QtCore.QRect(440, 150, 31, 51))
@@ -2819,7 +2772,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(2)
         self.extraStack.setCurrentIndex(0)
         self.parameterStack.setCurrentIndex(2)
         self.proccessingStackedWidget.setCurrentIndex(1)
@@ -2898,6 +2851,8 @@ class Ui_MainWindow(object):
         self.label_12.setText(_translate("MainWindow", "Couleur"))
         self.label_19.setText(_translate("MainWindow", "LedStrip"))
         self.label_20.setText(_translate("MainWindow", "Luminosité"))
+        self.ledSpeed.setText(_translate("MainWindow", "0"))
+        self.ledBrightness.setText(_translate("MainWindow", "0"))
         self.label_21.setText(_translate("MainWindow", "Luminosité"))
         self.titleParameter.setText(_translate("MainWindow", "Paramètres"))
         self.toolButtonParameterPage.setText(_translate("MainWindow", "..."))
