@@ -23,19 +23,10 @@ class DispenserSequenceManager {
         ServoAction animation_2;
         
     public:
-        // Constructeur pour initialiser le gestionnaire de servo.
         DispenserSequenceManager(ServoHandler& handler, uint8_t order[8]);
-
-        // Configure les paramètres des distributeurs.
         void setDispenserParams(uint8_t positionMax, uint16_t tMax, uint8_t positionRelease);
-
-        // Assigner une séquence de dispenseur  à un distributeur donné.
         void assignDispenserActions(uint8_t dispenserIndex, uint16_t releaseTime);
-
-        // Arrête immédiatement un distributeur, le ramenant à sa position de repos.
         void stopDispenser(uint8_t dispenserIndex);
-
-        // Déclenche une animation ou une séquence prédéfinie sur les distributeurs.
         void dispenserAnimation(uint8_t dispenserIndex, uint8_t speed, uint8_t positionMax, uint16_t delayFactor);
 };
 
@@ -63,4 +54,36 @@ class LemonBowlSequenceManager{
         void closeBowl();
         void openBowl();
         bool isBowlOpen();
+};
+
+class LemonRampSequenceManager {
+private:
+    struct RampParams {
+        uint8_t positionDown;
+        uint8_t positionUp;
+        uint8_t speed;
+        uint16_t downWaitDelay;
+        uint16_t upWaitDelay;
+    };
+
+    ServoHandler& servoHandler;
+    Servo servo;
+    RampParams rampParams;
+
+    ServoAction moveDown;
+    ServoAction downWait;
+    ServoAction downIdle;
+    ServoAction moveUp;
+    ServoAction upWait;
+    ServoAction upIdle;
+    ServoAction idle;
+
+public:
+    LemonRampSequenceManager(ServoHandler& handler, uint8_t servoID);
+
+    void setRampParams(uint8_t positionDown, uint8_t positionUp, uint8_t speed, uint16_t downWaitDelay, uint16_t upWaitDelay);
+    void releaseLemon();
+    void moveDownOnly();
+    void moveUpOnly();
+    void customPosition(uint8_t position);
 };

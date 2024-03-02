@@ -9,7 +9,6 @@ extern CmdMessenger cmdMessenger;
 int valvepins[NUMBER_OF_VALVES] = {2, 3, 4, 5};
 DCValveHandler valveManager(valvepins);
 
-
 void beginValve(){
     valveManager.begin();
 }
@@ -23,7 +22,7 @@ void onValveOpen() {
     int releaseTime = cmdMessenger.readBinArg<int>();
 
     if (valveIndex < 0 || valveIndex > 3) {
-        cmdMessenger.sendCmd(cmd_ack, "Error: valve index must be between 0 and 3");
+        cmdMessenger.sendCmd(cmd_ack, F("Error: valve index must be between 0 and 3"));
     } else {
         valveManager.open(valveIndex, static_cast<unsigned long>(releaseTime));
         cmdMessenger.sendCmd(cmd_ack, "Valve " + String(valveIndex) + " open for " + String(releaseTime) + " ms");
@@ -38,7 +37,7 @@ void onValveClose(){
 
 void onValveStop(){
     valveManager.stop();
-    cmdMessenger.sendCmd(cmd_ack, "All valves closed");
+    cmdMessenger.sendCmd(cmd_ack, F("All valves closed"));
 }
 
 // Attacher les commandes du servo-moteur du distributeur au CmdMessenger

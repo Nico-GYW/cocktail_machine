@@ -1,5 +1,9 @@
 #include "ServoSequenceManager.h"
 
+
+// ------------- DispenserSequenceManager ------------------ //
+
+
 DispenserSequenceManager::DispenserSequenceManager(ServoHandler& handler, uint8_t order[NUMBER_OF_DISPENSER])
     : servoHandler(handler) {
 
@@ -46,7 +50,7 @@ void DispenserSequenceManager::assignDispenserActions(uint8_t dispenserIndex, ui
         servos[dispenserIndex].actionList[1] = &release;
         release.delay = releaseTime;
     }
-    servos[dispenserIndex].actionList[3] = &idle;
+    servos[dispenserIndex].actionList[2] = &idle;
     servoHandler.initializeAction(servos[dispenserIndex], true);
 }
 
@@ -71,6 +75,11 @@ void DispenserSequenceManager::dispenserAnimation(uint8_t dispenserIndex, uint8_
 
     servoHandler.initializeAction(servos[dispenserIndex], true);
 }
+
+
+
+// ------------- LemonBowlSequenceManager ------------------ //
+
 
 LemonBowlSequenceManager::LemonBowlSequenceManager(ServoHandler& handler, uint8_t servoID)
     : servoHandler(handler) {
@@ -117,4 +126,79 @@ void LemonBowlSequenceManager::closeBowl() {
 
 bool LemonBowlSequenceManager::isBowlOpen() {
     return servo.currentPosition == lemonBowlParams.positionOpen;
+}
+
+
+// ------------- LemonRampSequenceManager ------------------ //
+
+
+LemonRampSequenceManager::LemonRampSequenceManager(ServoHandler& handler, uint8_t servoID)
+    : servoHandler(handler), servo() {
+    // Initialize RampParams with default values
+    rampParams = {120, 0, 10, 1000, 1000}; // Default values for down position, up position, speed, down and up wait delays
+
+    // Initialize ServoAction objects with initial parameters
+    moveDown = ServoAction(MOVE, rampParams.positionDown, rampParams.speed, 0);
+    downWait = ServoAction(WAIT, rampParams.positionDown, 0, rampParams.downWaitDelay);
+    downIdle = ServoAction(IDLE, rampParams.positionDown, 0, 0);
+    moveUp = ServoAction(MOVE, rampParams.positionUp, rampParams.speed, 0);
+    upWait = ServoAction(WAIT, rampParams.positionUp, 0, rampParams.upWaitDelay);
+    upIdle = ServoAction(IDLE, rampParams.positionUp, 0, 0);
+    idle = ServoAction(IDLE, rampParams.positionUp, 0, 0); // The idle position is the same as the up position
+
+    servo.ServoID = servoID;
+    // Initialize all action pointers to idle to start in a known state
+    for (int i = 0; i < MAX_ACTIONS; ++i) {
+        servo.actionList[i] = &idle;
+    }
+
+    // Add the servo to the ServoHandler for management
+    servoHandler.addServo(&servo);
+}
+
+void LemonRampSequenceManager::setRampParams(uint8_t positionDown, uint8_t positionUp, uint8_t speed, uint16_t downWaitDelay, uint16_t upWaitDelay) {
+    rampParams.positionDown = positionDown;
+    rampParams.positionUp = positionUp;
+    rampParams.speed = speed;
+    rampParams.downWaitDelay = downWaitDelay;
+    rampParams.upWaitDelay = upWaitDelay;
+
+    moveDown.targetPosition = positionDown;
+    moveDown.speed = speed;
+    downWait.targetPosition = positionDown;
+    downWait.delay = downWaitDelay;
+    downIdle.targetPosition = positionDown;
+
+    moveUp.targetPosition = positionUp;
+    moveUp.speed = speed;
+    upWait.targetPosition = positionUp;
+    upWait.delay = upWaitDelay;
+    upIdle.targetPosition = positionUp;
+
+    idle.targetPosition = positionUp; // Assuming the idle position is the same as the up position
+}
+
+void LemonRampSequenceManager::releaseLemon() {
+    servo.actionList[0] = &moveDown;
+    servo.actionList[1] = &downWait;
+    servo.actionList[2] = &moveUp;
+    servo.actionList[3] = &upWait;
+    servoHandler.initializeAction(servo, true);
+}
+
+void LemonRampSequenceManager::moveDownOnly() {
+    servo.actionList[0] = &moveDown;
+    servo.actionList[1] = &downIdle;
+    servoHandler.initializeAction(servo, true);
+}
+
+void LemonRampSequenceManager::moveUpOnly() {
+    servo.actionList[0] = &moveUp;
+    servo.actionList[1] = &upIdle;
+    servo.actionList[2] = &idle;
+    servoHandler.initializeAction(servo, true);
+}
+
+void LemonRampSequenceManager::customPosition(uint8_t position) {
+    servoHandler.move(position, servo.ServoID);
 }

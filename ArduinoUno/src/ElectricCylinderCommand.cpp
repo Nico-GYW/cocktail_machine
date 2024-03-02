@@ -19,15 +19,18 @@ void updateElectricCylinder() {
 static void onElectricCylinderForward() {
     unsigned long duration = static_cast<unsigned long>(cmdMessenger.readBinArg<int>());
     electricCylinder.moveForward(duration);
+    cmdMessenger.sendCmd(cmd_ack, F("Electric Cylinder moving forward"));
 }
 
 static void onElectricCylinderBackward() {
     unsigned long duration = static_cast<unsigned long>(cmdMessenger.readBinArg<int>());
     electricCylinder.moveBackward(duration);
+    cmdMessenger.sendCmd(cmd_ack, F("Electric Cylinder moving backward"));
 }
 
 static void onElectricCylinderStop() {
     electricCylinder.stopIdleLow(); // Ou stopIdleHigh selon le besoin
+    cmdMessenger.sendCmd(cmd_ack, F("Electric Cylinder stopped"));
 }
 
 void attachElectricCylinderCommands() {

@@ -1,8 +1,7 @@
 #include "ElectricCylinder.h"
 
-// Constructeur
 ElectricCylinder::ElectricCylinder(int pinControlA, int pinControlB)
-: _pinControlA(pinControlA), _pinControlB(pinControlB), _timer(0), _delay(0) {
+: _pinControlA(pinControlA), _pinControlB(pinControlB), _timer(0), _delay(0), _isTiming(false), _state(IDLE_LOW) {
 }
 
 void ElectricCylinder::begin() {

@@ -23,15 +23,30 @@ commands_uno = [
     ["cmd_SERVO_dispenser", "ii"], # Move StepperMotorX to a specific positiimon
     ["cmd_SERVO_dispenser_setting", "iii"], # Initiate homing sequence for StepperMotorX
     ["cmd_SERVO_dispenser_stop", "i"], # Stop StepperMotorX immediately
-    ["cmd_SERVO_dispenser_animation", "iiii"], 
+    ["cmd_SERVO_dispenser_animation", "iiii"],
+
+    ["cmd_SERVO_lemonBowl_open", ""],
+    ["cmd_SERVO_lemonBowl_close", ""],
+    ["cmd_SERVO_lemonBowl_setting", "iii"],
+    ["cmd_SERVO_lemonBowl_is_open", ""],
+
+    ["cmd_SERVO_lemonRamp_release", ""],
+    ["cmd_SERVO_lemonRamp_down", ""],
+    ["cmd_SERVO_lemonRamp_up", ""],
+    ["cmd_SERVO_lemonRamp_custo", "i"],
+    ["cmd_SERVO_lemonRamp_setting", "iiiii"],
+
     ["cmd_SERVO_handler_move", "ii"], 
     ["cmd_SERVO_handler_stop", ""],
+
     ["cmd_VALVE_open", "ii"],
     ["cmd_VALVE_close", "i"],
     ["cmd_VALVE_stop", "i"], 
+
     ["cmd_EC_forward", "i"],
     ["cmd_EC_backward", "i"],
     ["cmd_EC_stop", ""],
+
     ["cmd_ack","s"] # Acknowledge a command,
 ]
 
@@ -145,5 +160,85 @@ class ElectricCylinderController(Controller):
         Arrête le vérin électrique et le met en état d'arrêt (idle).
         """
         self.cmd.send("cmd_EC_stop")
+        msg = self.cmd.receive()
+        print(msg)
+
+class LemonBowlController(Controller):
+    def __init__(self):
+        super().__init__(cmd_arduino_uno)
+
+    def open_bowl(self):
+        """
+        Ouvre le Lemon Bowl.
+        """
+        self.cmd.send("cmd_SERVO_lemonBowl_open")
+        msg = self.cmd.receive()
+        print(msg)
+
+    def close_bowl(self):
+        """
+        Ferme le Lemon Bowl.
+        """
+        self.cmd.send("cmd_SERVO_lemonBowl_close")
+        msg = self.cmd.receive()
+        print(msg)
+
+    def set_bowl_params(self, positionOpen: int, positionClosed: int, speed: int):
+        """
+        Configure les paramètres du Lemon Bowl.
+        """
+        self.cmd.send("cmd_SERVO_lemonBowl_setting", positionOpen, positionClosed, speed)
+        msg = self.cmd.receive()
+        print(msg)
+
+    def is_bowl_open(self):
+        """
+        Vérifie si le Lemon Bowl est ouvert.
+        """
+        self.cmd.send("cmd_SERVO_lemonBowl_is_open")
+        msg = self.cmd.receive()
+        print(msg)
+
+class LemonRampController(Controller):
+    def __init__(self):
+        super().__init__(cmd_arduino_uno)
+
+    def release_lemon(self):
+        """
+        Exécute la séquence pour libérer un citron sur la rampe.
+        """
+        self.cmd.send("cmd_SERVO_lemonRamp_release")
+        msg = self.cmd.receive()
+        print(msg)
+
+    def move_down(self):
+        """
+        Déplace le ramp uniquement vers le bas.
+        """
+        self.cmd.send("cmd_SERVO_lemonRamp_down")
+        msg = self.cmd.receive()
+        print(msg)
+
+    def move_up(self):
+        """
+        Déplace le ramp uniquement vers le haut.
+        """
+        self.cmd.send("cmd_SERVO_lemonRamp_up")
+        msg = self.cmd.receive()
+        print(msg)
+
+    def custom_position(self, position: int):
+        """
+        Déplace le ramp à une position personnalisée.
+        """
+        self.cmd.send("cmd_SERVO_lemonRamp_custo", position)
+        msg = self.cmd.receive()
+        print(msg)
+
+    def set_ramp_settings(self, positionDown: int, positionUp: int, speed: int, downWaitDelay: int, upWaitDelay: int):
+        """
+        Configure les paramètres du ramp.
+        """
+        self.cmd.send("cmd_SERVO_lemonRamp_setting", positionDown, positionUp, speed, downWaitDelay, upWaitDelay)
         msg = self.cmd.receive()
         print(msg)

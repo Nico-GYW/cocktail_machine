@@ -1,8 +1,8 @@
 #include <SPI.h>
 #include <Adafruit_PWMServoDriver.h>
 
-#define MAX_ACTIONS 5  // Nombre maximum d'actions par servo
-#define NUMBER_OF_SERVO 16  // Nombre total de servo
+#define MAX_ACTIONS 4  // Nombre maximum d'actions par servo
+#define NUMBER_OF_SERVO 11  // Nombre total de servo
 
 enum ServoState {
     IDLE,
@@ -12,13 +12,22 @@ enum ServoState {
 
 struct ServoAction {
     ServoState stateType;
-    uint8_t targetPosition;  // in degrees
-    uint8_t speed; // taux d'incrémentation en degré
-    uint16_t delay; // Durée maximale de 20000 ms
+    uint8_t targetPosition; // en degrés
 
-    // Constructeur qui initialise direction à true et timer à 0 par défaut.
+    union {
+        uint8_t speed; // taux d'incrémentation en degré, utilisé pour MOVE
+        uint16_t delay; // Durée en ms, utilisé pour WAIT
+    };
+
+    // Constructeur qui initialise selon le type d'action
     ServoAction(ServoState state = IDLE, uint8_t pos = 0, uint8_t spd = 0, uint16_t del = 0)
-        : stateType(state), targetPosition(pos), speed(spd), delay(del) {}
+    : stateType(state), targetPosition(pos) {
+        if (state == MOVE) {
+            speed = spd;
+        } else if (state == WAIT) {
+            delay = del;
+        }
+    }
 };
 
 struct Servo {
