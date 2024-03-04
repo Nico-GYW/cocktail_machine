@@ -55,7 +55,8 @@ void DispenserSequenceManager::assignDispenserActions(uint8_t dispenserIndex, ui
 }
 
 void DispenserSequenceManager::stopDispenser(uint8_t dispenserIndex){
-    servoHandler.stop(servos[dispenserIndex]);
+    servos[dispenserIndex].actionList[0] = &idle;
+    servoHandler.initializeAction(servos[dispenserIndex], true);
 }
 
 void DispenserSequenceManager::dispenserAnimation(uint8_t dispenserIndex, uint8_t speed, uint8_t positionMax, uint16_t delayFactor) {
