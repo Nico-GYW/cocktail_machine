@@ -6,7 +6,7 @@
 extern CmdMessenger cmdMessenger;
 
 // Création de l'instance de ElectricCylinder
-ElectricCylinder electricCylinder(10, 11); // Utiliser les pins appropriés
+ElectricCylinder electricCylinder(7, 6); // Utiliser les pins appropriés
 
 void beginElectricCylinder() {
     electricCylinder.begin(); // Initialisation du vérin électrique
