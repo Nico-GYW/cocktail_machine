@@ -1,6 +1,7 @@
 import PyCmdMessenger
 import serial.tools.list_ports
 import time
+import threading
 
 # Initialize an ArduinoBoard instance.  
 
@@ -136,8 +137,11 @@ class DCValveController(Controller):
         print(msg)
 
 class ElectricCylinderController(Controller):
+    FULL_CYCLE_DURATION = 8000  # Temps nécessaire pour faire une course complète du cylindre en ms
+
     def __init__(self):
         super().__init__(cmd_arduino_uno)
+        self.interrupt = threading.Event()
 
     def move_forward(self, duration: int):
         """
@@ -155,6 +159,12 @@ class ElectricCylinderController(Controller):
         msg = self.cmd.receive()
         print(msg)
 
+    def go_home(self):
+        """
+        Fait reculer le vérin pendant le temps nécessaire pour revenir à la position de départ.
+        """
+        self.move_backward(self.FULL_CYCLE_DURATION)
+
     def stop(self):
         """
         Arrête le vérin électrique et le met en état d'arrêt (idle).
@@ -162,6 +172,38 @@ class ElectricCylinderController(Controller):
         self.cmd.send("cmd_EC_stop")
         msg = self.cmd.receive()
         print(msg)
+
+    def press_lemon_async(self, cycle_number: int, callback=None):
+        """
+        Version asynchrone de press_lemon pour être utilisée avec l'interface graphique.
+        """
+        def run():
+            DELAY = 1000
+            INITIAL_ADVANCE_DURATION = self.FULL_CYCLE_DURATION - DELAY
+            BACK_AND_FORTH_DURATION = 200
+
+            self.move_forward(INITIAL_ADVANCE_DURATION)
+            time.sleep(INITIAL_ADVANCE_DURATION / 1000)  # Convertir ms en s
+
+            for _ in range(cycle_number):
+                if self.interrupt.is_set():
+                    break
+                self.move_backward(BACK_AND_FORTH_DURATION)
+                time.sleep(BACK_AND_FORTH_DURATION / 1000)
+                self.move_forward(BACK_AND_FORTH_DURATION + DELAY)
+                time.sleep((BACK_AND_FORTH_DURATION + DELAY) / 1000)
+
+            if callback:
+                callback()
+
+        threading.Thread(target=run).start()
+
+    def stop_process(self):
+        """
+        Méthode pour interrompre le processus en cours.
+        """
+        self.interrupt.set()
+        self.stop()  # Envoyer la commande d'arrêt à l'Arduino
 
 class LemonBowlController(Controller):
     def __init__(self):
