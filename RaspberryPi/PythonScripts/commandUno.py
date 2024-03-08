@@ -137,73 +137,97 @@ class DCValveController(Controller):
         print(msg)
 
 class ElectricCylinderController(Controller):
-    FULL_CYCLE_DURATION = 8000  # Temps nécessaire pour faire une course complète du cylindre en ms
+    FULL_CYCLE_DURATION = 7800  # Temps nécessaire pour faire une course complète du cylindre en ms
 
     def __init__(self):
         super().__init__(cmd_arduino_uno)
         self.interrupt = threading.Event()
+        self.lock = threading.Lock()  # Verrou pour synchroniser l'accès au port série
+        self.position = 0
+        self.current_process = None
 
     def move_forward(self, duration: int):
-        """
-        Commande le vérin électrique pour avancer pendant une durée spécifiée.
-        """
-        self.cmd.send("cmd_EC_forward", duration)
-        msg = self.cmd.receive()
-        print(msg)
+        with self.lock:  # Applique le verrou pour éviter l'accès concurrent
+            self.cmd.send("cmd_EC_forward", duration)
+            msg = self.cmd.receive()
+            print(msg)
 
     def move_backward(self, duration: int):
-        """
-        Commande le vérin électrique pour reculer pendant une durée spécifiée.
-        """
-        self.cmd.send("cmd_EC_backward", duration)
-        msg = self.cmd.receive()
-        print(msg)
+        with self.lock:  # Applique le verrou pour éviter l'accès concurrent
+            self.cmd.send("cmd_EC_backward", duration)
+            msg = self.cmd.receive()
+            print(msg)
 
     def go_home(self):
-        """
-        Fait reculer le vérin pendant le temps nécessaire pour revenir à la position de départ.
-        """
-        self.move_backward(self.FULL_CYCLE_DURATION)
+        with self.lock:  # Applique le verrou ici aussi si nécessaire
+            self.move_backward(self.FULL_CYCLE_DURATION + 500)
+            self.position = 0
+            # Pas besoin de recevoir ici si move_backward s'en occupe déjà
 
     def stop(self):
-        """
-        Arrête le vérin électrique et le met en état d'arrêt (idle).
-        """
-        self.cmd.send("cmd_EC_stop")
-        msg = self.cmd.receive()
-        print(msg)
+        with self.lock:  # Applique le verrou pour éviter l'accès concurrent
+            self.cmd.send("cmd_EC_stop")
+            msg = self.cmd.receive()
+            print(msg)
 
-    def press_lemon_async(self, cycle_number: int, callback=None):
-        """
-        Version asynchrone de press_lemon pour être utilisée avec l'interface graphique.
-        """
+    def go_home_async(self):
+        def run():
+            with self.lock:  # Assurez-vous que cette section est protégée
+                self.current_process = "go_home_async"
+                self.move_backward(self.FULL_CYCLE_DURATION + 500)
+                time.sleep((self.FULL_CYCLE_DURATION + 500) / 1000)
+                if not self.interrupt.is_set():
+                    self.position = 0
+                self.interrupt.clear()
+                self.current_process = None
+                self.stop()
+
+        threading.Thread(target=run).start()
+
+    def press_lemon_async(self, cycle_number: int):
         def run():
             DELAY = 1000
             INITIAL_ADVANCE_DURATION = self.FULL_CYCLE_DURATION - DELAY
             BACK_AND_FORTH_DURATION = 200
 
-            self.move_forward(INITIAL_ADVANCE_DURATION)
-            time.sleep(INITIAL_ADVANCE_DURATION / 1000)  # Convertir ms en s
+            with self.lock:  # Protège également cette section d'exécution
+                self.current_process = "press_lemon_async"
+                self.move_forward(INITIAL_ADVANCE_DURATION)
+                time.sleep(INITIAL_ADVANCE_DURATION / 1000)
 
-            for _ in range(cycle_number):
-                if self.interrupt.is_set():
-                    break
-                self.move_backward(BACK_AND_FORTH_DURATION)
-                time.sleep(BACK_AND_FORTH_DURATION / 1000)
-                self.move_forward(BACK_AND_FORTH_DURATION + DELAY)
-                time.sleep((BACK_AND_FORTH_DURATION + DELAY) / 1000)
+                if self.position != 0:
+                    self.go_home_async()
+                    # Attendez le retour à la position initiale
+                    time.sleep((self.FULL_CYCLE_DURATION + 500) / 1000)
 
-            if callback:
-                callback()
+                for _ in range(cycle_number):
+                    if self.interrupt.is_set():
+                        break
+                    self.move_backward(BACK_AND_FORTH_DURATION)
+                    time.sleep(BACK_AND_FORTH_DURATION / 1000)
+                    self.move_forward(BACK_AND_FORTH_DURATION + DELAY)
+                    time.sleep((BACK_AND_FORTH_DURATION + DELAY) / 1000)
+
+                self.interrupt.clear()
+                self.current_process = None
+                if not self.interrupt.is_set():
+                    self.go_home()
 
         threading.Thread(target=run).start()
 
     def stop_process(self):
         """
-        Méthode pour interrompre le processus en cours.
+        Arrête le processus en cours et active le callback adéquat.
         """
-        self.interrupt.set()
-        self.stop()  # Envoyer la commande d'arrêt à l'Arduino
+        with self.lock:
+            self.interrupt.set()
+            # Attendre un peu pour s'assurer que le processus vérifie l'interruption
+            time.sleep(0.1)
+            if self.current_process == "go_home_async":
+                self.stop()
+            elif self.current_process == "press_lemon_async":
+                self.go_home()
+            self.current_process = None
 
 class LemonBowlController(Controller):
     def __init__(self):
