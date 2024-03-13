@@ -14,7 +14,8 @@ from ui_cocktailStep1Button import Ui_cocktailStep1Button
 from ui_cocktailStep2Button import Ui_cocktailStep2Button
 
 from mainPageWidgets import machine
-
+from commandMega import *
+from commandUno import *
 
 class ProcessPage(QWidget):
     def __init__(self, parent=None):
@@ -24,6 +25,16 @@ class ProcessPage(QWidget):
     def setup(self, ui):
         self.ui = ui
         self.setEndPage()
+        self.set_controllers()
+
+    def set_controllers(self):
+        self.EC = ElectricCylinderController()
+
+
+        self.interrupted = False
+        self.checkTimer = QTimer()
+        self.checkTimer.timeout.connect(self.checkInterrupt)
+        self.totalWaitTime = 0  # Durée totale attendue
 
     def setRecipe(self, recipe):
         self.cocktailRecipe = recipe
@@ -106,6 +117,7 @@ class ProcessPage(QWidget):
             self.askForLemonInBowl()
         else:
             self.step5CrushIce()  # Passez à l'étape suivante si pas de citrons nécessaires
+
     def askForLemonInBowl(self):
         self.clearCocktailStepLayout()
         step = CocktailStep("Étape 4 : Citrons", "Y a-t-il des citrons dans le bol ?", num_buttons=2)
@@ -184,9 +196,25 @@ class ProcessPage(QWidget):
 
     def pressLemon(self):
         # Simule le pressage du citron
-        print("Le citron est en train d'être pressé.")
-        QTimer.singleShot(5000, self.lemonPressed)  # Simule le temps de pressage
+        step = CocktailStep("Découpe de citron", "", num_buttons=2)
+        step.ui.button_1.setText("Pause")
+        step.ui.button_2.setText("Annuler")
+        step.ui.button_1.clicked.connect(self.askCitronPlacedCorrectly)
+        step.ui.button_2.clicked.connect(self.interruptProcess)
+        self.interrupt = False
 
+        QTimer.singleShot(5000, lambda: self.executeCommand(self.EC.move_forward, 1000))
+        QTimer.singleShot(10000, lambda: self.executeCommand(self.EC.move_forward, 1000))
+
+    def interruptProcess(self):
+        self.interrupt = True
+        self.EC.stop()
+                              
+    def executeCommand(self, command, *args, **kwargs):
+        """Exécute une commande si aucune interruption n'a été signalée."""
+        if not self.interrupt:
+            command(*args, **kwargs)
+        
     def lemonPressed(self):
         print("Les tranches de citron sont prêtes.")
         # Indiquez que les tranches sont dans le bol et passez à l'étape suivante après 5 secondes
@@ -238,7 +266,6 @@ class CocktailStep(QFrame):
             self.ui = Ui_cocktailStep2Button()
         else:
             self.ui = Ui_cocktailStep()
-
 
         self.ui.setupUi(self)
         self.ui.stepTitle.setText(title)
