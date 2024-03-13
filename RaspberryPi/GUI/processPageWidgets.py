@@ -201,18 +201,32 @@ class ProcessPage(QWidget):
         step.ui.button_2.setText("Annuler")
         step.ui.button_1.clicked.connect(self.askCitronPlacedCorrectly)
         step.ui.button_2.clicked.connect(self.interruptProcess)
-        self.interrupt = False
+        self.EC_interrput = False
+        total_delay = 0
+        
+        FULL_CYCLE_DURATION = 8000
+        BEFORE_BLADE_DELAY = 500
+        INITIAL_ADVANCE_DURATION = FULL_CYCLE_DURATION - BEFORE_BLADE_DELAY
+        BACK_AND_FORTH_DURATION = 1000
 
-        QTimer.singleShot(5000, lambda: self.executeCommand(self.EC.move_forward, 1000))
-        QTimer.singleShot(10000, lambda: self.executeCommand(self.EC.move_forward, 1000))
+        if self.EC.position != 0:
+            total_delay += 8500
+            self.EC.go_home()
+            QTimer.singleShot(total_delay, self.executeCommand(self.EC.set_position,0))
+            
+        QTimer.singleShot(total_delay, lambda: self.executeCommand(self.EC.move_forward, INITIAL_ADVANCE_DURATION))
+        total_delay += INITIAL_ADVANCE_DURATION + 100
+        QTimer.singleShot(total_delay, lambda: self.executeCommand(self.EC.move_backward, BACK_AND_FORTH_DURATION))
+        total_delay += BACK_AND_FORTH_DURATION + 100
+        QTimer.singleShot(total_delay, lambda: self.executeCommand(self.EC.move_forward, BACK_AND_FORTH_DURATION+BEFORE_BLADE_DELAY))
 
     def interruptProcess(self):
-        self.interrupt = True
+        self.EC_interrput = True
         self.EC.stop()
                               
     def executeCommand(self, command, *args, **kwargs):
         """Exécute une commande si aucune interruption n'a été signalée."""
-        if not self.interrupt:
+        if not self.EC_interrput:
             command(*args, **kwargs)
         
     def lemonPressed(self):

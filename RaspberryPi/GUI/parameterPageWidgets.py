@@ -192,9 +192,10 @@ class ParameterPage(QWidget):
     def set_other_control_page(self):
         # Créer une instance de StepperControl et la stocker dans la liste
         stepperMotorController = StepperMotorController()
+        ec = ElectricCylinderController()
         xStepperControl = SliderLinearControl(self.ui.xStepperSlider, stepperMotorController, "X")
         yStepperControl = SliderLinearControl(self.ui.yStepperSlider, stepperMotorController,"Y")
-        # cylinderControl = SliderLinearControl(self.ui.cylinderSlider, "V")
+        cylinderControl = SliderLinearControl(self.ui.cylinderSlider, ec, "V")
         ledstrip = ledStripControl(self.ui)
 
 
@@ -303,19 +304,19 @@ class BottleControl(QFrame):
             # Comportement pour fermer les valves
             self.controller.close_valve(self.actuator_id)
 
-class SliderLinearControl():
-    def __init__(self, stepperSlider, controller, control_type="X"):
+class SliderLinearControl:
+    def __init__(self, slider, controller, control_type):
         self.control_type = control_type
-        self.stepperSlider = stepperSlider
+        self.slider = slider
         self.controller = controller
         self.isSliderPressed = False
-        self.currentCommand = None  # None, 'home', ou 'moveTo'
-        self.lastPosition = None  # Réinitialisé à None après stop
+        self.currentCommand = None
+        self.lastPosition = None
         
         # Connecter les signaux du slider
-        self.stepperSlider.sliderPressed.connect(self.onSliderPressed)
-        self.stepperSlider.sliderReleased.connect(self.onSliderReleased)
-        self.stepperSlider.valueChanged.connect(self.onValueChanged)
+        self.slider.sliderPressed.connect(self.onSliderPressed)
+        self.slider.sliderReleased.connect(self.onSliderReleased)
+        self.slider.valueChanged.connect(self.onValueChanged)
 
     def onSliderPressed(self):
         self.isSliderPressed = True
@@ -329,37 +330,47 @@ class SliderLinearControl():
             self.sendCommand()
 
     def sendCommand(self):
-        position = self.stepperSlider.value()
-        if position < 0 and (self.currentCommand != 'moveTo' or self.lastPosition != position):
-            targetPosition = 3000 if self.control_type == "X" else 4000
-            self.moveToPosition(targetPosition)
-        elif position > 0 and self.currentCommand != 'home':
-            self.goHome()
+        position = self.slider.value()
+        if self.control_type in ["X", "Y"]:
+            if position < 0 and (self.currentCommand != 'moveTo' or self.lastPosition != position):
+                targetPosition = 3000 if self.control_type == "X" else 4000
+                self.moveToPosition(targetPosition)
+            elif position > 0 and self.currentCommand != 'home':
+                self.goHome()
+        elif self.control_type == "V":
+            if position > 0 and (self.currentCommand != 'forward' or self.lastPosition != position):
+                self.moveForward()
+            elif position < 0 and (self.currentCommand != 'backward' or self.lastPosition != position):
+                self.moveBackward()
 
     def stopMotor(self):
-        if self.control_type == "X":
-            self.controller.stop('X')
-        else:
-            self.controller.stop('Y')
+        if self.control_type in ["X", "Y"]:
+            self.controller.stop(self.control_type)
+        elif self.control_type == "V":
+            self.controller.stop()
         self.currentCommand = None
-        self.lastPosition = None  # Réinitialiser lastPosition ici
-        self.stepperSlider.setValue(0)  # Réinitialiser la valeur du slider à 0
+        self.lastPosition = None
+        self.slider.setValue(0)
 
     def goHome(self):
-        if self.control_type == "X":
-            self.controller.home('X')
-        else:
-            self.controller.home('Y')
+        self.controller.home(self.control_type)
         self.currentCommand = 'home'
-        self.lastPosition = None  # Considérez de réinitialiser également ici si nécessaire
+        self.lastPosition = None
 
     def moveToPosition(self, position):
-        if self.control_type == "X":
-            self.controller.moveTo('X', position)
-        else:
-            self.controller.moveTo('Y', position)
+        self.controller.moveTo(self.control_type, position)
         self.currentCommand = 'moveTo'
-        self.lastPosition = position  # Mise à jour de lastPosition
+        self.lastPosition = position
+
+    def moveForward(self):
+        self.controller.move_forward(9000)
+        self.currentCommand = 'forward'
+        self.lastPosition = self.slider.value()
+
+    def moveBackward(self):
+        self.controller.move_backward(9000)
+        self.currentCommand = 'backward'
+        self.lastPosition = self.slider.value()
 
 
 class ledStripControl:

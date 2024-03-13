@@ -144,6 +144,7 @@ class ElectricCylinderController(Controller):
 
     def move_forward(self, duration: int):
         self.cmd.send("cmd_EC_forward", duration)
+        self.position = 1
         msg = self.cmd.receive()
         print(msg)
 
@@ -153,7 +154,7 @@ class ElectricCylinderController(Controller):
         print(msg)
 
     def go_home(self):
-        self.cmd.send("cmd_EC_backward", self.FULL_CYCLE_DURATION + 500)
+        self.cmd.send("cmd_EC_backward", 8500)
         msg = self.cmd.receive()
         print(msg)
 
@@ -162,6 +163,9 @@ class ElectricCylinderController(Controller):
         self.cmd.send("cmd_EC_stop")
         msg = self.cmd.receive()
         print(msg)
+
+    def set_position(self, new_position):
+        self.position = new_position
         
 class LemonBowlController(Controller):
     def __init__(self):
