@@ -12,8 +12,8 @@ ServoHandler servoHandler(pwmDriver);
 uint8_t servoOrder[NUMBER_OF_DISPENSER] = {0, 1, 14, 3, 11, 12, 4, 2, 15};
 // {0, 1, 2, 3, 4, 5, 6, 7, 8};
 DispenserSequenceManager dispenserManager(servoHandler, servoOrder);
-LemonBowlSequenceManager lemonBowlSequenceManager(servoHandler, 13);
-LemonRampSequenceManager lemonRampSequenceManager(servoHandler, 10); 
+LemonBowlSequenceManager lemonBowlSequenceManager(servoHandler, 10);
+LemonRampSequenceManager lemonRampSequenceManager(servoHandler, 13); 
 
 void beginServo(){
     servoHandler.begin();
@@ -115,11 +115,12 @@ void onLemonRampCustomPosition() {
 void onLemonRampSetting() {
     uint8_t positionDown = cmdMessenger.readBinArg<int>();
     uint8_t positionUp = cmdMessenger.readBinArg<int>();
+    uint8_t positionIdle = cmdMessenger.readBinArg<int>();
     uint8_t speed = cmdMessenger.readBinArg<int>();
     uint16_t downWaitDelay = cmdMessenger.readBinArg<int>();
     uint16_t upWaitDelay = cmdMessenger.readBinArg<int>();
 
-    lemonRampSequenceManager.setRampParams(positionDown, positionUp, speed, downWaitDelay, upWaitDelay);
+    lemonRampSequenceManager.setRampParams(positionDown, positionUp, positionIdle, speed, downWaitDelay, upWaitDelay);
     cmdMessenger.sendCmd(cmd_ack, F("Lemon Ramp Settings Updated"));
 }
 
@@ -129,7 +130,7 @@ void onServoHandlerMove() {
     uint8_t position = cmdMessenger.readBinArg<int>();
     uint8_t id = cmdMessenger.readBinArg<int>();
 
-    if (id < NUMBER_OF_SERVO) {
+    if (id < MAX_ID) {
         servoHandler.move(position, id);
         cmdMessenger.sendCmd(cmd_ack, "Servo " + String(id) + " stopped at position " + String(position));
     } else {

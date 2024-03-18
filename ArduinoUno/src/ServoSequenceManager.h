@@ -10,6 +10,7 @@ class DispenserSequenceManager {
             uint8_t positionMax;
             uint16_t tMax;
             uint8_t positionRelease;
+            uint8_t positionIdle;
         };
 
         ServoHandler& servoHandler; // Gère les servos associés aux distributeurs.
@@ -61,6 +62,7 @@ private:
     struct RampParams {
         uint8_t positionDown;
         uint8_t positionUp;
+        uint8_t positionIdle;
         uint8_t speed;
         uint16_t downWaitDelay;
         uint16_t upWaitDelay;
@@ -81,7 +83,7 @@ private:
 public:
     LemonRampSequenceManager(ServoHandler& handler, uint8_t servoID);
 
-    void setRampParams(uint8_t positionDown, uint8_t positionUp, uint8_t speed, uint16_t downWaitDelay, uint16_t upWaitDelay);
+    void setRampParams(uint8_t positionDown, uint8_t positionUp, uint8_t positionIdle, uint8_t speed, uint16_t downWaitDelay, uint16_t upWaitDelay);
     void releaseLemon();
     void moveDownOnly();
     void moveUpOnly();

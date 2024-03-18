@@ -7,12 +7,12 @@
 DispenserSequenceManager::DispenserSequenceManager(ServoHandler& handler, uint8_t order[NUMBER_OF_DISPENSER])
     : servoHandler(handler) {
 
-    dispenserParams = {160, 1000, 120}; // positionMax, tMax ,positionRelease
+    dispenserParams = {160, 1000, 120, 0}; // positionMax, tMax ,positionRelease, positionIdle
 
     moveUp = ServoAction(WAIT, dispenserParams.positionMax, 0, dispenserParams.tMax);
     release = ServoAction(WAIT, dispenserParams.positionRelease, 0, 0);
     release_idle = ServoAction(IDLE, dispenserParams.positionRelease, 0, 0);
-    idle = ServoAction();
+    idle = ServoAction(IDLE, dispenserParams.positionIdle, 0, 0);
     animation_1 = ServoAction(MOVE, 150, 0, 0); // Bouger à la position 150 avec une vitesse donnée
     animation_2 = ServoAction(MOVE, 0, 0, 0);   // Retour à la position 0 avec la même vitesse
 
@@ -85,7 +85,7 @@ void DispenserSequenceManager::dispenserAnimation(uint8_t dispenserIndex, uint8_
 LemonBowlSequenceManager::LemonBowlSequenceManager(ServoHandler& handler, uint8_t servoID)
     : servoHandler(handler) {
 
-    lemonBowlParams = {0, 180, 10}; // positionOpen, positionMax ,speed
+    lemonBowlParams = {100, 0, 20}; // positionOpen, positionMax ,speed
 
     openMove = ServoAction(MOVE, lemonBowlParams.positionOpen, lemonBowlParams.speed, 0);
     openIdle = ServoAction(IDLE, lemonBowlParams.positionOpen, 0, 0);
@@ -136,7 +136,7 @@ bool LemonBowlSequenceManager::isBowlOpen() {
 LemonRampSequenceManager::LemonRampSequenceManager(ServoHandler& handler, uint8_t servoID)
     : servoHandler(handler), servo() {
     // Initialize RampParams with default values
-    rampParams = {120, 0, 10, 1000, 1000}; // Default values for down position, up position, speed, down and up wait delays
+    rampParams = {120, 0, 0, 100, 100, 500}; // Default values for down position, up position, idle position, speed, down and up wait delays
 
     // Initialize ServoAction objects with initial parameters
     moveDown = ServoAction(MOVE, rampParams.positionDown, rampParams.speed, 0);
@@ -144,7 +144,7 @@ LemonRampSequenceManager::LemonRampSequenceManager(ServoHandler& handler, uint8_
     downIdle = ServoAction(IDLE, rampParams.positionDown, 0, 0);
     moveUp = ServoAction(MOVE, rampParams.positionUp, rampParams.speed, 0);
     upWait = ServoAction(WAIT, rampParams.positionUp, 0, rampParams.upWaitDelay);
-    upIdle = ServoAction(IDLE, rampParams.positionUp, 0, 0);
+    upIdle = ServoAction(IDLE, rampParams.positionIdle, 0, 0);
     idle = ServoAction(IDLE, rampParams.positionUp, 0, 0); // The idle position is the same as the up position
 
     servo.ServoID = servoID;
@@ -157,9 +157,10 @@ LemonRampSequenceManager::LemonRampSequenceManager(ServoHandler& handler, uint8_
     servoHandler.addServo(&servo);
 }
 
-void LemonRampSequenceManager::setRampParams(uint8_t positionDown, uint8_t positionUp, uint8_t speed, uint16_t downWaitDelay, uint16_t upWaitDelay) {
+void LemonRampSequenceManager::setRampParams(uint8_t positionDown, uint8_t positionUp, uint8_t positionIdle, uint8_t speed, uint16_t downWaitDelay, uint16_t upWaitDelay) {
     rampParams.positionDown = positionDown;
     rampParams.positionUp = positionUp;
+    rampParams.positionIdle = positionIdle;
     rampParams.speed = speed;
     rampParams.downWaitDelay = downWaitDelay;
     rampParams.upWaitDelay = upWaitDelay;
@@ -174,7 +175,7 @@ void LemonRampSequenceManager::setRampParams(uint8_t positionDown, uint8_t posit
     moveUp.speed = speed;
     upWait.targetPosition = positionUp;
     upWait.delay = upWaitDelay;
-    upIdle.targetPosition = positionUp;
+    upIdle.targetPosition = positionIdle;
 
     idle.targetPosition = positionUp; // Assuming the idle position is the same as the up position
 }

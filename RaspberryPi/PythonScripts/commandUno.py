@@ -34,7 +34,7 @@ commands_uno = [
     ["cmd_SERVO_lemonRamp_down", ""],
     ["cmd_SERVO_lemonRamp_up", ""],
     ["cmd_SERVO_lemonRamp_custo", "i"],
-    ["cmd_SERVO_lemonRamp_setting", "iiiii"],
+    ["cmd_SERVO_lemonRamp_setting", "iiiiii"],
 
     ["cmd_SERVO_handler_move", "ii"], 
     ["cmd_SERVO_handler_stop", ""],
@@ -268,10 +268,10 @@ class LemonRampController(Controller):
         msg = self.cmd.receive()
         print(msg)
 
-    def set_ramp_settings(self, positionDown: int, positionUp: int, speed: int, downWaitDelay: int, upWaitDelay: int):
+    def set_ramp_settings(self, positionDown: int, positionUp: int, positionIdle: int, speed: int, downWaitDelay: int, upWaitDelay: int):
         """
         Configure les paramètres du ramp.
         """
-        self.cmd.send("cmd_SERVO_lemonRamp_setting", positionDown, positionUp, speed, downWaitDelay, upWaitDelay)
+        self.cmd.send("cmd_SERVO_lemonRamp_setting", positionDown, positionUp, positionIdle, speed, downWaitDelay, upWaitDelay)
         msg = self.cmd.receive()
         print(msg)

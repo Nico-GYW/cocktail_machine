@@ -1,6 +1,6 @@
 #include "Servo.h"
 
-#define USMIN  450 // This is the rounded 'minimum' microsecond length 0° (-90°)
+#define USMIN  350 // This is the rounded 'minimum' microsecond length 0° (-90°)
 #define USMAX  1800 // This is the rounded 'maximum' microsecond length 180° (+90°)
 
 #define SLOWDOWNFACTOR 10
@@ -130,13 +130,13 @@ void ServoHandler::stop() {
 
 // Arrête tous les servos en les plaçant dans leur état de repos.
 void ServoHandler::move(uint8_t position, uint8_t id) {
-    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+    for (int i = 0; i < MAX_ID; ++i) {
         pwmDriver.writeMicroseconds(id, map(position, 0, 180, USMIN, USMAX));
     }
 }
 
 void ServoHandler::moveAll(uint8_t position) {
-    for (int i = 0; i < NUMBER_OF_SERVO; ++i) {
+    for (int i = 0; i < MAX_ID; ++i) {
         pwmDriver.writeMicroseconds(i, map(position, 0, 180, USMIN, USMAX));
     }
 }

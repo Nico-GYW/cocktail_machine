@@ -2,7 +2,8 @@
 #include <Adafruit_PWMServoDriver.h>
 
 #define MAX_ACTIONS 4  // Nombre maximum d'actions par servo
-#define NUMBER_OF_SERVO 11  // Nombre total de servo
+#define NUMBER_OF_SERVO 11  // Nombre total de servo dans le servo  handle
+#define MAX_ID 16 //
 
 enum ServoState {
     IDLE,
