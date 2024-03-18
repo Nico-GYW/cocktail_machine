@@ -1,5 +1,6 @@
 import PyCmdMessenger
 import serial.tools.list_ports
+import time
 
 # Initialize an ArduinoBoard instance.  
 
@@ -55,6 +56,35 @@ cmd_arduino_uno = PyCmdMessenger.CmdMessenger(arduino_uno, commands_uno)
 class Controller:
     def __init__(self, cmd_arduino):
         self.cmd = cmd_arduino
+
+    def send_command(self, command, *args):
+        """
+        Envoie une commande avec gestion d'erreur.
+
+        :param command: La commande à envoyer.
+        :param args: Les arguments de la commande.
+        :return: True si la commande a été envoyée avec succès, False sinon.
+        """
+        try:
+            self.cmd.send(command, *args)
+            return True  # Commande envoyée avec succès
+        except Exception as e:
+            print(f"Erreur lors de l'envoi de la commande '{command}': {e}")
+            return False  # Échec de l'envoi de la commande
+        
+    def receive_command(self):
+        """
+        Tente de recevoir une réponse du dispositif.
+
+        :return: Le message reçu si réussi, None sinon.
+        """
+        try:
+            time.sleep(0.1)
+            msg = self.cmd.receive()
+            return msg  # Message reçu avec succès
+        except Exception as e:
+            print(f"Erreur lors de la réception du message: {e}")
+            return None  # Échec de la réception du message
         
 class DispenserController(Controller):
 
@@ -137,31 +167,30 @@ class DCValveController(Controller):
 class ElectricCylinderController(Controller):
     FULL_CYCLE_DURATION = 7800  # Temps nécessaire pour faire une course complète du cylindre en ms
 
-    def __init__(self, cmd_arduino_uno):
+    def __init__(self):
         super().__init__(cmd_arduino_uno)
         self.position = 0
-        self.interrupted = False  # Attribut pour suivre l'interruption
 
     def move_forward(self, duration: int):
-        self.cmd.send("cmd_EC_forward", duration)
+        self.send_command("cmd_EC_forward", duration)
         self.position = 1
-        msg = self.cmd.receive()
+        msg = self.receive_command()
         print(msg)
 
     def move_backward(self, duration: int):
-        self.cmd.send("cmd_EC_backward", duration)
-        msg = self.cmd.receive()
+        self.send_command("cmd_EC_backward", duration)
+        msg = self.receive_command()
         print(msg)
 
     def go_home(self):
-        self.cmd.send("cmd_EC_backward", 8500)
-        msg = self.cmd.receive()
+        self.send_command("cmd_EC_backward", 8500)
+        msg = self.receive_command()
         print(msg)
 
     def stop(self):
         self.interrupted = True  # Définir l'interruption
-        self.cmd.send("cmd_EC_stop")
-        msg = self.cmd.receive()
+        self.send_command("cmd_EC_stop")
+        msg = self.receive_command()
         print(msg)
 
     def set_position(self, new_position):

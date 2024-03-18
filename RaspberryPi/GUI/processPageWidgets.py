@@ -30,12 +30,6 @@ class ProcessPage(QWidget):
     def set_controllers(self):
         self.EC = ElectricCylinderController()
 
-
-        self.interrupted = False
-        self.checkTimer = QTimer()
-        self.checkTimer.timeout.connect(self.checkInterrupt)
-        self.totalWaitTime = 0  # Durée totale attendue
-
     def setRecipe(self, recipe):
         self.cocktailRecipe = recipe
         print("Set Recipe")

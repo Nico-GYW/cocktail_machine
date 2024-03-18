@@ -201,12 +201,12 @@ class ParameterPage(QWidget):
 
         self.objectControls.append(xStepperControl)
         self.objectControls.append(yStepperControl) 
-        # self.objectControls.append(cylinderControl) 
+        self.objectControls.append(cylinderControl) 
         self.objectControls.append(ledstrip) 
 
         self.ui.xStepperButton.clicked.connect(xStepperControl.goHome)
         self.ui.yStepperButton.clicked.connect(yStepperControl.goHome)
-        # self.ui.cylinderButton.clicked.connect(cylinderControl.goHome)
+        self.ui.cylinderButton.clicked.connect(cylinderControl.goHome)
 
 
 class BottleParameter(QFrame):
@@ -311,7 +311,6 @@ class SliderLinearControl:
         self.controller = controller
         self.isSliderPressed = False
         self.currentCommand = None
-        self.lastPosition = None
         
         # Connecter les signaux du slider
         self.slider.sliderPressed.connect(self.onSliderPressed)
@@ -332,15 +331,16 @@ class SliderLinearControl:
     def sendCommand(self):
         position = self.slider.value()
         if self.control_type in ["X", "Y"]:
-            if position < 0 and (self.currentCommand != 'moveTo' or self.lastPosition != position):
+            if position < 0 and (self.currentCommand != 'moveTo'):
                 targetPosition = 3000 if self.control_type == "X" else 4000
                 self.moveToPosition(targetPosition)
             elif position > 0 and self.currentCommand != 'home':
                 self.goHome()
         elif self.control_type == "V":
-            if position > 0 and (self.currentCommand != 'forward' or self.lastPosition != position):
+            if position > 0 and (self.currentCommand != 'forward'):
                 self.moveForward()
-            elif position < 0 and (self.currentCommand != 'backward' or self.lastPosition != position):
+            elif position < 0 and (self.currentCommand != 'backward'):
+                print("Verrin Back")
                 self.moveBackward()
 
     def stopMotor(self):
@@ -349,28 +349,26 @@ class SliderLinearControl:
         elif self.control_type == "V":
             self.controller.stop()
         self.currentCommand = None
-        self.lastPosition = None
         self.slider.setValue(0)
 
     def goHome(self):
-        self.controller.home(self.control_type)
+        if self.control_type in ["X", "Y"]:
+            self.controller.home(self.control_type)
+        elif self.control_type == "V":
+            self.controller.go_home()
         self.currentCommand = 'home'
-        self.lastPosition = None
 
     def moveToPosition(self, position):
         self.controller.moveTo(self.control_type, position)
         self.currentCommand = 'moveTo'
-        self.lastPosition = position
 
     def moveForward(self):
         self.controller.move_forward(9000)
         self.currentCommand = 'forward'
-        self.lastPosition = self.slider.value()
 
     def moveBackward(self):
         self.controller.move_backward(9000)
         self.currentCommand = 'backward'
-        self.lastPosition = self.slider.value()
 
 
 class ledStripControl:
