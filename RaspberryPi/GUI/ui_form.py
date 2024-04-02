@@ -2690,13 +2690,34 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setGeometry(QtCore.QRect(60, 454, 621, 31))
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
-        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.processPage)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(120, 260, 551, 121))
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        self.CocktailStepVerticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
+        self.interrupt = QtWidgets.QPushButton(self.processPage)
+        self.interrupt.setGeometry(QtCore.QRect(720, 440, 61, 31))
+        self.interrupt.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    font-size: 16px;\n"
+"    background-color: #F79643;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu\'appuyé */\n"
+"}\n"
+"")
+        self.interrupt.setObjectName("interrupt")
+        self.horizontalLayoutWidget = QtWidgets.QWidget(self.processPage)
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(50, 260, 671, 122))
+        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+        self.CocktailStepVerticalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.CocktailStepVerticalLayout.setContentsMargins(0, 0, 0, 0)
         self.CocktailStepVerticalLayout.setObjectName("CocktailStepVerticalLayout")
-        self.cocktailStep = QtWidgets.QWidget(self.verticalLayoutWidget_2)
+        self.cocktailStep = QtWidgets.QWidget(self.horizontalLayoutWidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.cocktailStep.sizePolicy().hasHeightForWidth())
+        self.cocktailStep.setSizePolicy(sizePolicy)
+        self.cocktailStep.setMinimumSize(QtCore.QSize(500, 120))
+        self.cocktailStep.setMaximumSize(QtCore.QSize(200, 120))
         self.cocktailStep.setObjectName("cocktailStep")
         self.stepdetail = QtWidgets.QLabel(self.cocktailStep)
         self.stepdetail.setGeometry(QtCore.QRect(50, 70, 181, 20))
@@ -2709,7 +2730,7 @@ class Ui_MainWindow(object):
         self.stepdetail.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.stepdetail.setObjectName("stepdetail")
         self.stepTitle = QtWidgets.QLabel(self.cocktailStep)
-        self.stepTitle.setGeometry(QtCore.QRect(80, 10, 361, 41))
+        self.stepTitle.setGeometry(QtCore.QRect(0, 10, 501, 41))
         font = QtGui.QFont()
         font.setFamily("CoconPro")
         font.setPointSize(-1)
@@ -2733,20 +2754,6 @@ class Ui_MainWindow(object):
 "")
         self.stepButton.setObjectName("stepButton")
         self.CocktailStepVerticalLayout.addWidget(self.cocktailStep)
-        self.interrupt = QtWidgets.QPushButton(self.processPage)
-        self.interrupt.setGeometry(QtCore.QRect(720, 440, 61, 31))
-        self.interrupt.setStyleSheet("QPushButton {\n"
-"    color: white;\n"
-"    font-size: 16px;\n"
-"    background-color: #F79643;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #f0f0f0; /* Gris clair lorsqu\'appuyé */\n"
-"}\n"
-"")
-        self.interrupt.setObjectName("interrupt")
         self.processingStackedWidget.addWidget(self.processPage)
         self.endingPage = QtWidgets.QWidget()
         self.endingPage.setStyleSheet("background-color : #F0F0F0;\n"
@@ -2796,7 +2803,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(4)
         self.extraStack.setCurrentIndex(0)
         self.parameterStack.setCurrentIndex(2)
-        self.processingStackedWidget.setCurrentIndex(1)
+        self.processingStackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -2912,10 +2919,10 @@ class Ui_MainWindow(object):
         self.label_54.setText(_translate("MainWindow", "Schweppes"))
         self.label_55.setText(_translate("MainWindow", "100 ml"))
         self.titleBarMan_2.setText(_translate("MainWindow", "Préparation du Mojito"))
+        self.interrupt.setText(_translate("MainWindow", "Stop !"))
         self.stepdetail.setText(_translate("MainWindow", "Rhum blanc - 20 ml"))
         self.stepTitle.setText(_translate("MainWindow", "Étape 1 : bouteilles"))
         self.stepButton.setText(_translate("MainWindow", "Fait !"))
-        self.interrupt.setText(_translate("MainWindow", "Stop !"))
         self.endTitle.setText(_translate("MainWindow", "Mojito prêt !"))
         self.endButton.setText(_translate("MainWindow", "Au suivant !"))
 from barmanPageWidgets import BarmanPage
