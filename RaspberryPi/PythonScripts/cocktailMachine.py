@@ -48,29 +48,31 @@ class CocktailMachine:
         self.stock_ice = 1000
         self.cocktail_recipes = []
 
-        # self.stepper = StepperMotorController()
-        # self.lemonBucket = LemonBucketController()
-        # self.lemonRamp = LemonRampController()
-        # self.valve = SolenoidValveController()
-        # self.alcoholDispenser = AlcoholDispenserController()
-        # self.electricCylinder = ElectricCylinderController()
-        # self.ledStrip = LedStripController()
+    def check_ingredients(self, recipe):
+        missing_ingredients = []
 
-    def check_ingredients(self, holder, ingredients):
+        # Vérifier les bouteilles en verre
+        for ingredient, quantity in recipe.glass_bottles.items():
+            if not self.check_single_ingredient(self.glass_bottle_holder, ingredient, quantity):
+                missing_ingredients.append((ingredient, quantity))
 
-        for ingredient, quantity in ingredients.items():
+        # Vérifier les soft drinks
+        for ingredient, quantity in recipe.soft_drink_bottles.items():
+            if not self.check_single_ingredient(self.soft_drink_bottle_holder, ingredient, quantity):
+                missing_ingredients.append((ingredient, quantity))
 
-            bottles = holder.get(ingredient)
+        return missing_ingredients
 
-            if not bottles:
-                return f"{ingredient} not found on the machine."
+    def check_single_ingredient(self, holder, ingredient, required_quantity):
+        bottles = holder.get(ingredient)
+        if not bottles:
+            return False  # L'ingrédient n'est pas trouvé
 
-            total_quantity = sum(bottle.quantity for bottle in bottles)
-            if total_quantity < quantity:
-                return f"Not enough {ingredient} on the machine."
+        total_quantity = sum(bottle.quantity for bottle in bottles)
+        if total_quantity < required_quantity:
+            return False  # Quantité insuffisante
 
-        return "All ingredients are available."
-
+        return True  # L'ingrédient est disponible en quantité suffisante
 
     def use_ingredient(self, holder, bottle_position, quantity):
 
@@ -85,35 +87,29 @@ class CocktailMachine:
         else:
             print("Invalid bottle position.")
         return False
+    
+    def fetch_bottles_for_ingredient(self, ingredient, bottle_type, required_quantity):
+        """
+        Fetch bottles based on the ingredient, bottle type, and required quantity.
+        
+        Args:
+            ingredient (str): The name of the ingredient.
+            bottle_type (str): The type of the bottle ('glass' or 'soft').
+            required_quantity (int): The required quantity of the ingredient.
+        
+        Returns:
+            list: A list of tuples, each containing the bottle's position, (X, Y) coordinates, and the quantity to use from that bottle.
+        """
+        bottle_holder = self.glass_bottle_holder if bottle_type == 'glass' else self.soft_drink_bottle_holder
+        return bottle_holder.get_position_by_ingredient(ingredient, required_quantity)
 
     def make_cocktail(self, recipe: CocktailRecipe):
 
-        if recipe.name != "Tequila Sunrise":
-            return ("Le cocktail n'est pas orange, le WSL n'en fait donc pas")
-
-        glass_bottles_status = self.check_ingredients(self.glass_bottle_holder, recipe.glass_bottles)
-        if glass_bottles_status != "All ingredients are available.":
-            print(glass_bottles_status)
-            return
-
-        soft_drink_bottles_status = self.check_ingredients(self.soft_drink_bottle_holder, recipe.soft_drink_bottles)
-        if soft_drink_bottles_status != "All ingredients are available.":
-            print(soft_drink_bottles_status)
-            return
-
-        if self.stock_lemon < recipe.lemon:
-            print("Not enough lemon on the machine.")
-            return
-        if self.stock_ice < recipe.ice:
-            print("Not enough ice on the machine.")
-            return
-
-        self.stepper.x_go_home()
-        self.ledStrip.pulse()
 
         # If all ingredients are available, then make the cocktail and update the stocks
         for ingredient, quantity in recipe.glass_bottles.items():
-            bottle_position = self.glass_bottle_holder.get_by_name(ingredient)
+            bottle_position = self.glass_bottle_holder.get_position_by_name(ingredient)
+
             self.stepper.goto_glass_bottle(bottle_position+1)
             time.sleep((10-bottle_position)*TIME_FOR_STEPPER)
 
@@ -123,7 +119,6 @@ class CocktailMachine:
                 full_shots -= 1
                 time.sleep(6)
                 
-
             if half_shot > 0:
                 self.alcoholDispenser.dispense(bottle_position+1, 0.5)
                 time.sleep(6)

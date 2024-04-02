@@ -193,15 +193,20 @@ class ParameterPage(QWidget):
         # Créer une instance de StepperControl et la stocker dans la liste
         stepperMotorController = StepperMotorController()
         ec = ElectricCylinderController()
+        sh = ServoHandler()
         xStepperControl = SliderLinearControl(self.ui.xStepperSlider, stepperMotorController, "X")
         yStepperControl = SliderLinearControl(self.ui.yStepperSlider, stepperMotorController,"Y")
         cylinderControl = SliderLinearControl(self.ui.cylinderSlider, ec, "V")
+        lemonRamControl = SliderServoControl(self.ui.lemonRampSlider, sh, "R")
+        lemonBowlControl = SliderServoControl(self.ui.lemonBowlSlider, sh, "B")
         ledstrip = ledStripControl(self.ui)
 
 
         self.objectControls.append(xStepperControl)
         self.objectControls.append(yStepperControl) 
         self.objectControls.append(cylinderControl) 
+        self.objectControls.append(lemonRamControl)
+        self.objectControls.append(lemonBowlControl)
         self.objectControls.append(ledstrip) 
 
         self.ui.xStepperButton.clicked.connect(xStepperControl.goHome)
@@ -260,8 +265,9 @@ class BottleDialog(QDialog):
         self.ui.dial.valueChanged.connect(self.update_spin_box_value)
 
     def update_spin_box_value(self, value):
-        # Mettre à jour la valeur du QSpinBox avec la valeur du QDial
-        self.ui.quantitySpinBox.setValue(value)
+        # Multiplier la valeur du QDial par 10 avant de la définir dans le QSpinBox
+        newValue = value * 10
+        self.ui.quantitySpinBox.setValue(newValue)
 
     def update_machine(self):
         if self.machine:
@@ -369,6 +375,53 @@ class SliderLinearControl:
     def moveBackward(self):
         self.controller.move_backward(9000)
         self.currentCommand = 'backward'
+
+class SliderServoControl:
+    def __init__(self, slider, controller, control_type):
+        self.control_type = control_type
+        self.slider = slider
+        self.controller = controller
+        self.isSliderPressed = False
+        
+        # Connecter les signaux du slider
+        self.slider.sliderPressed.connect(self.onSliderPressed)
+        self.slider.sliderReleased.connect(self.onSliderReleased)
+        self.slider.valueChanged.connect(self.onValueChanged)
+
+    def onSliderPressed(self):
+        self.isSliderPressed = True
+
+    def onSliderReleased(self):
+        self.isSliderPressed = False
+        self.resetSliderAndSendCommand()
+
+    def onValueChanged(self):
+        if self.isSliderPressed:
+            self.sendCommand()
+
+    def sendCommand(self):
+        position = self.mapSliderValueToPosition()
+        if self.control_type == "R":
+            self.controller.move(position, 13)
+        elif self.control_type == "B":
+            self.controller.move(position, 10)
+
+    def mapSliderValueToPosition(self):
+        sliderValue = self.slider.value()
+        if self.control_type == "R":
+            return int(sliderValue * 1.2)  # Map from 0-100 to 0-120
+        elif self.control_type == "B":
+            return sliderValue  # Direct mapping for 0-100
+
+    def resetSliderAndSendCommand(self):
+        if self.control_type == "R":
+            self.slider.setValue(0)
+            self.sendCommand()
+        elif self.control_type == "B":
+            sliderValue = self.slider.value()
+            newValue = 0 if sliderValue < 50 else 100
+            self.slider.setValue(newValue)
+            self.sendCommand()
 
 
 class ledStripControl:

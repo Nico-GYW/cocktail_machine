@@ -242,10 +242,10 @@ QSpinBox::down-arrow {
     </rect>
    </property>
    <property name="maximum">
-    <number>1000</number>
+    <number>100</number>
    </property>
    <property name="singleStep">
-    <number>50</number>
+    <number>1</number>
    </property>
   </widget>
  </widget>

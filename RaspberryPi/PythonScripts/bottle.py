@@ -75,6 +75,10 @@ class BottleHolder:
             if bottle.name not in self.bottle_names:
                 self.bottle_names[bottle.name] = []
             self.bottle_names[bottle.name].append(bottle.position - 1)
+        
+        # Imaginary fixed positions (X, Y) for each bottle position index
+        self.position_mapping = [(100, 50) for _ in range(10)]  # Assuming 10 positions for simplicity
+
 
     def get(self, name):
         """
@@ -113,15 +117,42 @@ class BottleHolder:
         """
         return self.bottles[position - 1] if 0 < position <= len(self.bottles) else None
 
-    def get_by_name(self, name):
-        # Check if the name exists in the dictionary
-        if name in self.bottle_names:
-            # If it does, return the first value for that key
-            return self.bottle_names[name][0]
-        else:
-            # If it doesn't, return None or any appropriate value
-            return None
+    def get_position_by_ingredient(self, ingredient, required_quantity):
+        """
+        Find bottle positions and quantities to use for the required amount of the ingredient.
+        
+        Args:
+            ingredient (str): The name of the ingredient.
+            required_quantity (int): The required quantity of the ingredient.
+        
+        Returns:
+            list: A list of tuples, each containing the bottle's (X, Y) position and the quantity to use from that bottle.
+        """
+        if ingredient not in self.bottle_names:
+            return []  # L'ingrédient n'est pas trouvé
+        
+        total_quantity = 0
+        bottles_to_fetch = []
 
+        for position_index in self.bottle_names[ingredient]:
+            if total_quantity >= required_quantity:
+                break  # La quantité requise est atteinte
+            
+            bottle = self.bottles[position_index]
+            available_quantity = bottle.quantity
+            quantity_to_use = min(available_quantity, required_quantity - total_quantity)
+            total_quantity += quantity_to_use
+            
+            position_xy = self.position_mapping[position_index]
+            bottles_to_fetch.append((bottle.position, position_xy, quantity_to_use))
+            
+            if total_quantity >= required_quantity:
+                break
+
+        if total_quantity < required_quantity:
+            return []  # Quantité insuffisant
+
+        return bottles_to_fetch
 
     def update_bottle(self, bottle):
         """

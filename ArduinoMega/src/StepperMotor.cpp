@@ -1,6 +1,8 @@
 #include "StepperMotor.h"
 
-StepperMotor::StepperMotor(int stepPin, int dirPin, int endStop, int enablePin) : 
+extern CmdMessenger cmdMessenger; 
+
+StepperMotor::StepperMotor(int stepPin, int dirPin, int endStop, int enablePin, bool isXStepper) : 
     stepper(AccelStepper::DRIVER, stepPin, dirPin), 
     currentState(IDLE_STATE) {
     this->endStop = endStop;
@@ -48,6 +50,7 @@ void StepperMotor::handleMovingState() {
         stepper.run();
     } else {
         stepper.disableOutputs();
+        cmdMessenger.sendCmd(cmd_ack, isXStepper ? "Stepper X done" : "Stepper Y done");
         currentState = IDLE_STATE;
     }
 }

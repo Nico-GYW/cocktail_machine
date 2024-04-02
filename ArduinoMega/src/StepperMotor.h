@@ -2,6 +2,8 @@
 #define StepperMotor_h
 
 #include <AccelStepper.h>
+#include "CmdMessenger.h"
+#include "CommandsEnum.h"
 
 class StepperMotor {
   public:
@@ -12,7 +14,7 @@ class StepperMotor {
       REACHED_HOME_STATE,
     };
 
-    StepperMotor(int stepPin, int dirPin, int endStop, int enablePin);
+    StepperMotor(int stepPin, int dirPin, int endStop, int enablePin, bool isXStepper);
     void begin();
     void loop();
     void moveTo(int position);
@@ -32,6 +34,7 @@ class StepperMotor {
     MotorState currentState;
     int endStop;
     int enablePin;
+    bool isXStepper;
 };
 
 #endif

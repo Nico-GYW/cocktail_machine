@@ -1,7 +1,6 @@
 #include "StepperMotor.h"
 #include "StepperMotorCommands.h"
 #include "CmdMessenger.h"
-#include "CommandsEnum.h"
 
 // X motor
 #define StepPinX A0
@@ -18,8 +17,8 @@
 #define maxPositionY 2500
 
 extern CmdMessenger cmdMessenger; // Déclaration externe
-StepperMotor StepperMotorX(StepPinX, DirPinX, EndAxisX, EnablePinX);  // stepPin, dirPin, endStop, enablePin
-StepperMotor StepperMotorY(StepPinY, DirPinY, EndAxisY, EnablePinY);  // stepPin, dirPin, endStop, enablePin
+StepperMotor StepperMotorX(StepPinX, DirPinX, EndAxisX, EnablePinX, true);  // stepPin, dirPin, endStop, enablePin
+StepperMotor StepperMotorY(StepPinY, DirPinY, EndAxisY, EnablePinY, false);  // stepPin, dirPin, endStop, enablePin
 
 void beginStepper(){
   StepperMotorX.begin();

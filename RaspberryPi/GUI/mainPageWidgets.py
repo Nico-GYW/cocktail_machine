@@ -8,6 +8,7 @@ import os
 sys.path.append(os.path.abspath('../PythonScripts'))
 
 from ui_cocktailCard import Ui_cocktailCard
+from pompetteUtils import PompetteMessageBox
 from cocktailMachine import CocktailMachine
 from cocktailRecipe import CocktailRecipe
 
@@ -104,9 +105,20 @@ class MainPage(QWidget):
         self.ui.extraPage.reset_all_extras()
 
     def changeProcessPage(self):
-        self.ui.proccessingStackedWidget.setCurrentIndex(0)
-        self.ui.processPage.setRecipe(self.current_recipe)
-        self.changePage(4)
+        missing_ingredients = self.machine.check_ingredients(self.current_recipe)
+        
+        if not missing_ingredients:
+            # Si tous les ingrédients sont présents, continuer le processus
+            self.ui.processingStackedWidget.setCurrentIndex(0)
+            self.ui.processPage.setRecipe(self.current_recipe)
+            self.changePage(4)
+        else:
+            # Si des ingrédients manquent, afficher un message d'erreur
+            missing_ingredients_list = '\n'.join([f"{ingredient} (quantité manquante : {quantity})" for ingredient, quantity in missing_ingredients])
+            message = f"Il manque les ingrédients suivants pour que Pompette te régale :\n{missing_ingredients_list}"
+            
+            errorMessageBox = PompetteMessageBox(message, self)
+            errorMessageBox.exec_()
 
     def mettreAJourTextePage(self):
         index_courant = self.ui.cocktailCarousel.currentIndex() + 1  # +1 car l'index commence à 0

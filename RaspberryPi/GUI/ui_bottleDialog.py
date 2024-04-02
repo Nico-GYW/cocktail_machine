@@ -146,8 +146,8 @@ class Ui_bottleDialog(object):
         self.quantitySpinBox.setObjectName("quantitySpinBox")
         self.dial = QtWidgets.QDial(bottleDialog)
         self.dial.setGeometry(QtCore.QRect(280, 180, 50, 64))
-        self.dial.setMaximum(1000)
-        self.dial.setSingleStep(50)
+        self.dial.setMaximum(100)
+        self.dial.setSingleStep(1)
         self.dial.setObjectName("dial")
 
         self.retranslateUi(bottleDialog)

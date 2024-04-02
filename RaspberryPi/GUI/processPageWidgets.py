@@ -3,6 +3,7 @@ from PyQt5.QtGui import QPixmap, QFont
 from PyQt5.QtCore import QTimer, QPropertyAnimation
 
 
+import time
 import sys
 import os
 sys.path.append(os.path.abspath('../PythonScripts'))
@@ -29,15 +30,21 @@ class ProcessPage(QWidget):
 
     def set_controllers(self):
         self.EC = ElectricCylinderController()
+        self.stepperMotorController = StepperMotorController()
+        self.LemonRampController = LemonBowlController()
+        self.LemnBowlController = LemonRampController()
+        self.DispenserController = DispenserController()
+        self.LedController = LedStripController()
+        self.ValveController = DCValveController()
 
     def setRecipe(self, recipe):
         self.cocktailRecipe = recipe
         print("Set Recipe")
-        self.step1PrepareGlassStep()
         self.totalPhases = self.calculateTotalPhases()
         self.progressValue = 0
         self.ui.cocktailProgressBar.setValue(0)
-
+        self.step1PrepareGlassStep()
+        
     def clearCocktailStepLayout(self):
         # Supprime tous les widgets du layout
         for i in reversed(range(self.ui.CocktailStepVerticalLayout.count())): 
@@ -56,9 +63,10 @@ class ProcessPage(QWidget):
 
     def calculateTotalPhases(self):
         # Calculer le nombre total de phases en fonction des éléments de la recette
-        total_phases = len(self.cocktailRecipe.glass_bottles)
+        total_phases = 1 # set glass instruction
+        total_phases += len(self.cocktailRecipe.glass_bottles)
         total_phases += len(self.cocktailRecipe.soft_drink_bottles)
-        total_phases += 1 if self.cocktailRecipe.lemon > 0 else 0  # Plusieurs sous-phases pour les citrons si nécessaire
+        total_phases += 2  # Plusieurs sous-phases pour les citrons si nécessaire
         total_phases += 1 if self.cocktailRecipe.ice > 0 else 0
         return total_phases
 
@@ -75,8 +83,14 @@ class ProcessPage(QWidget):
         self.animation.setEndValue(progress)  # Valeur finale (nouvelle valeur calculée)
         self.animation.start()  # Démarre l'animation
 
+    def toggleInterrupt(self): # Interruption pour le bouton stop boutille
+        self.bottleInterrupt = not self.bottleInterrupt
+        print("Valeur de bottleInterrupt modifiée :", self.bottleInterrupt)  # Pour vérification
+
     def pourBottle(self, bottleType):
-        self.clearCocktailStepLayout() 
+        self.clearCocktailStepLayout()
+        self.bottleInterrupt = False
+        self.ui.interuptButton.clicked.connect(self.toggleInterrupt)
         stepTitle = "Étape 2 : Bouteille en verre" if bottleType == "glass" else "Étape 3 : Bouteille de soft"
         self.currentStep = CocktailStep(stepTitle)  # Créez un seul CocktailStep pour cette étape
         self.ui.CocktailStepVerticalLayout.addWidget(self.currentStep)
@@ -86,17 +100,82 @@ class ProcessPage(QWidget):
 
     def pourNextBottle(self, bottleType):
         try:
-            bottle, quantity = next(self.bottle_iterator)
-            self.currentStep.ui.subtitle.setText(f"{bottle} - {quantity} ml")  # Mettre à jour le sous-titre pour la bouteille actuelle
-            print(f"Verser {quantity}ml de {bottle}")  # Remplacer par un appel à la méthode de la machine
-            QTimer.singleShot(3000, lambda: self.pourNextBottle(bottleType))  # Donne le temps pour le versage et l'affichage avant de passer à la bouteille suivante
+            ingredient, required_quantity = next(self.bottle_iterator)
+            self.currentStep.ui.subtitle.setText(f"{ingredient} - {required_quantity} ml")
+            print(f"Verser {required_quantity}ml de {ingredient}")
+
+            bottles_to_fetch = self.machine.fetch_bottles_for_ingredient(ingredient, bottleType, required_quantity)
+
+            for bottle_position, position_xy, quantity_to_use in bottles_to_fetch:
+                self.movementWithInterruptCheck(position_xy)
+                self.dispenseWithInterruptCheck(bottle_position, quantity_to_use)
+                print(f"Bouteille {bottle_position} à la position {position_xy} pour {quantity_to_use}ml versés")
+
             self.updateProgress(1)
+
         except StopIteration:
-            # Toutes les bouteilles ont été traitées, passer à l'étape suivante
             if bottleType == "glass":
                 self.step3PourSoftDrinks()
             else:
                 self.step4HandleLemons()
+
+    def movementWithInterruptCheck(self, position_xy):
+        # Initie le déplacement 
+        self.stepperMotorController.moveTo("X", position_xy[0])
+        self.stepperMotorController.moveTo("Y", position_xy[1])
+
+        # Boucle jusqu'à ce que le déplacement soit achevé, avec vérification des interruptions
+        while not self.stepperMotorController.isAcked():
+            if self.bottleInterrupt:
+                # Arrêter le mouvement en cas d'interruption
+                self.stepperMotorController.stop("X")
+                self.stepperMotorController.stop("Y")
+                
+                # Attendre que l'interruption soit levée
+                while self.bottleInterrupt:
+                    time.sleep(0.1)  # Utilisez time.sleep pour éviter une utilisation CPU élevée
+
+                # Reprendre le mouvement après l'interruption
+                self.stepperMotorController.moveTo("X", position_xy[0])
+                self.stepperMotorController.moveTo("Y", position_xy[1])
+
+    def dispenseWithInterruptCheck(self, bottle_position, quantity_to_use):
+        doses_needed = quantity_to_use // 25
+        remaining_ml = quantity_to_use % 25
+
+        for _ in range(doses_needed):
+            total_time_ms = 7000  # Temps pour 25 ml
+            self.waitForOrInterrupt(bottle_position, total_time_ms)
+
+        if remaining_ml > 0:
+            proportional_time_ms = int((remaining_ml / 25.0) * 7000)
+            self.waitForOrInterrupt(bottle_position, proportional_time_ms)
+
+    def waitForOrInterrupt(self, bottle_position, total_time_ms):
+        start_time = time.time()  # Marque le début de la distribution
+        elapsed_time_ms = 0
+
+        self.DispenserController.activate_dispenser(bottle_position, total_time_ms)
+        
+        while elapsed_time_ms < total_time_ms:
+            if self.bottleInterrupt:
+                self.DispenserController.stop(bottle_position)  # Arrête la distribution
+                interrupt_start_time = time.time()  # Marque le début de l'interruption
+
+                # Attend que l'interruption soit levée
+                while self.bottleInterrupt:
+                    time.sleep(0.1)
+
+                interrupt_time = (time.time() - interrupt_start_time) * 1000  # Calcule la durée de l'interruption
+                start_time += interrupt_time / 1000  # Ajuste le temps de départ pour exclure le temps d'interruption
+                
+                # Réactive le distributeur avec le temps restant ajusté
+                remaining_time_ms = total_time_ms - elapsed_time_ms
+                self.DispenserController.activate_dispenser(bottle_position, remaining_time_ms)
+
+            # Mise à jour du temps écoulé, excluant le temps d'interruption
+            elapsed_time_ms = (time.time() - start_time) * 1000
+            time.sleep(0.1)  # Attente active courte pour éviter une utilisation excessive du processeur
 
     # Les méthodes pour l'étape spécifique des bouteilles en verre et des bouteilles de soft
     def step2PourGlassBottles(self):

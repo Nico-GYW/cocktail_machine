@@ -36,7 +36,7 @@ class Ui_cocktailStep1Button(object):
         self.stepTitle.setAlignment(QtCore.Qt.AlignCenter)
         self.stepTitle.setObjectName("stepTitle")
         self.button_1 = QtWidgets.QPushButton(cocktailStep1Button)
-        self.button_1.setGeometry(QtCore.QRect(160, 80, 61, 31))
+        self.button_1.setGeometry(QtCore.QRect(170, 80, 61, 31))
         self.button_1.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    font-size: 16px;\n"

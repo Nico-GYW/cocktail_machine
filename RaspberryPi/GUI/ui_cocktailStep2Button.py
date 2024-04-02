@@ -50,7 +50,7 @@ class Ui_cocktailStep2Button(object):
 "")
         self.button_1.setObjectName("button_1")
         self.button_2 = QtWidgets.QPushButton(cocktailStep2Button)
-        self.button_2.setGeometry(QtCore.QRect(210, 80, 60, 30))
+        self.button_2.setGeometry(QtCore.QRect(220, 80, 60, 30))
         self.button_2.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    font-size: 16px;\n"

@@ -75,6 +75,7 @@ class StepperMotorController(Controller):
 
     def __init__(self):
         super().__init__(cmd_arduino_mega)
+        self.ack_received = {"Stepper X done": False, "Stepper Y done": False}
 
     def moveTo(self, motor: str, position: int):
         # Envoie la commande pour déplacer le moteur spécifié à une position spécifique
@@ -112,7 +113,24 @@ class StepperMotorController(Controller):
         msg = self.cmd.receive()
         state = msg[1][0]
         return state
+    
+    def isAcked(self, ack_type=None, reset=False):
+        if reset:
+            self.ack_received = {"Stepper X done": False, "Stepper Y done": False}  # Réinitialisation des ack
 
+        msg = self.arduino.receive()  # Tente de recevoir un message une fois
+        if msg:
+            command, values, timestamp = msg
+            if command in ["Stepper X done", "Stepper Y done"]:
+                self.ack_received[command] = True  # Marquer l'ack comme reçu
+
+                # Vérifier si on a reçu les ack nécessaires
+                if ack_type is None:  # Si on attend les deux ack
+                    return all(self.ack_received.values())  # Retourner True si les deux ack ont été reçus
+                else:  # Si on attend un ack spécifique
+                    return self.ack_received[ack_type]  # Retourner True si l'ack spécifique a été reçu
+        return False  # Retourner False si aucun message pertinent n'a été reçu
+    
 class LedStripController(Controller):
 
     def __init__(self):

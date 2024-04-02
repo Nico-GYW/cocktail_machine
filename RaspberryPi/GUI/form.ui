@@ -89,7 +89,7 @@ QPushButton {
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="LandingPage" name="landingPage">
      <property name="minimumSize">
@@ -3672,7 +3672,7 @@ background-color: #A0ACB0;</string>
                 <set>Qt::AlignCenter</set>
                </property>
               </widget>
-              <widget class="QSlider" name="verticalSlider_17">
+              <widget class="QSlider" name="lemonBowlSlider">
                <property name="geometry">
                 <rect>
                  <x>30</x>
@@ -3682,6 +3682,9 @@ background-color: #A0ACB0;</string>
                 </rect>
                </property>
                <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="singleStep">
                 <number>1</number>
                </property>
                <property name="orientation">
@@ -3977,7 +3980,7 @@ background-color: #A0ACB0;</string>
                 <set>Qt::AlignCenter</set>
                </property>
               </widget>
-              <widget class="QSlider" name="verticalSlider_16">
+              <widget class="QSlider" name="lemonRampSlider">
                <property name="geometry">
                 <rect>
                  <x>30</x>
@@ -6167,7 +6170,7 @@ background-color: transparent;</string>
        <enum>QFrame::Plain</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="ProcessPage" name="processPage">
        <property name="minimumSize">
@@ -6333,9 +6336,9 @@ QProgressBar::chunk {
        <widget class="QWidget" name="verticalLayoutWidget_2">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>120</x>
           <y>260</y>
-          <width>421</width>
+          <width>551</width>
           <height>121</height>
          </rect>
         </property>
