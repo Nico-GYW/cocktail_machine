@@ -15,6 +15,13 @@ class Ui_cocktailStep2Button(object):
     def setupUi(self, cocktailStep2Button):
         cocktailStep2Button.setObjectName("cocktailStep2Button")
         cocktailStep2Button.resize(400, 120)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(cocktailStep2Button.sizePolicy().hasHeightForWidth())
+        cocktailStep2Button.setSizePolicy(sizePolicy)
+        cocktailStep2Button.setMinimumSize(QtCore.QSize(400, 120))
+        cocktailStep2Button.setMaximumSize(QtCore.QSize(400, 120))
         self.stepTitle = QtWidgets.QLabel(cocktailStep2Button)
         self.stepTitle.setGeometry(QtCore.QRect(0, 0, 400, 40))
         font = QtGui.QFont()
