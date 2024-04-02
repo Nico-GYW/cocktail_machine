@@ -1,7 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QFrame, QGridLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QFrame, QGridLayout, QLabel, QApplication
 from PyQt5.QtGui import QPixmap, QFont
 from PyQt5.QtCore import QTimer, QPropertyAnimation
-
 
 import time
 import sys
@@ -27,6 +26,7 @@ class ProcessPage(QWidget):
         self.ui = ui
         self.setEndPage()
         self.set_controllers()
+        self.ui.interrupt.clicked.connect(self.changeMenuPage) # Boutton Interrupt
 
     def set_controllers(self):
         self.EC = ElectricCylinderController()
@@ -46,12 +46,13 @@ class ProcessPage(QWidget):
         self.step1PrepareGlassStep()
         
     def clearCocktailStepLayout(self):
-        # Supprime tous les widgets du layout
-        for i in reversed(range(self.ui.CocktailStepVerticalLayout.count())): 
-            widget = self.ui.CocktailStepVerticalLayout.itemAt(i).widget()
-            if widget is not None: 
-                self.ui.CocktailStepVerticalLayout.removeWidget(widget)
-                widget.deleteLater()
+        self.ui.processPage.adjustSize()
+        while self.ui.CocktailStepVerticalLayout.count():
+            layoutItem = self.ui.CocktailStepVerticalLayout.takeAt(0)  # Prendre l'élément à l'index 0
+            if layoutItem.widget():
+                widget = layoutItem.widget()
+                widget.deleteLater()  # Supprimer le widget
+                print("Widget supprimé")
 
     def step1PrepareGlassStep(self):
         self.clearCocktailStepLayout()  # Videz le layout
@@ -90,10 +91,11 @@ class ProcessPage(QWidget):
     def pourBottle(self, bottleType):
         self.clearCocktailStepLayout()
         self.bottleInterrupt = False
-        self.ui.interuptButton.clicked.connect(self.toggleInterrupt)
+        self.ui.interrupt.clicked.connect(self.toggleInterrupt) # bouton interrupt
         stepTitle = "Étape 2 : Bouteille en verre" if bottleType == "glass" else "Étape 3 : Bouteille de soft"
         self.currentStep = CocktailStep(stepTitle)  # Créez un seul CocktailStep pour cette étape
         self.ui.CocktailStepVerticalLayout.addWidget(self.currentStep)
+        QApplication.processEvents()
         bottles = self.cocktailRecipe.glass_bottles if bottleType == "glass" else self.cocktailRecipe.soft_drink_bottles
         self.bottle_iterator = iter(bottles.items())  # Créer un itérateur sur les bouteilles
         self.pourNextBottle(bottleType)
@@ -104,7 +106,7 @@ class ProcessPage(QWidget):
             self.currentStep.ui.subtitle.setText(f"{ingredient} - {required_quantity} ml")
             print(f"Verser {required_quantity}ml de {ingredient}")
 
-            bottles_to_fetch = self.machine.fetch_bottles_for_ingredient(ingredient, bottleType, required_quantity)
+            bottles_to_fetch = machine.fetch_bottles_for_ingredient(ingredient, bottleType, required_quantity)
 
             for bottle_position, position_xy, quantity_to_use in bottles_to_fetch:
                 self.movementWithInterruptCheck(position_xy)
@@ -120,24 +122,39 @@ class ProcessPage(QWidget):
                 self.step4HandleLemons()
 
     def movementWithInterruptCheck(self, position_xy):
-        # Initie le déplacement 
+        # Initie le déplacement
         self.stepperMotorController.moveTo("X", position_xy[0])
         self.stepperMotorController.moveTo("Y", position_xy[1])
 
-        # Boucle jusqu'à ce que le déplacement soit achevé, avec vérification des interruptions
-        while not self.stepperMotorController.isAcked():
+        # Initialise les états des moteurs pour suivre si un mouvement est nécessaire
+        x_movement_complete = False
+        y_movement_complete = False
+
+        # Boucle jusqu'à ce que le déplacement soit achevé pour les deux axes
+        while not x_movement_complete or not y_movement_complete:
+            if not x_movement_complete and self.stepperMotorController.getState("X") == "0":
+                x_movement_complete = True
+                print("x_movement_complete")
+            if not y_movement_complete and self.stepperMotorController.getState("Y") == "0":
+                y_movement_complete = True
+                print("y_movement_complete")
+
             if self.bottleInterrupt:
                 # Arrêter le mouvement en cas d'interruption
                 self.stepperMotorController.stop("X")
                 self.stepperMotorController.stop("Y")
-                
+
                 # Attendre que l'interruption soit levée
                 while self.bottleInterrupt:
                     time.sleep(0.1)  # Utilisez time.sleep pour éviter une utilisation CPU élevée
 
-                # Reprendre le mouvement après l'interruption
-                self.stepperMotorController.moveTo("X", position_xy[0])
-                self.stepperMotorController.moveTo("Y", position_xy[1])
+                # Reprendre le mouvement après l'interruption, si nécessaire
+                if not x_movement_complete:
+                    self.stepperMotorController.moveTo("X", position_xy[0])
+                if not y_movement_complete:
+                    self.stepperMotorController.moveTo("Y", position_xy[1])
+
+
 
     def dispenseWithInterruptCheck(self, bottle_position, quantity_to_use):
         doses_needed = quantity_to_use // 25

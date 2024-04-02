@@ -105,7 +105,7 @@ class MainPage(QWidget):
         self.ui.extraPage.reset_all_extras()
 
     def changeProcessPage(self):
-        missing_ingredients = self.machine.check_ingredients(self.current_recipe)
+        missing_ingredients = machine.check_ingredients(self.current_recipe)
         
         if not missing_ingredients:
             # Si tous les ingrédients sont présents, continuer le processus
