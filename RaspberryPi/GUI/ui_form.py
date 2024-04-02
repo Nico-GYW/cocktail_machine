@@ -2681,13 +2681,13 @@ class Ui_MainWindow(object):
         self.logo2_5.setScaledContents(True)
         self.logo2_5.setObjectName("logo2_5")
         self.logo2_6 = QtWidgets.QLabel(self.processPage)
-        self.logo2_6.setGeometry(QtCore.QRect(700, 390, 51, 61))
+        self.logo2_6.setGeometry(QtCore.QRect(650, 390, 51, 61))
         self.logo2_6.setText("")
         self.logo2_6.setPixmap(QtGui.QPixmap("ressources/generic/full_glass.png"))
         self.logo2_6.setScaledContents(True)
         self.logo2_6.setObjectName("logo2_6")
         self.horizontalSlider = QtWidgets.QSlider(self.processPage)
-        self.horizontalSlider.setGeometry(QtCore.QRect(60, 460, 671, 25))
+        self.horizontalSlider.setGeometry(QtCore.QRect(60, 454, 621, 31))
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.processPage)
@@ -2699,7 +2699,7 @@ class Ui_MainWindow(object):
         self.cocktailStep = QtWidgets.QWidget(self.verticalLayoutWidget_2)
         self.cocktailStep.setObjectName("cocktailStep")
         self.stepdetail = QtWidgets.QLabel(self.cocktailStep)
-        self.stepdetail.setGeometry(QtCore.QRect(90, 80, 181, 20))
+        self.stepdetail.setGeometry(QtCore.QRect(50, 70, 181, 20))
         font = QtGui.QFont()
         font.setFamily("CoconPro")
         font.setPointSize(-1)
@@ -2709,7 +2709,7 @@ class Ui_MainWindow(object):
         self.stepdetail.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.stepdetail.setObjectName("stepdetail")
         self.stepTitle = QtWidgets.QLabel(self.cocktailStep)
-        self.stepTitle.setGeometry(QtCore.QRect(40, 10, 361, 41))
+        self.stepTitle.setGeometry(QtCore.QRect(80, 10, 361, 41))
         font = QtGui.QFont()
         font.setFamily("CoconPro")
         font.setPointSize(-1)
@@ -2719,7 +2719,7 @@ class Ui_MainWindow(object):
         self.stepTitle.setAlignment(QtCore.Qt.AlignCenter)
         self.stepTitle.setObjectName("stepTitle")
         self.stepButton = QtWidgets.QPushButton(self.cocktailStep)
-        self.stepButton.setGeometry(QtCore.QRect(290, 70, 61, 31))
+        self.stepButton.setGeometry(QtCore.QRect(250, 70, 61, 31))
         self.stepButton.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    font-size: 16px;\n"
@@ -2733,6 +2733,20 @@ class Ui_MainWindow(object):
 "")
         self.stepButton.setObjectName("stepButton")
         self.CocktailStepVerticalLayout.addWidget(self.cocktailStep)
+        self.interrupt = QtWidgets.QPushButton(self.processPage)
+        self.interrupt.setGeometry(QtCore.QRect(720, 440, 61, 31))
+        self.interrupt.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    font-size: 16px;\n"
+"    background-color: #F79643;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #f0f0f0; /* Gris clair lorsqu\'appuyé */\n"
+"}\n"
+"")
+        self.interrupt.setObjectName("interrupt")
         self.proccessingStackedWidget.addWidget(self.processPage)
         self.endingPage = QtWidgets.QWidget()
         self.endingPage.setStyleSheet("background-color : #F0F0F0;\n"
@@ -2901,6 +2915,7 @@ class Ui_MainWindow(object):
         self.stepdetail.setText(_translate("MainWindow", "Rhum blanc - 20 ml"))
         self.stepTitle.setText(_translate("MainWindow", "Étape 1 : bouteilles"))
         self.stepButton.setText(_translate("MainWindow", "Fait !"))
+        self.interrupt.setText(_translate("MainWindow", "Stop !"))
         self.endTitle.setText(_translate("MainWindow", "Mojito prêt !"))
         self.endButton.setText(_translate("MainWindow", "Au suivant !"))
 from barmanPageWidgets import BarmanPage
