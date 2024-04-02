@@ -2614,19 +2614,19 @@ class Ui_MainWindow(object):
         self.processingPage.setStyleSheet("background-color : #F0F0F0;\n"
 "")
         self.processingPage.setObjectName("processingPage")
-        self.proccessingStackedWidget = QtWidgets.QStackedWidget(self.processingPage)
-        self.proccessingStackedWidget.setGeometry(QtCore.QRect(0, 0, 800, 480))
+        self.processingStackedWidget = QtWidgets.QStackedWidget(self.processingPage)
+        self.processingStackedWidget.setGeometry(QtCore.QRect(0, 0, 800, 480))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.proccessingStackedWidget.sizePolicy().hasHeightForWidth())
-        self.proccessingStackedWidget.setSizePolicy(sizePolicy)
-        self.proccessingStackedWidget.setMinimumSize(QtCore.QSize(800, 480))
-        self.proccessingStackedWidget.setMaximumSize(QtCore.QSize(800, 480))
-        self.proccessingStackedWidget.setStyleSheet("background-color : #F0F0F0;\n"
+        sizePolicy.setHeightForWidth(self.processingStackedWidget.sizePolicy().hasHeightForWidth())
+        self.processingStackedWidget.setSizePolicy(sizePolicy)
+        self.processingStackedWidget.setMinimumSize(QtCore.QSize(800, 480))
+        self.processingStackedWidget.setMaximumSize(QtCore.QSize(800, 480))
+        self.processingStackedWidget.setStyleSheet("background-color : #F0F0F0;\n"
 "")
-        self.proccessingStackedWidget.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.proccessingStackedWidget.setObjectName("proccessingStackedWidget")
+        self.processingStackedWidget.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.processingStackedWidget.setObjectName("processingStackedWidget")
         self.processPage = ProcessPage()
         self.processPage.setMinimumSize(QtCore.QSize(800, 0))
         font = QtGui.QFont()
@@ -2747,7 +2747,7 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.interrupt.setObjectName("interrupt")
-        self.proccessingStackedWidget.addWidget(self.processPage)
+        self.processingStackedWidget.addWidget(self.processPage)
         self.endingPage = QtWidgets.QWidget()
         self.endingPage.setStyleSheet("background-color : #F0F0F0;\n"
 "")
@@ -2788,7 +2788,7 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.endButton.setObjectName("endButton")
-        self.proccessingStackedWidget.addWidget(self.endingPage)
+        self.processingStackedWidget.addWidget(self.endingPage)
         self.stackedWidget.addWidget(self.processingPage)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -2796,7 +2796,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(4)
         self.extraStack.setCurrentIndex(0)
         self.parameterStack.setCurrentIndex(2)
-        self.proccessingStackedWidget.setCurrentIndex(0)
+        self.processingStackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

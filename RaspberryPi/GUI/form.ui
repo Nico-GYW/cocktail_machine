@@ -6135,7 +6135,7 @@ background-color: transparent;</string>
       <string notr="true">background-color : #F0F0F0;
 </string>
      </property>
-     <widget class="QStackedWidget" name="proccessingStackedWidget">
+     <widget class="QStackedWidget" name="processingStackedWidget">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -6170,7 +6170,7 @@ background-color: transparent;</string>
        <enum>QFrame::Plain</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="ProcessPage" name="processPage">
        <property name="minimumSize">
