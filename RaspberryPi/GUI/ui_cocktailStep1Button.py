@@ -14,16 +14,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_cocktailStep1Button(object):
     def setupUi(self, cocktailStep1Button):
         cocktailStep1Button.setObjectName("cocktailStep1Button")
-        cocktailStep1Button.resize(400, 120)
+        cocktailStep1Button.resize(800, 200)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(cocktailStep1Button.sizePolicy().hasHeightForWidth())
         cocktailStep1Button.setSizePolicy(sizePolicy)
-        cocktailStep1Button.setMinimumSize(QtCore.QSize(400, 120))
-        cocktailStep1Button.setMaximumSize(QtCore.QSize(400, 120))
+        cocktailStep1Button.setMinimumSize(QtCore.QSize(800, 200))
+        cocktailStep1Button.setMaximumSize(QtCore.QSize(800, 200))
         self.subtitle = QtWidgets.QLabel(cocktailStep1Button)
-        self.subtitle.setGeometry(QtCore.QRect(0, 40, 400, 30))
+        self.subtitle.setGeometry(QtCore.QRect(0, 40, 800, 30))
         font = QtGui.QFont()
         font.setFamily("CoconPro")
         font.setPointSize(-1)
@@ -33,7 +33,7 @@ class Ui_cocktailStep1Button(object):
         self.subtitle.setAlignment(QtCore.Qt.AlignCenter)
         self.subtitle.setObjectName("subtitle")
         self.stepTitle = QtWidgets.QLabel(cocktailStep1Button)
-        self.stepTitle.setGeometry(QtCore.QRect(0, 0, 400, 40))
+        self.stepTitle.setGeometry(QtCore.QRect(0, 0, 800, 40))
         font = QtGui.QFont()
         font.setFamily("CoconPro")
         font.setPointSize(-1)
@@ -43,7 +43,7 @@ class Ui_cocktailStep1Button(object):
         self.stepTitle.setAlignment(QtCore.Qt.AlignCenter)
         self.stepTitle.setObjectName("stepTitle")
         self.button_1 = QtWidgets.QPushButton(cocktailStep1Button)
-        self.button_1.setGeometry(QtCore.QRect(170, 80, 61, 31))
+        self.button_1.setGeometry(QtCore.QRect(360, 80, 60, 30))
         self.button_1.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    font-size: 16px;\n"
