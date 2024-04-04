@@ -1,6 +1,6 @@
 #include "Servo.h"
 
-#define USMIN  350 // This is the rounded 'minimum' microsecond length 0° (-90°)
+#define USMIN  400 // This is the rounded 'minimum' microsecond length 0° (-90°)
 #define USMAX  1800 // This is the rounded 'maximum' microsecond length 180° (+90°)
 
 #define SLOWDOWNFACTOR 10

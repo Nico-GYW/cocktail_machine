@@ -62,7 +62,7 @@ class BottleHolder:
         bottle_names (dict): A dictionary mapping bottle names to a list of positions.
     """
 
-    def __init__(self, bottles):
+    def __init__(self, bottles, position_mapping):
         """
         Initialize a BottleHolder instance.
 
@@ -76,9 +76,8 @@ class BottleHolder:
                 self.bottle_names[bottle.name] = []
             self.bottle_names[bottle.name].append(bottle.position - 1)
         
-        # Imaginary fixed positions (X, Y) for each bottle position index
-        self.position_mapping = [(100, 50) for _ in range(10)]  # Assuming 10 positions for simplicity
-
+        self.position_mapping = position_mapping
+        #  fixed positions (X, Y) for each bottle position index
 
     def get(self, name):
         """
@@ -138,11 +137,13 @@ class BottleHolder:
             if total_quantity >= required_quantity:
                 break  # La quantité requise est atteinte
             
+            print(position_index)
             bottle = self.bottles[position_index]
             available_quantity = bottle.quantity
             quantity_to_use = min(available_quantity, required_quantity - total_quantity)
             total_quantity += quantity_to_use
             
+            print(self.position_mapping)
             position_xy = self.position_mapping[position_index]
             bottles_to_fetch.append((bottle.position, position_xy, quantity_to_use))
             
@@ -177,18 +178,21 @@ class BottleHolder:
         self.bottle_names[bottle.name].append(position)
 
     @classmethod
-    def from_dict(cls, state):
+    def from_dict(cls, state, position_mapping=None):
         """
         Create a BottleHolder instance from a dictionary.
 
         Args:
             state (dict): The dictionary containing the state of the BottleHolder.
+            position_mapping (list): Optional. The position mapping for the bottles.
 
         Returns:
             BottleHolder: The created BottleHolder instance.
         """
         bottles = [Bottle(**bottle_dict) for bottle_dict in state["bottles"]]
-        return cls(bottles)
+        if position_mapping is None:
+            raise ValueError("position_mapping is required")
+        return cls(bottles, position_mapping)
 
     def to_dict(self):
         """

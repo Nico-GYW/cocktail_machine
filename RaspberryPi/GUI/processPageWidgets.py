@@ -52,14 +52,13 @@ class ProcessPage(QWidget):
             if layoutItem.widget():
                 widget = layoutItem.widget()
                 widget.deleteLater()  # Supprimer le widget
-                print("Widget supprimé")
 
     def step1PrepareGlassStep(self):
         self.clearCocktailStepLayout()  # Videz le layout
         step = CocktailStep("En attente d’un verre", "Déposer un verre sur le plateau", num_buttons=1)  # Créez l'étape
         step.ui.button_1.setText("Fait !")  # Configurez le texte du bouton
         step.ui.button_1.clicked.connect(self.step2PourGlassBottles)  # Connectez le signal au slot pour passer à l'étape suivante
-        print("step1PrepareGlassStep")
+        print("Etape 1 : En attente d’un verre")
         self.ui.CocktailStepVerticalLayout.addWidget(step)  # Ajoutez le step au layout
 
     def calculateTotalPhases(self):
@@ -91,12 +90,14 @@ class ProcessPage(QWidget):
     def pourBottle(self, bottleType):
         self.clearCocktailStepLayout()
         self.bottleInterrupt = False
+        self.ui.interrupt.clicked.disconnect()
         self.ui.interrupt.clicked.connect(self.toggleInterrupt) # bouton interrupt
         stepTitle = "Étape 2 : Bouteille en verre" if bottleType == "glass" else "Étape 3 : Bouteille de soft"
         self.currentStep = CocktailStep(stepTitle)  # Créez un seul CocktailStep pour cette étape
         self.ui.CocktailStepVerticalLayout.addWidget(self.currentStep)
         QApplication.processEvents()
         bottles = self.cocktailRecipe.glass_bottles if bottleType == "glass" else self.cocktailRecipe.soft_drink_bottles
+        print(f"Etape 2 : Bouteille {bottleType}")
         self.bottle_iterator = iter(bottles.items())  # Créer un itérateur sur les bouteilles
         self.pourNextBottle(bottleType)
 
@@ -110,12 +111,19 @@ class ProcessPage(QWidget):
 
             for bottle_position, position_xy, quantity_to_use in bottles_to_fetch:
                 self.movementWithInterruptCheck(position_xy)
-                self.dispenseWithInterruptCheck(bottle_position, quantity_to_use)
+                if bottleType == "glass":
+                    self.dispenseWithInterruptCheck(bottle_position, quantity_to_use)
+                else:
+                    self.pourSoftWithInterruptCheck(bottle_position, quantity_to_use)
+
                 print(f"Bouteille {bottle_position} à la position {position_xy} pour {quantity_to_use}ml versés")
 
             self.updateProgress(1)
 
+            self.pourNextBottle(bottleType)
+
         except StopIteration:
+            print("Stop iteration")
             if bottleType == "glass":
                 self.step3PourSoftDrinks()
             else:
@@ -139,6 +147,8 @@ class ProcessPage(QWidget):
                 y_movement_complete = True
                 print("y_movement_complete")
 
+            QApplication.processEvents()
+
             if self.bottleInterrupt:
                 # Arrêter le mouvement en cas d'interruption
                 self.stepperMotorController.stop("X")
@@ -146,6 +156,7 @@ class ProcessPage(QWidget):
 
                 # Attendre que l'interruption soit levée
                 while self.bottleInterrupt:
+                    QApplication.processEvents()
                     time.sleep(0.1)  # Utilisez time.sleep pour éviter une utilisation CPU élevée
 
                 # Reprendre le mouvement après l'interruption, si nécessaire
@@ -155,44 +166,77 @@ class ProcessPage(QWidget):
                     self.stepperMotorController.moveTo("Y", position_xy[1])
 
 
-
     def dispenseWithInterruptCheck(self, bottle_position, quantity_to_use):
         doses_needed = quantity_to_use // 25
         remaining_ml = quantity_to_use % 25
+        print(f"Quantité : {quantity_to_use}")
+        print(f"Doses : {doses_needed}")
 
         for _ in range(doses_needed):
             total_time_ms = 7000  # Temps pour 25 ml
-            self.waitForOrInterrupt(bottle_position, total_time_ms)
+            print(f"Bouteille {bottle_position} pour {total_time_ms}secondes")
+            self.waitForOrInterrupt(bottle_position, total_time_ms, "dispenser", 5000)
 
         if remaining_ml > 0:
             proportional_time_ms = int((remaining_ml / 25.0) * 7000)
-            self.waitForOrInterrupt(bottle_position, proportional_time_ms)
+            self.waitForOrInterrupt(bottle_position, proportional_time_ms, "dispenser", 5000)
 
-    def waitForOrInterrupt(self, bottle_position, total_time_ms):
-        start_time = time.time()  # Marque le début de la distribution
-        elapsed_time_ms = 0
+    def pourSoftWithInterruptCheck(self, valve_index, quantity_to_use):
+        # Calculer le temps d'ouverture nécessaire pour la quantité désirée
+        # Supposons x ms par ml comme coefficient de conversion
+        x = 100  # Exemple: 100 ms par ml, à ajuster selon vos mesures
+        total_time_ms = quantity_to_use * x
 
-        self.DispenserController.activate_dispenser(bottle_position, total_time_ms)
-        
-        while elapsed_time_ms < total_time_ms:
+        # Appeler waitForOrInterrupt pour gérer l'ouverture de la vanne et surveiller les interruptions
+        self.waitForOrInterrupt(valve_index, total_time_ms, "valve")
+
+    def waitForOrInterrupt(self, index, total_time_ms, device_type, delay_ms=0):
+        start_time = time.time()
+        elapsed_time_ms = 0 
+
+        # Initialiser le dispositif selon son type
+        if device_type == "dispenser":
+            self.DispenserController.activate_dispenser(index, total_time_ms)
+        elif device_type == "valve":
+            self.ValveController.open_valve(index, total_time_ms)
+
+        while elapsed_time_ms < total_time_ms + delay_ms:
+
+            QApplication.processEvents()
             if self.bottleInterrupt:
-                self.DispenserController.stop(bottle_position)  # Arrête la distribution
+                # Arrêter le dispositif en cas d'interruption
+                if device_type == "dispenser":
+                    self.DispenserController.stop_dispenser(index)
+                elif device_type == "valve":
+                    self.ValveController.stop_all_valves()
+                    
                 interrupt_start_time = time.time()  # Marque le début de l'interruption
-
+                print("Start interrupt timer")
                 # Attend que l'interruption soit levée
                 while self.bottleInterrupt:
+                    QApplication.processEvents()
                     time.sleep(0.1)
 
+                print("Stop interrupt timer")
                 interrupt_time = (time.time() - interrupt_start_time) * 1000  # Calcule la durée de l'interruption
                 start_time += interrupt_time / 1000  # Ajuste le temps de départ pour exclure le temps d'interruption
-                
-                # Réactive le distributeur avec le temps restant ajusté
+
+                # Calculer le temps restant et réactiver le dispositif si nécessaire
                 remaining_time_ms = total_time_ms - elapsed_time_ms
-                self.DispenserController.activate_dispenser(bottle_position, remaining_time_ms)
+                if remaining_time_ms > 0:
+                    if device_type == "dispenser":
+                        self.DispenserController.activate_dispenser(index, remaining_time_ms)
+                    elif device_type == "valve":
+                        self.ValveController.open_valve(index, remaining_time_ms)
 
             # Mise à jour du temps écoulé, excluant le temps d'interruption
             elapsed_time_ms = (time.time() - start_time) * 1000
-            time.sleep(0.1)  # Attente active courte pour éviter une utilisation excessive du processeur
+            print(elapsed_time_ms)
+            time.sleep(0.1)  # Attente active courte
+
+        # Assurer que le dispositif est fermé à la fin du processus
+        if device_type == "valve":
+            self.ValveController.close_valve(index)
 
     # Les méthodes pour l'étape spécifique des bouteilles en verre et des bouteilles de soft
     def step2PourGlassBottles(self):
@@ -200,6 +244,7 @@ class ProcessPage(QWidget):
         self.pourBottle("glass")
 
     def step3PourSoftDrinks(self):
+        print("Etape 3 :")
         self.pourBottle("soft")
 
     def step4HandleLemons(self):

@@ -42,8 +42,24 @@ class CocktailMachine:
             Bottle("Fanta", 1000, 3),
             Bottle("Ginger Ale", 1000, 4),
         ]
-        self.glass_bottle_holder = BottleHolder(glass_bottles)
-        self.soft_drink_bottle_holder = BottleHolder(soft_drink_bottles)
+        Y1 = 500
+        Y2 = 2000
+        self.glass_bottles_position = [
+            (3500, Y1),    # B2
+            (3000, Y1),    # B3
+            (2600, Y2),    # B4
+            (2200, Y1),    # B5
+            (1725, Y1),    # B6
+            (1300, Y2),    # B7
+            (950, Y1),     # B8
+            (475, Y2)      # B9
+        ]
+        S1 = (2000, 0)
+        S4 = (3300, 0)
+        self.soft_bottles_position = [S1, S1, S4, S4]
+
+        self.glass_bottle_holder = BottleHolder(glass_bottles, self.glass_bottles_position)
+        self.soft_drink_bottle_holder = BottleHolder(soft_drink_bottles, self.soft_bottles_position)
         self.stock_lemon = 1000
         self.stock_ice = 1000
         self.cocktail_recipes = []
@@ -174,8 +190,8 @@ class CocktailMachine:
 
         with open(file_path, "r") as f:
             state = json.load(f)
-        self.glass_bottle_holder = BottleHolder.from_dict(state["glass_bottles"])
-        self.soft_drink_bottle_holder = BottleHolder.from_dict(state["soft_drink_bottles"])
+        self.glass_bottle_holder = BottleHolder.from_dict(state["glass_bottles"], self.glass_bottles_position)
+        self.soft_drink_bottle_holder = BottleHolder.from_dict(state["soft_drink_bottles"], self.soft_bottles_position)
         self.stock_lemon = state["stock_lemon"]
         self.stock_ice = state["stock_ice"]
         self.cocktail_recipes = [CocktailRecipe(**recipe_dict) for recipe_dict in state["cocktail_recipes"]]
