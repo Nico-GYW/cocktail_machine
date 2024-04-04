@@ -118,7 +118,7 @@ class ProcessPage(QWidget):
             for bottle_position, position_xy, quantity_to_use in bottles_to_fetch:
                 self.movementWithInterruptCheck(position_xy)
                 if bottleType == "glass":
-                    self.dispenseWithInterruptCheck(bottle_position, quantity_to_use)
+                    self.dispenseWithInterruptCheck(ingredient, bottle_position, quantity_to_use)
                 else:
                     self.pourSoftWithInterruptCheck(bottle_position, quantity_to_use)
 
@@ -178,24 +178,39 @@ class ProcessPage(QWidget):
                     self.stepperMotorController.moveTo("Y", position_xy[1])
 
 
-    def dispenseWithInterruptCheck(self, bottle_position, quantity_to_use):
+    def dispenseWithInterruptCheck(self, ingredient, bottle_position, quantity_to_use):
         doses_needed = quantity_to_use // 25
         remaining_ml = quantity_to_use % 25
-        print(f"Quantité : {quantity_to_use}")
-        print(f"Doses : {doses_needed}")
+        quantity_remaining_to_dispense = quantity_to_use
+        delay_between_doses = 5000  # Définir le délai entre les doses par défaut
 
-        self.randomColor = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-        self.LedController.set_settings("R", *self.randomColor, brightness=100, speed=50)
-        
-
-        for _ in range(doses_needed):
+        for dose_number in range(doses_needed):
             total_time_ms = 7000  # Temps pour 25 ml
-            print(f"Bouteille {bottle_position} pour {total_time_ms}secondes")
-            self.waitForOrInterrupt(bottle_position, total_time_ms, "dispenser", 5000)
+            # Déterminer si nous sommes à la dernière dose
+            is_last_dose = dose_number == doses_needed - 1 and remaining_ml == 0
 
+            # Mettre à jour la quantité restante à verser
+            quantity_remaining_to_dispense -= 25
+ 
+            # Si c'est la dernière dose et qu'il n'y a pas de reste, on n'attend pas après
+            if is_last_dose:
+                self.waitForOrInterrupt(bottle_position, total_time_ms, "dispenser", delay_between_doses)
+                # Pas de délai après la dernière dose
+            else:
+                # Pour toutes les autres doses, appliquer le délai avant d'appeler la fonction
+                self.waitForOrInterrupt(bottle_position, total_time_ms, "dispenser", 1500)
+            
+            self.currentStep.ui.subtitle.setText(f"{ingredient} - {quantity_remaining_to_dispense + remaining_ml} ml")
+            
+        # Gérer le reste si remaining_ml > 0
         if remaining_ml > 0:
             proportional_time_ms = int((remaining_ml / 25.0) * 7000)
-            self.waitForOrInterrupt(bottle_position, proportional_time_ms, "dispenser", 5000)
+            self.currentStep.ui.subtitle.setText(f"{ingredient} - {remaining_ml} ml")
+            # Pour la dose restante, exécuter immédiatement sans délai supplémentaire
+            self.waitForOrInterrupt(bottle_position, proportional_time_ms, "dispenser", 1500)
+
+        # Après la distribution complète
+        self.currentStep.ui.subtitle.setText(f"{ingredient} - 0 ml")
 
     def pourSoftWithInterruptCheck(self, valve_index, quantity_to_use):
         # Calculer le temps d'ouverture nécessaire pour la quantité désirée
