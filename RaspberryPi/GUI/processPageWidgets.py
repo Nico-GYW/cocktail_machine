@@ -17,6 +17,10 @@ from mainPageWidgets import machine
 from commandMega import *
 from commandUno import *
 
+redColor = (255, 0, 0)
+greenColor = (0, 255, 0)
+whiteColor = (255, 255, 255)
+
 class ProcessPage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -31,8 +35,8 @@ class ProcessPage(QWidget):
     def set_controllers(self):
         self.EC = ElectricCylinderController()
         self.stepperMotorController = StepperMotorController()
-        self.LemonRampController = LemonBowlController()
-        self.LemnBowlController = LemonRampController()
+        self.LemonRampController = LemonRampController()
+        self.LemonBowlController = LemonBowlController()
         self.DispenserController = DispenserController()
         self.LedController = LedStripController()
         self.ValveController = DCValveController()
@@ -54,6 +58,8 @@ class ProcessPage(QWidget):
                 widget.deleteLater()  # Supprimer le widget
 
     def step1PrepareGlassStep(self):
+        self.randomColor = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.LedController.set_settings("P", *self.randomColor, brightness=100, speed=250)
         self.clearCocktailStepLayout()  # Videz le layout
         step = CocktailStep("En attente d’un verre", "Déposer un verre sur le plateau", num_buttons=1)  # Créez l'étape
         step.ui.button_1.setText("Fait !")  # Configurez le texte du bouton
@@ -131,6 +137,10 @@ class ProcessPage(QWidget):
 
     def movementWithInterruptCheck(self, position_xy):
         # Initie le déplacement
+
+        self.randomColor = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.LedController.set_settings("P", *self.randomColor, brightness=100, speed=50)
+    
         self.stepperMotorController.moveTo("X", position_xy[0])
         self.stepperMotorController.moveTo("Y", position_xy[1])
 
@@ -151,6 +161,7 @@ class ProcessPage(QWidget):
 
             if self.bottleInterrupt:
                 # Arrêter le mouvement en cas d'interruption
+                self.LedController.set_settings("T", *redColor, brightness=100, speed=50)
                 self.stepperMotorController.stop("X")
                 self.stepperMotorController.stop("Y")
 
@@ -159,7 +170,8 @@ class ProcessPage(QWidget):
                     QApplication.processEvents()
                     time.sleep(0.1)  # Utilisez time.sleep pour éviter une utilisation CPU élevée
 
-                # Reprendre le mouvement après l'interruption, si nécessaire
+                self.LedController.set_settings("P", *self.randomColor, brightness=100, speed=50)
+
                 if not x_movement_complete:
                     self.stepperMotorController.moveTo("X", position_xy[0])
                 if not y_movement_complete:
@@ -171,6 +183,10 @@ class ProcessPage(QWidget):
         remaining_ml = quantity_to_use % 25
         print(f"Quantité : {quantity_to_use}")
         print(f"Doses : {doses_needed}")
+
+        self.randomColor = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.LedController.set_settings("R", *self.randomColor, brightness=100, speed=50)
+        
 
         for _ in range(doses_needed):
             total_time_ms = 7000  # Temps pour 25 ml
@@ -184,7 +200,7 @@ class ProcessPage(QWidget):
     def pourSoftWithInterruptCheck(self, valve_index, quantity_to_use):
         # Calculer le temps d'ouverture nécessaire pour la quantité désirée
         # Supposons x ms par ml comme coefficient de conversion
-        x = 100  # Exemple: 100 ms par ml, à ajuster selon vos mesures
+        x = 3  # Exemple: 100 ms par ml, à ajuster selon vos mesures
         total_time_ms = quantity_to_use * x
 
         # Appeler waitForOrInterrupt pour gérer l'ouverture de la vanne et surveiller les interruptions
@@ -205,6 +221,7 @@ class ProcessPage(QWidget):
             QApplication.processEvents()
             if self.bottleInterrupt:
                 # Arrêter le dispositif en cas d'interruption
+                self.LedController.set_settings("R", *redColor, brightness=100, speed=150)
                 if device_type == "dispenser":
                     self.DispenserController.stop_dispenser(index)
                 elif device_type == "valve":
@@ -216,6 +233,8 @@ class ProcessPage(QWidget):
                 while self.bottleInterrupt:
                     QApplication.processEvents()
                     time.sleep(0.1)
+
+                self.LedController.set_settings("R", *self.randomColor, brightness=100, speed=50)
 
                 print("Stop interrupt timer")
                 interrupt_time = (time.time() - interrupt_start_time) * 1000  # Calcule la durée de l'interruption
@@ -261,17 +280,18 @@ class ProcessPage(QWidget):
         step.ui.button_1.clicked.connect(self.checkLemonBowlOpen)
         step.ui.button_2.clicked.connect(self.startLemonCuttingProcess)
         self.ui.CocktailStepVerticalLayout.addWidget(step)
+        QApplication.processEvents()
 
     def checkLemonBowlOpen(self):
         # isOpen = self.machine.checkLemonBowl()  # Méthode hypothétique pour vérifier l'état du bol
-        isOpen = random.choice([True, False])  # Génère aléatoirement True ou False
+        isOpen = self.LemonBowlController.is_bowl_open()
         print(f"Le bol à citron est {'ouvert' if isOpen else 'fermé'}.")
 
         if isOpen:
             # Logique à exécuter si le bol est ouvert
             print("Le bol est déjà ouvert. Passage à l'étape suivante.")
             self.updateProgress(2)
-            self.step5CrushIce()  # Remplacez nextStep par la méthode appropriée pour passer à l'étape suivante
+            self.step5CrushIce()
         else:
             # Logique à exécuter si le bol est fermé
             print("Le bol est fermé. Demande d'ouverture.")
@@ -284,43 +304,46 @@ class ProcessPage(QWidget):
         step = CocktailStep("Ouvrir le bol à citron ?", "", num_buttons=2)
         step.ui.button_1.setText("Oui")
         step.ui.button_2.setText("Non")
-        step.ui.button_1.clicked.connect(self.combinedFunction2)
-        step.ui.button_2.clicked.connect(self.combinedFunction1)  # Passer à l'étape suivante même si le bol n'est pas ouvert
+        step.ui.button_1.clicked.connect(self.combinedFunction1)
+        step.ui.button_2.clicked.connect(self.combinedFunction2)  # Passer à l'étape suivante même si le bol n'est pas ouvert
         self.ui.CocktailStepVerticalLayout.addWidget(step)
 
     def combinedFunction1(self):
-        self.updateProgress(1)
-        self.step5CrushIce()
-
-    def combinedFunction2(self):
         self.updateProgress(1/3)
         self.openLemonBowl()
 
+    def combinedFunction2(self):
+        self.updateProgress(1)
+        self.step5CrushIce()
+
+
     def openLemonBowl(self):
-        # self.machine.openLemonBowl()  # Méthode hypothétique pour ouvrir le bol
+        self.LemonBowlController.open_bowl()  # Méthode hypothétique pour ouvrir le bol
         print("Ouverture du bol à citron de la machine")
         self.updateProgress(2/3)
-        QTimer.singleShot(5000, self.nextStep)  # Donnez du temps pour l'ouverture avant de passer à la suite
+
+        self.step5CrushIce()
 
     def startLemonCuttingProcess(self):
         self.clearCocktailStepLayout()
         self.updateProgress(1/3)
-        step = CocktailStep("Découpe de citron", "Libération d'un citron dans la chambre de découpe", num_buttons=2)
-        step.ui.button_1.setText("Citron bien placé ?")
-        step.ui.button_2.setText("Presser le citron")
-        step.ui.button_1.clicked.connect(self.askCitronPlacedCorrectly)
-        step.ui.button_2.clicked.connect(self.pressLemon)
+        self.LemonRampController.release_lemon()
+        step = CocktailStep("Découpe de citron", "Libération d'un citron dans la chambre de découpe...", num_buttons=0)
         self.ui.CocktailStepVerticalLayout.addWidget(step)
+        QApplication.processEvents()
+        time.sleep(5)
+        self.askCitronPlacedCorrectly()
 
     def askCitronPlacedCorrectly(self):
-        # Ici, on pourrait simuler la vérification ou demander directement à l'utilisateur
         self.updateProgress(1/3)
-        citronPlaced = random.choice([True, False])  # Simule la vérification
-        print(f"Citron correctement placé : {'Oui' if citronPlaced else 'Non'}")
-        if citronPlaced:
-            self.pressLemon()
-        else:
-            self.manuallyPlaceCitron()
+        self.clearCocktailStepLayout()
+        step = CocktailStep("Découpe du citron", "Le citron est-t-il correctement placé ?", num_buttons=2)
+        step.ui.button_1.setText("Oui")
+        step.ui.button_2.setText("Non")
+        step.ui.button_1.clicked.connect(self.pressLemon)
+        step.ui.button_2.clicked.connect(self.manuallyPlaceCitron)
+        self.ui.CocktailStepVerticalLayout.addWidget(step)
+        QApplication.processEvents()
 
     def manuallyPlaceCitron(self):
         self.clearCocktailStepLayout()
@@ -328,14 +351,22 @@ class ProcessPage(QWidget):
         step.ui.button_1.setText("Fait")
         step.ui.button_1.clicked.connect(self.pressLemon)
         self.ui.CocktailStepVerticalLayout.addWidget(step)
+        QApplication.processEvents()
 
     def pressLemon(self):
         # Simule le pressage du citron
+        self.clearCocktailStepLayout()
         step = CocktailStep("Découpe de citron", "", num_buttons=2)
         step.ui.button_1.setText("Pause")
         step.ui.button_2.setText("Annuler")
         step.ui.button_1.clicked.connect(self.askCitronPlacedCorrectly)
         step.ui.button_2.clicked.connect(self.interruptProcess)
+        self.ui.CocktailStepVerticalLayout.addWidget(step)
+        QApplication.processEvents()
+
+        if not(self.LemonBowlController.is_bowl_open()):
+            self.LemonBowlController.close_bowl()
+
         self.EC_interrput = False
         total_delay = 0
         
@@ -377,7 +408,7 @@ class ProcessPage(QWidget):
             self.changePage()  # Passez à la page suivante si pas de glace nécessaire
 
     def showIceCrushingStep(self):
-        self.updateProgress()
+        self.updateProgress(1)
         self.clearCocktailStepLayout()
         step = CocktailStep("Étape 5 : Pillage de glace", "Prêt à piler la glace ?", num_buttons=2)
         step.ui.button_1.setText("Piler")
@@ -395,7 +426,7 @@ class ProcessPage(QWidget):
         # Logique pour changer de page ou passer à l'étape suivante de la préparation du cocktail
         self.ui.endTitle.setText(self.cocktailRecipe.name)
         self.ui.endCocktaiImage.setPixmap(QPixmap(self.cocktailRecipe.get_image()))
-        self.ui.proccessingStackedWidget.setCurrentIndex(1)
+        self.ui.processingStackedWidget.setCurrentIndex(1)
         print("Changement de page ou étape suivante...")
 
     def setEndPage(self):
