@@ -230,7 +230,11 @@ class LemonBowlController(Controller):
         """
         self.cmd.send("cmd_SERVO_lemonBowl_is_open")
         msg = self.cmd.receive()
-        print(msg)
+        # Analyser le message pour déterminer l'état du bol
+        if msg[1][0] == 'Open':
+            return True
+        else:
+            return False
 
 class LemonRampController(Controller):
     def __init__(self):
