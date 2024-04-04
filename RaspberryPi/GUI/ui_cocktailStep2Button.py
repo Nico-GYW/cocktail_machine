@@ -14,16 +14,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_cocktailStep2Button(object):
     def setupUi(self, cocktailStep2Button):
         cocktailStep2Button.setObjectName("cocktailStep2Button")
-        cocktailStep2Button.resize(800, 200)
+        cocktailStep2Button.resize(700, 200)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(cocktailStep2Button.sizePolicy().hasHeightForWidth())
         cocktailStep2Button.setSizePolicy(sizePolicy)
-        cocktailStep2Button.setMinimumSize(QtCore.QSize(800, 200))
-        cocktailStep2Button.setMaximumSize(QtCore.QSize(800, 200))
+        cocktailStep2Button.setMinimumSize(QtCore.QSize(700, 200))
+        cocktailStep2Button.setMaximumSize(QtCore.QSize(700, 200))
         self.stepTitle = QtWidgets.QLabel(cocktailStep2Button)
-        self.stepTitle.setGeometry(QtCore.QRect(0, 0, 800, 40))
+        self.stepTitle.setGeometry(QtCore.QRect(0, 0, 700, 40))
         font = QtGui.QFont()
         font.setFamily("CoconPro")
         font.setPointSize(-1)
@@ -33,7 +33,7 @@ class Ui_cocktailStep2Button(object):
         self.stepTitle.setAlignment(QtCore.Qt.AlignCenter)
         self.stepTitle.setObjectName("stepTitle")
         self.subtitle = QtWidgets.QLabel(cocktailStep2Button)
-        self.subtitle.setGeometry(QtCore.QRect(0, 40, 800, 30))
+        self.subtitle.setGeometry(QtCore.QRect(0, 40, 700, 30))
         font = QtGui.QFont()
         font.setFamily("CoconPro")
         font.setPointSize(-1)
@@ -43,7 +43,7 @@ class Ui_cocktailStep2Button(object):
         self.subtitle.setAlignment(QtCore.Qt.AlignCenter)
         self.subtitle.setObjectName("subtitle")
         self.button_1 = QtWidgets.QPushButton(cocktailStep2Button)
-        self.button_1.setGeometry(QtCore.QRect(320, 80, 60, 30))
+        self.button_1.setGeometry(QtCore.QRect(270, 80, 60, 30))
         self.button_1.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    font-size: 16px;\n"
@@ -57,7 +57,7 @@ class Ui_cocktailStep2Button(object):
 "")
         self.button_1.setObjectName("button_1")
         self.button_2 = QtWidgets.QPushButton(cocktailStep2Button)
-        self.button_2.setGeometry(QtCore.QRect(420, 80, 60, 30))
+        self.button_2.setGeometry(QtCore.QRect(370, 80, 60, 30))
         self.button_2.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    font-size: 16px;\n"
